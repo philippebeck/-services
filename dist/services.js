@@ -1,4 +1,4 @@
-/*! servicesjs v0.1.0 | https://github.com/philippebeck/servicesjs | Apache-2.0 License License */
+/*! servidio v0.1.1 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
 "mode strict";
 
@@ -158,4 +158,4 @@ export function rewriteString(str, type) {
 }
 
 /*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 30th Apr 2022 @ 1:46:50 AM */
+ Updated: 30th Apr 2022 @ 5:41:46 PM */

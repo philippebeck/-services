@@ -1,14 +1,16 @@
 {
   "name": "servidio",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript Frontend Services",
   "keywords": [
     "JavaScript",
     "Frontend",
-    "Services"
+    "Services",
+    "Axios",
+    "String"
   ],
   "license": "Apache-2.0 License",
-  "main": "services.js",
+  "main": "dist/services.js",
   "repository": "github:philippebeck/servidio",
   "homepage": "https://github.com/philippebeck/servidio",
   "bugs": "https://github.com/philippebeck/servidio/issues",

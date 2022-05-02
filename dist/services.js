@@ -1,8 +1,6 @@
-/*! servidio v0.1.1 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
+/*! servidio v0.1.2 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
 "mode strict";
-
-import * as constants from "../../src/script/constants";
 
 const axios = require("axios");
 
@@ -158,4 +156,4 @@ export function rewriteString(str, type) {
 }
 
 /*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 30th Apr 2022 @ 5:41:46 PM */
+ Updated: 2nd May 2022 @ 12:04:02 PM */

@@ -37,8 +37,8 @@ Yarn : `yarn add servidio`
 
 [![jsDelivr Montly Downloads](https://img.shields.io/jsdelivr/npm/hm/servidio.svg?label=Montly+Downloads)](https://www.jsdelivr.com/package/npm/servidio)
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.1/dist/services.js](https://cdn.jsdelivr.net/npm/servidio@0.1.1/dist/services.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.1/dist/services.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.1/dist/services.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.2/dist/services.js](https://cdn.jsdelivr.net/npm/servidio@0.1.2/dist/services.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.2/dist/services.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.2/dist/services.min.js)  
 
 ---
 

@@ -7,12 +7,12 @@ module.exports = function(grunt) {
         footer: "\n/*! Author: <%= pkg.author.name %> <<%= pkg.author.email %>>\n Updated: <%= grunt.template.today('dS mmm yyyy @ h:MM:ss TT') %> */"},
       js: {
         src: ["src/init.js", "src/axios.js", "src/string.js"],
-        dest: "dist/services.js"}
+        dest: "dist/serve.js"}
     },
     uglify: {
       target: {
         files: {
-          "dist/services.min.js": ["dist/services.js"]
+          "dist/serve.min.js": ["dist/serve.js"]
         }
       }
     }

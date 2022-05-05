@@ -1,4 +1,4 @@
-/*! servidio v0.1.3 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
+/*! servidio v0.1.4 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
 "mode strict";
 
@@ -9,7 +9,7 @@ import * as constants from "@/script/constants"
 const axios = require("axios");
 
 /**
- * SET AXIOS DEFAULTS
+ * SET DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;
@@ -176,6 +176,7 @@ export function checkString(str, type) {
       alert(constants.ALERT_UNKNOWN);
 
       return false;
+      
   }
   return true;
 }
@@ -204,5 +205,9 @@ export function rewriteString(str, type) {
   return str;
 }
 
+// ******************** EXPORT ******************** \\
+
+export default { getData, postData, patchData, putData, deleteData, checkString, rewriteString };
+
 /*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 5th May 2022 @ 10:14:20 PM */
+ Updated: 5th May 2022 @ 11:28:42 PM */

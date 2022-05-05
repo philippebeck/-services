@@ -1,3 +1,70 @@
+// ******************** STRING ******************** \\
+
+/**
+ * CHECK EMPTY
+ * @param {string} str 
+ * @returns 
+ */
+function checkEmpty(str) {
+  if (str === "") {
+    alert(constants.ALERT_EMPTY);
+
+    return false;
+  }
+}
+
+/**
+ * CHECK NAME
+ * @param {string} str 
+ * @returns 
+ */
+function checkName(str) {
+  if (constants.REGEX_NAME.test(str) !== true) {
+    alert(constants.ALERT_NAME);
+
+    return false;
+  }
+}
+
+/**
+ * CHECK URL
+ * @param {string} str 
+ * @returns 
+ */
+function checkUrl(str) {
+  if (constants.REGEX_URL.test(str) !== true) {
+    alert(constants.ALERT_URL);
+
+    return false;
+  }
+}
+
+/**
+ * CHECK EMAIL
+ * @param {string} str 
+ * @returns 
+ */
+function checkEmail(str) {
+  if (constants.REGEX_EMAIL.test(str) !== true) {
+    alert(constants.ALERT_EMAIL);
+
+    return false;
+  }
+}
+
+/**
+ * CHECK PASSWORD
+ * @param {string} str 
+ * @returns 
+ */
+function checkPass(str) {
+  if (constants.REGEX_PASS.test(str) !== true) {
+    alert(constants.ALERT_PASS);
+
+    return false;
+  }
+}
+
 /**
  * CHECK STRING
  * @param {string} str
@@ -5,49 +72,28 @@
  * @returns
  */
 export function checkString(str, type) {
-  if (str === "") {
-    alert(constants.ALERT_EMPTY);
-    return false;
-  }
+  checkEmpty(str);
 
   switch (type) {
     case "name":
-      if (constants.REGEX_NAME.test(str) === true) {
-        str = true;
-      } else {
-        str = false;
-        alert(constants.ALERT_NAME);
-      }
+      checkName(str);
       break;
     case "url":
-      if (constants.REGEX_URL.test(str) === true) {
-        str = true;
-      } else {
-        str = false;
-        alert(constants.ALERT_URL);
-      }
+      checkUrl(str);
       break;
     case "email":
-      if (constants.REGEX_EMAIL.test(str) === true) {
-        str = true;
-      } else {
-        str = false;
-        alert(constants.ALERT_EMAIL);
-      }
+      checkEmail(str);
       break;
     case "pass":
-      if (constants.REGEX_PASS.test(str) === true) {
-        str = true;
-      } else {
-        str = false;
-        alert(constants.ALERT_PASS);
-      }
+      checkPass(str);
       break;
     default:
-      str = false;
       alert(constants.ALERT_UNKNOWN);
+
+      return false;
+      
   }
-  return str;
+  return true;
 }
 
 /**

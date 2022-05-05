@@ -1,3 +1,5 @@
+// ******************** STRING ******************** \\
+
 /**
  * CHECK STRING
  * @param {string} str

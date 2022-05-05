@@ -3,7 +3,7 @@
 const axios = require("axios");
 
 /**
- * SET AXIOS DEFAULTS
+ * SET DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;

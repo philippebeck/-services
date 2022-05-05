@@ -1,6 +1,6 @@
 {
   "name": "servidio",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "JavaScript Frontend Services",
   "keywords": [
     "JavaScript",
@@ -10,7 +10,7 @@
     "String"
   ],
   "license": "Apache-2.0 License",
-  "main": "dist/services.js",
+  "main": "dist/serve.js",
   "repository": "github:philippebeck/servidio",
   "homepage": "https://github.com/philippebeck/servidio",
   "bugs": "https://github.com/philippebeck/servidio/issues",

@@ -1,15 +1,22 @@
-/*! servidio v0.1.4 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
+/*! servidio v0.1.5 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
 "mode strict";
 
-import * as constants from "@/script/constants"
+let axios = null;
+let constants = null;
+
+if (require("axios")) {
+  axios = require("axios");
+  constants = require("@/script/constants");
+
+} else {
+  constants = require("../script/constants");
+}
 
 // ******************** AXIOS ******************** \\
 
-const axios = require("axios");
-
 /**
- * SET DEFAULTS
+ * SET AXIOS DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;
@@ -21,15 +28,177 @@ function setAxios() {
 }
 
 /**
+ * AXIOS GET DATA
+ * @param {string} url 
+ * @returns 
+ */
+async function axiosGet(url) {
+  setAxios();
+  const response = await axios.get(url);
+
+  return response.data;
+}
+
+/**
+ * AXIOS POST DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function axiosPost(url, data) {
+  setAxios();
+  const response = await axios.post(url, data);
+
+  return response.data;
+}
+
+/**
+ * AXIOS PATCH DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function axiosPatch(url, data) {
+  setAxios();
+  const response = await axios.patch(url, data);
+
+  return response.data;
+}
+
+/**
+ * AXIOS PUT DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function axiosPut(url, data) {
+  setAxios();
+  const response = await axios.put(url, data);
+
+  return response.data;
+}
+
+/**
+ * AXIOS DELETE DATA
+ * @param {string} url 
+ * @returns 
+ */
+async function axiosDelete(url) {
+  setAxios();
+  const response = await axios.delete(url);
+
+  return response.data;
+}
+
+// ******************** FETCH ******************** \\
+
+/**
+ * FETCH GET DATA
+ * @param {string} url 
+ * @returns 
+ */
+async function fetchGet(url) {
+  await fetch(constants.API_URL + url, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
+  })
+  .then((data) => { return data })
+  .catch((error) => console.error(error));
+}
+
+/**
+ * FETCH POST DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function fetchPost(url, data) {
+  await fetch(constants.API_URL + url, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${constants.TOKEN}`
+    },
+    body: JSON.stringify(data)
+  })
+  .then((data) => { return data })
+  .catch((error) => console.error(error));
+}
+
+/**
+ * FETCH PATCH DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function fetchPatch(url, data) {
+  await fetch(`${constants.API_URL}${url}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${constants.TOKEN}`
+    },
+    body: JSON.stringify(data)
+  })
+  .then((data) => { return data })
+  .catch((error) => console.error(error));
+}
+
+/**
+ * FETCH PUT DATA
+ * @param {string} url 
+ * @param {array} data 
+ * @returns 
+ */
+async function fetchPut(url, data) {
+  await fetch(`${constants.API_URL}${url}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${constants.TOKEN}`
+    },
+    body: JSON.stringify(data)
+  })
+  .then((data) => { return data })
+  .catch((error) => console.error(error));
+}
+
+/**
+ * FETCH DELETE DATA
+ * @param {string} url 
+ * @returns 
+ */
+async function fetchDelete(url) {
+  await fetch(`${constants.API_URL}${url}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${constants.TOKEN}`
+    }
+  })
+  .then((data) => { return data })
+  .catch((error) => console.error(error));
+}
+
+// ******************** DATA ******************** \\
+
+/**
  * GET DATA
  * @param {string} url 
  * @returns 
  */
 export async function getData(url) {
-  setAxios();
-  const response = await axios.get(url);
-
-  return response.data;
+  if (axios) {
+    return await axiosGet(url);
+  }
+  return await fetchGet(url);
 }
 
 /**
@@ -39,10 +208,10 @@ export async function getData(url) {
  * @returns 
  */
 export async function postData(url, data) {
-  setAxios();
-  const response = await axios.post(url, data);
-
-  return response.data;
+  if (axios) {
+    return await axiosPost(url, data);
+  }
+  return await fetchPost(url, data);
 }
 
 /**
@@ -52,10 +221,10 @@ export async function postData(url, data) {
  * @returns 
  */
 export async function patchData(url, data) {
-  setAxios();
-  const response = await axios.patch(url, data);
-
-  return response.data;
+  if (axios) {
+    return await axiosPatch(url, data);
+  }
+  return await fetchPatch(url, data);
 }
 
 /**
@@ -65,10 +234,10 @@ export async function patchData(url, data) {
  * @returns 
  */
 export async function putData(url, data) {
-  setAxios();
-  const response = await axios.put(url, data);
-
-  return response.data;
+  if (axios) {
+    return await axiosPut(url, data);
+  }
+  return await fetchPut(url, data);
 }
 
 /**
@@ -77,10 +246,11 @@ export async function putData(url, data) {
  * @returns 
  */
 export async function deleteData(url) {
-  setAxios();
-  const response = await axios.delete(url);
+  if (axios) {
+    return await axiosDelete(url);
+  }
+  return await fetchDelete(url);
 
-  return response.data;
 }
 
 // ******************** STRING ******************** \\
@@ -210,4 +380,4 @@ export function rewriteString(str, type) {
 export default { getData, postData, patchData, putData, deleteData, checkString, rewriteString };
 
 /*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 5th May 2022 @ 11:28:42 PM */
+ Updated: 6th May 2022 @ 4:54:56 PM */

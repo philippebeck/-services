@@ -1,9 +1,7 @@
 // ******************** AXIOS ******************** \\
 
-const axios = require("axios");
-
 /**
- * SET DEFAULTS
+ * SET AXIOS DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;
@@ -15,11 +13,11 @@ function setAxios() {
 }
 
 /**
- * GET DATA
+ * AXIOS GET DATA
  * @param {string} url 
  * @returns 
  */
-export async function getData(url) {
+async function axiosGet(url) {
   setAxios();
   const response = await axios.get(url);
 
@@ -27,12 +25,12 @@ export async function getData(url) {
 }
 
 /**
- * POST DATA
+ * AXIOS POST DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function postData(url, data) {
+async function axiosPost(url, data) {
   setAxios();
   const response = await axios.post(url, data);
 
@@ -40,12 +38,12 @@ export async function postData(url, data) {
 }
 
 /**
- * PATCH DATA
+ * AXIOS PATCH DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function patchData(url, data) {
+async function axiosPatch(url, data) {
   setAxios();
   const response = await axios.patch(url, data);
 
@@ -53,12 +51,12 @@ export async function patchData(url, data) {
 }
 
 /**
- * PUT DATA
+ * AXIOS PUT DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function putData(url, data) {
+async function axiosPut(url, data) {
   setAxios();
   const response = await axios.put(url, data);
 
@@ -66,11 +64,11 @@ export async function putData(url, data) {
 }
 
 /**
- * DELETE DATA
+ * AXIOS DELETE DATA
  * @param {string} url 
  * @returns 
  */
-export async function deleteData(url) {
+async function axiosDelete(url) {
   setAxios();
   const response = await axios.delete(url);
 

@@ -38,8 +38,8 @@ Yarn : `yarn add servidio`
 
 ## CDN 
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.4/dist/services.js](https://cdn.jsdelivr.net/npm/servidio@0.1.4/dist/services.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.4/dist/services.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.4/dist/services.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.min.js)  
 
 ---
 
@@ -66,7 +66,7 @@ String part :
 
 ---
 
-## Usage for Vue3
+## Usage for Vue3 + NPM
 
 1.  Copy the `script/constants.js` file to your project root with the script folder like this `script/constants.js` & replace values with your own values
 2.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`

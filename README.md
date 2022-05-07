@@ -15,9 +15,9 @@ JavaScript Frontend Services
 
 ## Overview
 
-Servidio is a JavaScript Frontend Service Library.
-
-You will find Axios CRUD Services & String Services.
+Servidio is a JavaScript Frontend Service Library.  
+You will find CRUD Services & String Services.  
+CRUD Services is managed by Axios, otherwise Fetch if Axios is not available.
 
 ## Summary
 
@@ -38,8 +38,8 @@ Yarn : `yarn add servidio`
 
 ## CDN 
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.5/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.min.js)  
 
 ---
 
@@ -53,7 +53,7 @@ Yarn : `yarn add servidio`
 
 ## Content
 
-Axios part :  
+CRUD part :  
 -   **getData(url)**  
 -   **postData(url, data)**  
 -   **patchData(url, data)**  
@@ -68,7 +68,7 @@ String part :
 
 ## Usage for Vue3 + NPM
 
-1.  Copy the `script/constants.js` file to your project root with the script folder like this `script/constants.js` & replace values with your own values
+1.  Copy the `servidio/script/constants.js` file to your project in the folder `/src/script/` like this : `/src/script/constants.js` & replace values with your own values
 2.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
 3.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/links2code/blob/master/src/main.js))
 4.  Then use it in yours components like in these examples : 

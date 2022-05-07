@@ -1,12 +1,6 @@
 "mode strict";
 
-let axios = null;
-let constants = null;
+import axios from "axios"
 
-if (require("axios")) {
-  axios = require("axios");
-  constants = require("@/script/constants");
-
-} else {
-  constants = require("../script/constants");
-}
+const constants = import("/src/script/constants")
+  .then((data) => { return data })

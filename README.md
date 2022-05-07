@@ -2,16 +2,15 @@
 
 JavaScript Frontend Services
 
+[![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
+[![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
+[![jsDelivr Downloads](https://badgen.net/jsdelivr/hits/npm/servidio)](https://www.jsdelivr.com/package/npm/servidio)
+[![GitHub Last Commit](https://badgen.net/github/last-commit/philippebeck/servidio)](https://github.com/philippebeck/servidio/commits/master)
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/philippebeck/servidio.svg?label=Last+Commit)](https://github.com/philippebeck/servidio/commits/master)
-
-[![NPM Montly Downloads](https://img.shields.io/npm/dm/servidio.svg?label=NPM+Downloads)](https://www.npmjs.com/package/servidio)
-[![jsDelivr Montly Downloads](https://img.shields.io/jsdelivr/npm/hm/servidio.svg?label=JSDelivr+Downloads)](https://www.jsdelivr.com/package/npm/servidio)
-
-[![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/servidio.svg?label=JavaScript)](https://github.com/philippebeck/servidio)
-[![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/servidio.svg?label=Code+Size)](https://github.com/philippebeck/servidio/tree/master)
-[![GitHub License](https://img.shields.io/github/license/philippebeck/servidio.svg?label=License)](https://github.com/philippebeck/servidio/blob/master/LICENSE.md)
+[![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/servidio)](https://github.com/philippebeck/servidio)
+[![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/servidio)](https://github.com/philippebeck/servidio/tree/master)
 
 ## Overview
 
@@ -38,8 +37,8 @@ Yarn : `yarn add servidio`
 
 ## CDN 
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.6/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@0.1.7/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@0.1.7/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@0.1.7/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@0.1.7/dist/serve.min.js)  
 
 ---
 

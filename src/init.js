@@ -1,6 +1,4 @@
 "mode strict";
 
 import axios from "axios"
-
-const constants = import("/src/script/constants")
-  .then((data) => { return data })
+import constants from "/src/script/constants"

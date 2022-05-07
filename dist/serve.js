@@ -1,11 +1,9 @@
-/*! servidio v0.1.6 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
+/*! servidio v0.1.7 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
 "mode strict";
 
 import axios from "axios"
-
-const constants = import("/src/script/constants")
-  .then((data) => { return data })
+import constants from "/src/script/constants"
 
 // ******************** AXIOS ******************** \\
 
@@ -374,4 +372,4 @@ export function rewriteString(str, type) {
 export default { getData, postData, patchData, putData, deleteData, checkString, rewriteString };
 
 /*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 7th May 2022 @ 10:21:27 AM */
+ Updated: 7th May 2022 @ 11:56:05 AM */

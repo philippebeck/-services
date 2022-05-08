@@ -16,7 +16,7 @@ JavaScript Frontend Services
 
 Servidio is a JavaScript Frontend Service Library.  
 You will find CRUD Services & String Services.  
-CRUD Services is managed by Axios, otherwise Fetch if Axios is not available.
+CRUD Services are managed by Axios, otherwise Fetch if Axios is not available.
 
 ## Summary
 

@@ -1,6 +1,6 @@
 /*! servidio v0.1.7 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
 
-"mode strict";
+"use strict";
 
 import axios from "axios"
 import constants from "/src/script/constants"

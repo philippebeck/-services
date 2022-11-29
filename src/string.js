@@ -3,7 +3,7 @@
 /**
  * CHECK EMPTY
  * @param {string} str 
- * @returns 
+ * @returns
  */
 function checkEmpty(str) {
   if (str === "") {
@@ -71,7 +71,7 @@ function checkPass(str) {
  * @param {string} type
  * @returns
  */
-export function checkString(str, type) {
+function checkString(str, type) {
   checkEmpty(str);
 
   switch (type) {
@@ -102,7 +102,7 @@ export function checkString(str, type) {
  * @param {string} type
  * @returns 
  */
-export function rewriteString(str, type) {
+function rewriteString(str, type) {
   switch (type) {
     case "name":
       str = str.trim().charAt(0).toUpperCase() + str.trim().slice(1);

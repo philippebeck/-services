@@ -3,10 +3,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json"),
     concat: {
       options: {
-        banner: "/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.homepage %> | <%= pkg.license %> License */\n\n", 
-        footer: "\n/*! Author: <%= pkg.author.name %> <<%= pkg.author.email %>>\n Updated: <%= grunt.template.today('dS mmm yyyy @ h:MM:ss TT') %> */"},
+        banner: "/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.homepage %> | <%= pkg.license %> */\n\n", 
+        footer: "\n/*! Author: <%= pkg.author.name %> <<%= pkg.author.email %>> | Updated: <%= grunt.template.today('dS mmm yyyy') %> */"},
       js: {
-        src: ["src/init.js", "src/axios.js", "src/fetch.js", "src/data.js", "src/string.js", "src/export.js"],
+        src: ["src/init.js", "src/data.js", "src/string.js", "src/export.js"],
         dest: "dist/serve.js"}
     },
     uglify: {

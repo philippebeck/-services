@@ -1,11 +1,11 @@
-/*! servidio v0.1.7 | https://github.com/philippebeck/servidio | Apache-2.0 License License */
+/*! servidio v0.2.0 | https://github.com/philippebeck/servidio | Apache-2.0 License */
 
 "use strict";
 
 import axios from "axios"
-import constants from "/src/script/constants"
+import constants from "/constants"
 
-// ******************** AXIOS ******************** \\
+// ******************** DATA ******************** \\
 
 /**
  * SET AXIOS DEFAULTS
@@ -24,7 +24,7 @@ function setAxios() {
  * @param {string} url 
  * @returns 
  */
-async function axiosGet(url) {
+async function getData(url) {
   setAxios();
   const response = await axios.get(url);
 
@@ -37,7 +37,7 @@ async function axiosGet(url) {
  * @param {array} data 
  * @returns 
  */
-async function axiosPost(url, data) {
+async function postData(url, data) {
   setAxios();
   const response = await axios.post(url, data);
 
@@ -50,7 +50,7 @@ async function axiosPost(url, data) {
  * @param {array} data 
  * @returns 
  */
-async function axiosPatch(url, data) {
+async function patchData(url, data) {
   setAxios();
   const response = await axios.patch(url, data);
 
@@ -63,7 +63,7 @@ async function axiosPatch(url, data) {
  * @param {array} data 
  * @returns 
  */
-async function axiosPut(url, data) {
+async function putData(url, data) {
   setAxios();
   const response = await axios.put(url, data);
 
@@ -75,174 +75,11 @@ async function axiosPut(url, data) {
  * @param {string} url 
  * @returns 
  */
-async function axiosDelete(url) {
+async function deleteData(url) {
   setAxios();
   const response = await axios.delete(url);
 
   return response.data;
-}
-
-// ******************** FETCH ******************** \\
-
-/**
- * FETCH GET DATA
- * @param {string} url 
- * @returns 
- */
-async function fetchGet(url) {
-  await fetch(constants.API_URL + url, {
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-    }
-  })
-  .then((data) => { return data })
-  .catch((error) => console.error(error));
-}
-
-/**
- * FETCH POST DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-async function fetchPost(url, data) {
-  await fetch(constants.API_URL + url, {
-    method: "POST",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
-    body: JSON.stringify(data)
-  })
-  .then((data) => { return data })
-  .catch((error) => console.error(error));
-}
-
-/**
- * FETCH PATCH DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-async function fetchPatch(url, data) {
-  await fetch(`${constants.API_URL}${url}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
-    body: JSON.stringify(data)
-  })
-  .then((data) => { return data })
-  .catch((error) => console.error(error));
-}
-
-/**
- * FETCH PUT DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-async function fetchPut(url, data) {
-  await fetch(`${constants.API_URL}${url}/${id}`, {
-    method: "PUT",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
-    body: JSON.stringify(data)
-  })
-  .then((data) => { return data })
-  .catch((error) => console.error(error));
-}
-
-/**
- * FETCH DELETE DATA
- * @param {string} url 
- * @returns 
- */
-async function fetchDelete(url) {
-  await fetch(`${constants.API_URL}${url}/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "authorization": `Bearer ${constants.TOKEN}`
-    }
-  })
-  .then((data) => { return data })
-  .catch((error) => console.error(error));
-}
-
-// ******************** DATA ******************** \\
-
-/**
- * GET DATA
- * @param {string} url 
- * @returns 
- */
-export async function getData(url) {
-  if (axios) {
-    return await axiosGet(url);
-  }
-  return await fetchGet(url);
-}
-
-/**
- * POST DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-export async function postData(url, data) {
-  if (axios) {
-    return await axiosPost(url, data);
-  }
-  return await fetchPost(url, data);
-}
-
-/**
- * PATCH DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-export async function patchData(url, data) {
-  if (axios) {
-    return await axiosPatch(url, data);
-  }
-  return await fetchPatch(url, data);
-}
-
-/**
- * PUT DATA
- * @param {string} url 
- * @param {array} data 
- * @returns 
- */
-export async function putData(url, data) {
-  if (axios) {
-    return await axiosPut(url, data);
-  }
-  return await fetchPut(url, data);
-}
-
-/**
- * DELETE DATA
- * @param {string} url 
- * @returns 
- */
-export async function deleteData(url) {
-  if (axios) {
-    return await axiosDelete(url);
-  }
-  return await fetchDelete(url);
-
 }
 
 // ******************** STRING ******************** \\
@@ -250,7 +87,7 @@ export async function deleteData(url) {
 /**
  * CHECK EMPTY
  * @param {string} str 
- * @returns 
+ * @returns
  */
 function checkEmpty(str) {
   if (str === "") {
@@ -318,7 +155,7 @@ function checkPass(str) {
  * @param {string} type
  * @returns
  */
-export function checkString(str, type) {
+function checkString(str, type) {
   checkEmpty(str);
 
   switch (type) {
@@ -349,7 +186,7 @@ export function checkString(str, type) {
  * @param {string} type
  * @returns 
  */
-export function rewriteString(str, type) {
+function rewriteString(str, type) {
   switch (type) {
     case "name":
       str = str.trim().charAt(0).toUpperCase() + str.trim().slice(1);
@@ -369,7 +206,9 @@ export function rewriteString(str, type) {
 
 // ******************** EXPORT ******************** \\
 
-export default { getData, postData, patchData, putData, deleteData, checkString, rewriteString };
+export default { 
+  getData, postData, patchData, putData, deleteData,
+  checkString, rewriteString
+};
 
-/*! Author: Philippe Beck <philippe@philippebeck.net>
- Updated: 7th May 2022 @ 11:56:05 AM */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 29th Nov 2022 */

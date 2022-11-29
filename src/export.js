@@ -1,3 +1,6 @@
 // ******************** EXPORT ******************** \\
 
-export default { getData, postData, patchData, putData, deleteData, checkString, rewriteString };
+export default { 
+  getData, postData, patchData, putData, deleteData,
+  checkString, rewriteString
+};

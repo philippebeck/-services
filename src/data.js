@@ -1,65 +1,76 @@
 // ******************** DATA ******************** \\
 
 /**
- * GET DATA
- * @param {string} url 
- * @returns 
+ * SET AXIOS DEFAULTS
  */
-export async function getData(url) {
-  if (axios) {
-    return await axiosGet(url);
+function setAxios() {
+  axios.defaults.baseURL = constants.API_URL;
+  axios.defaults.headers.post["Content-Type"] = constants.CONTENT_TYPE;
+  
+  if (constants.TOKEN) {
+    axios.defaults.headers.common["Authorization"] = "Bearer " + constants.TOKEN;
   }
-  return await fetchGet(url);
 }
 
 /**
- * POST DATA
+ * AXIOS GET DATA
+ * @param {string} url 
+ * @returns 
+ */
+async function getData(url) {
+  setAxios();
+  const response = await axios.get(url);
+
+  return response.data;
+}
+
+/**
+ * AXIOS POST DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function postData(url, data) {
-  if (axios) {
-    return await axiosPost(url, data);
-  }
-  return await fetchPost(url, data);
+async function postData(url, data) {
+  setAxios();
+  const response = await axios.post(url, data);
+
+  return response.data;
 }
 
 /**
- * PATCH DATA
+ * AXIOS PATCH DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function patchData(url, data) {
-  if (axios) {
-    return await axiosPatch(url, data);
-  }
-  return await fetchPatch(url, data);
+async function patchData(url, data) {
+  setAxios();
+  const response = await axios.patch(url, data);
+
+  return response.data;
 }
 
 /**
- * PUT DATA
+ * AXIOS PUT DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
  */
-export async function putData(url, data) {
-  if (axios) {
-    return await axiosPut(url, data);
-  }
-  return await fetchPut(url, data);
+async function putData(url, data) {
+  setAxios();
+  const response = await axios.put(url, data);
+
+  return response.data;
 }
 
 /**
- * DELETE DATA
+ * AXIOS DELETE DATA
  * @param {string} url 
  * @returns 
  */
-export async function deleteData(url) {
-  if (axios) {
-    return await axiosDelete(url);
-  }
-  return await fetchDelete(url);
+async function deleteData(url) {
+  setAxios();
+  const response = await axios.delete(url);
 
+  return response.data;
 }

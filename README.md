@@ -23,14 +23,14 @@ Data Services are managed by Axios.
 [Servidio](#servidio)  
 [Overview](#overview)  
 [Summary](#summary)  
-[Package Manager](#package-manager)  
+[Package](#package)  
 [Download](#download)  
 [Content](#content)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
-## Package Manager
+## Package
 
 NPM : `npm i servidio`  
 Yarn : `yarn add servidio`  

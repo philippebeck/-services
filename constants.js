@@ -10,7 +10,7 @@ export default {
   ALERT_PASS : "8 to 50 characters including an uppercase, a lowercase & a number",
 
   API_URL : "http://localhost:3000",
-  CONTENT_TYPE : "application/json", 
+  CONTENT_TYPE : "multipart/form-data", 
   TOKEN : JSON.parse(localStorage.getItem("userToken")),
   USER_ID : JSON.parse(localStorage.getItem("userId")),
 

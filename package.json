@@ -1,6 +1,6 @@
 {
   "name": "servidio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "JavaScript Frontend Services",
   "keywords": [
     "JavaScript",
@@ -15,7 +15,10 @@
   "homepage": "https://www.npmjs.com/package/servidio",
   "bugs": "https://github.com/philippebeck/servidio/issues",
   "dependencies": {
-    "axios": "^1.2.0"
+    "axios": "^1.2.0",
+    "email-validator": "^2.0.4",
+    "password-validator": "^5.3.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "grunt": "^1.5.3",

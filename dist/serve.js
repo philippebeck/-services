@@ -1,14 +1,18 @@
-/*! servidio v0.2.0 | https://github.com/philippebeck/servidio | Apache-2.0 License */
+/*! servidio v0.3.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
 import axios from "axios"
+import emailValidator from "email-validator";
+import passValidator from "password-validator";
+import validUrl from "valid-url";
+
 import constants from "/constants"
 
 // ******************** DATA ******************** \\
 
 /**
- * SET AXIOS DEFAULTS
+ * SET DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;
@@ -20,19 +24,18 @@ function setAxios() {
 }
 
 /**
- * AXIOS GET DATA
+ * GET DATA
  * @param {string} url 
  * @returns 
  */
 async function getData(url) {
   setAxios();
   const response = await axios.get(url);
-
   return response.data;
 }
 
 /**
- * AXIOS POST DATA
+ * POST DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -40,12 +43,11 @@ async function getData(url) {
 async function postData(url, data) {
   setAxios();
   const response = await axios.post(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS PATCH DATA
+ * PATCH DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -53,12 +55,11 @@ async function postData(url, data) {
 async function patchData(url, data) {
   setAxios();
   const response = await axios.patch(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS PUT DATA
+ * PUT DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -66,149 +67,79 @@ async function patchData(url, data) {
 async function putData(url, data) {
   setAxios();
   const response = await axios.put(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS DELETE DATA
+ * DELETE DATA
  * @param {string} url 
  * @returns 
  */
 async function deleteData(url) {
   setAxios();
   const response = await axios.delete(url);
-
   return response.data;
 }
 
 // ******************** STRING ******************** \\
 
 /**
- * CHECK EMPTY
- * @param {string} str 
- * @returns
- */
-function checkEmpty(str) {
-  if (str === "") {
-    alert(constants.ALERT_EMPTY);
-
-    return false;
-  }
-}
-
-/**
- * CHECK NAME
- * @param {string} str 
- * @returns 
- */
-function checkName(str) {
-  if (constants.REGEX_NAME.test(str) !== true) {
-    alert(constants.ALERT_NAME);
-
-    return false;
-  }
-}
-
-/**
- * CHECK URL
- * @param {string} str 
- * @returns 
- */
-function checkUrl(str) {
-  if (constants.REGEX_URL.test(str) !== true) {
-    alert(constants.ALERT_URL);
-
-    return false;
-  }
-}
-
-/**
  * CHECK EMAIL
- * @param {string} str 
+ * @param {string} email 
  * @returns 
  */
-function checkEmail(str) {
-  if (constants.REGEX_EMAIL.test(str) !== true) {
-    alert(constants.ALERT_EMAIL);
-
-    return false;
+function checkEmail(email) {
+  if (emailValidator.validate(email)) {
+    return true;
   }
+
+  alert(constants.ALERT_EMAIL);
+  return false;
 }
 
 /**
  * CHECK PASSWORD
- * @param {string} str 
+ * @param {string} pass 
  * @returns 
  */
-function checkPass(str) {
-  if (constants.REGEX_PASS.test(str) !== true) {
-    alert(constants.ALERT_PASS);
+function checkPass(pass) {
+  const schema = new passValidator();
 
-    return false;
+  schema
+    .is().min(constants.PASS_MIN)
+    .is().max(constants.PASS_MAX)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits(constants.PASS_INT)
+    .has().not().spaces();
+
+  if (schema.validate(pass)) {
+    return true;
   }
+
+  alert(constants.ALERT_PASS);
+  return false;
 }
 
 /**
- * CHECK STRING
- * @param {string} str
- * @param {string} type
- * @returns
- */
-function checkString(str, type) {
-  checkEmpty(str);
-
-  switch (type) {
-    case "name":
-      checkName(str);
-      break;
-    case "url":
-      checkUrl(str);
-      break;
-    case "email":
-      checkEmail(str);
-      break;
-    case "pass":
-      checkPass(str);
-      break;
-    default:
-      alert(constants.ALERT_UNKNOWN);
-
-      return false;
-      
-  }
-  return true;
-}
-
-/**
- * REWRITE STRING
- * @param {string} str
- * @param {string} type
+ * CHECK URL
+ * @param {string} url 
  * @returns 
  */
-function rewriteString(str, type) {
-  switch (type) {
-    case "name":
-      str = str.trim().charAt(0).toUpperCase() + str.trim().slice(1);
-      break;
-    case "email":
-      str = str.trim().toLowerCase();
-      break;
-    case "url":
-      str = str.trim().toLowerCase().replace(constants.REWRITE_URL, "");
-      break;
-    default:
-      str = str.trim();
+function checkUrl(url) {
+  if (validUrl.isUri(url)) {
+    return true;
   }
 
-  return str;
+  alert(constants.ALERT_URL);
+  return false;
 }
 
 // ******************** EXPORT ******************** \\
 
 export default { 
-  getData, postData, patchData, putData, deleteData,
-  checkString, rewriteString
+  getData, postData, patchData, putData, deleteData, 
+  checkEmail, checkPass, checkUrl 
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 29th Nov 2022 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 14th Jan 2023 */

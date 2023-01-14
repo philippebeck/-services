@@ -3,13 +3,12 @@
 JavaScript Frontend Services
 
 [![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
-
-[![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
 [![GitHub Last Commit](https://badgen.net/github/last-commit/philippebeck/servidio)](https://github.com/philippebeck/servidio/commits/master)
+[![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
+[![GitHub License](https://img.shields.io/github/license/philippebeck/nemjs.svg?label=License)](https://github.com/philippebeck/nemjs/blob/master/LICENSE.md)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)
-
 [![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/servidio)](https://github.com/philippebeck/servidio)
 [![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/servidio)](https://github.com/philippebeck/servidio/tree/master)
 
@@ -24,14 +23,14 @@ Data Services are managed by Axios.
 [Servidio](#servidio)  
 [Overview](#overview)  
 [Summary](#summary)  
-[Package Manager](#package-manager)  
+[Package](#package)  
 [Download](#download)  
 [Content](#content)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
-## Package Manager
+## Package
 
 NPM : `npm i servidio`  
 Yarn : `yarn add servidio`  
@@ -55,8 +54,9 @@ Data part :
 -   **deleteData(url)**
 
 String part :  
--   **checkString(str, type)**  
--   **rewriteString(str, type)**  
+-   **checkEmail(email)**  
+-   **checkPass(pass)**  
+-   **checkUrl(url)**  
 
 ---
 
@@ -68,5 +68,5 @@ String part :
 4.  Then use it in yours components like in these examples : 
     -  `this.$serve.getData(url)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/HomeView.vue))  
     -  `this.$serve.postData(url, data)`  
-    -  `this.$serve.checkString(message.name, "name") === true` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/ContactView.vue))  
-    -  `this.$serve.rewriteString(user.email, "email")`  
+    -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/ContactView.vue))  
+    -  `this.$serve.checkPass(user.pass)`  

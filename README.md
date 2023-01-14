@@ -54,8 +54,9 @@ Data part :
 -   **deleteData(url)**
 
 String part :  
--   **checkString(str, type)**  
--   **rewriteString(str, type)**  
+-   **checkEmail(email)**  
+-   **checkPass(pass)**  
+-   **checkUrl(url)**  
 
 ---
 
@@ -67,5 +68,5 @@ String part :
 4.  Then use it in yours components like in these examples : 
     -  `this.$serve.getData(url)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/HomeView.vue))  
     -  `this.$serve.postData(url, data)`  
-    -  `this.$serve.checkString(message.name, "name") === true` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/ContactView.vue))  
-    -  `this.$serve.rewriteString(user.email, "email")`  
+    -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/ContactView.vue))  
+    -  `this.$serve.checkPass(user.pass)`  

@@ -1,7 +1,7 @@
 // ******************** DATA ******************** \\
 
 /**
- * SET AXIOS DEFAULTS
+ * SET DEFAULTS
  */
 function setAxios() {
   axios.defaults.baseURL = constants.API_URL;
@@ -13,19 +13,18 @@ function setAxios() {
 }
 
 /**
- * AXIOS GET DATA
+ * GET DATA
  * @param {string} url 
  * @returns 
  */
 async function getData(url) {
   setAxios();
   const response = await axios.get(url);
-
   return response.data;
 }
 
 /**
- * AXIOS POST DATA
+ * POST DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -33,12 +32,11 @@ async function getData(url) {
 async function postData(url, data) {
   setAxios();
   const response = await axios.post(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS PATCH DATA
+ * PATCH DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -46,12 +44,11 @@ async function postData(url, data) {
 async function patchData(url, data) {
   setAxios();
   const response = await axios.patch(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS PUT DATA
+ * PUT DATA
  * @param {string} url 
  * @param {array} data 
  * @returns 
@@ -59,18 +56,16 @@ async function patchData(url, data) {
 async function putData(url, data) {
   setAxios();
   const response = await axios.put(url, data);
-
   return response.data;
 }
 
 /**
- * AXIOS DELETE DATA
+ * DELETE DATA
  * @param {string} url 
  * @returns 
  */
 async function deleteData(url) {
   setAxios();
   const response = await axios.delete(url);
-
   return response.data;
 }

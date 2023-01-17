@@ -44,7 +44,7 @@ function checkPass(pass) {
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
+  if (validUrl.isWebUri(url)) {
     return true;
   }
 

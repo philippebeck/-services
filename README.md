@@ -54,6 +54,7 @@ Data part :
 -   **deleteData(url)**
 
 String part :  
+-   **checkName(name)**  
 -   **checkEmail(email)**  
 -   **checkPass(pass)**  
 -   **checkUrl(url)**  

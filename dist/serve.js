@@ -1,4 +1,4 @@
-/*! servidio v0.3.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.4.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -84,6 +84,20 @@ async function deleteData(url) {
 // ******************** STRING ******************** \\
 
 /**
+ * CHECK NAME
+ * @param {string} name 
+ * @returns 
+ */
+function checkName(name) {
+  if (name.length >= constants.NAME_MIN && name.length <= constants.NAME_MAX) {
+    return true;
+  }
+
+  alert(constants.ALERT_NAME);
+  return false;
+}
+
+/**
  * CHECK EMAIL
  * @param {string} email 
  * @returns 
@@ -127,7 +141,7 @@ function checkPass(pass) {
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
+  if (validUrl.isWebUri(url)) {
     return true;
   }
 
@@ -139,7 +153,7 @@ function checkUrl(url) {
 
 export default { 
   getData, postData, patchData, putData, deleteData, 
-  checkEmail, checkPass, checkUrl 
+  checkName, checkEmail, checkPass, checkUrl 
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 14th Jan 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Jan 2023 */

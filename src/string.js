@@ -1,6 +1,20 @@
 // ******************** STRING ******************** \\
 
 /**
+ * CHECK NAME
+ * @param {string} name 
+ * @returns 
+ */
+function checkName(name) {
+  if (name.length >= constants.NAME_MIN && name.length <= constants.NAME_MAX) {
+    return true;
+  }
+
+  alert(constants.ALERT_NAME);
+  return false;
+}
+
+/**
  * CHECK EMAIL
  * @param {string} email 
  * @returns 
@@ -44,7 +58,7 @@ function checkPass(pass) {
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
+  if (validUrl.isWebUri(url)) {
     return true;
   }
 

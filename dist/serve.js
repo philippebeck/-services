@@ -1,4 +1,4 @@
-/*! servidio v0.4.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.4.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -141,7 +141,7 @@ function checkPass(pass) {
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isWebUri(url)) {
+  if (validUrl.isUri(url)) {
     return true;
   }
 
@@ -156,4 +156,4 @@ export default {
   checkName, checkEmail, checkPass, checkUrl 
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Jan 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Jan 2023 */

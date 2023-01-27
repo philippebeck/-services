@@ -1,11 +1,11 @@
 # Servidio
 
+[![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
+
 JavaScript Frontend Services
 
-[![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
 [![GitHub Last Commit](https://badgen.net/github/last-commit/philippebeck/servidio)](https://github.com/philippebeck/servidio/commits/master)
 [![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
-[![GitHub License](https://img.shields.io/github/license/philippebeck/nemjs.svg?label=License)](https://github.com/philippebeck/nemjs/blob/master/LICENSE.md)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)

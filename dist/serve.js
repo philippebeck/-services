@@ -1,4 +1,4 @@
-/*! servidio v0.4.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.5.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -81,7 +81,53 @@ async function deleteData(url) {
   return response.data;
 }
 
-// ******************** STRING ******************** \\
+// ******************** CHECKER ******************** \\
+
+/**
+ * CHECK SESSION
+ * @param {array} users
+ * @param {string} role
+ * @returns
+ */
+function checkSession(users, role) {
+  if (localStorage.userId) {
+    let userId = JSON.parse(localStorage.userId);
+
+    for (const user of users) {
+      if (userId === user._id) {
+        let auth = null;
+
+        switch (user.role) {
+          case "admin":
+            auth = true;
+            break;
+
+          case "author":
+            if (role === "admin") {
+              auth = false;
+            } else {
+              auth = true;
+            }
+            break;
+
+          case "user":
+            if (role === "user") {
+              auth = true;
+              } else {
+                auth = false;
+              }
+            break;
+
+          default:
+            auth = false;
+            break;
+        }
+        return auth;
+      }
+    }
+  }
+  return false;
+}
 
 /**
  * CHECK NAME
@@ -149,11 +195,65 @@ function checkUrl(url) {
   return false;
 }
 
+/**
+ * CHECK LIKES
+ * @param {array} usersLiked
+ * @returns
+ */
+function checkLikes(usersLiked) {
+  for (let i = 0; i < usersLiked.length; i++) {
+    if (constants.USER_ID === usersLiked[i]) {
+
+      return true;
+    }
+  }
+  return false;
+}
+
+// ******************** SETTER ******************** \\
+
+/**
+ * SET CATEGORIES
+ * @param {array} items 
+ * @returns 
+ */
+function setCats(items) {
+  const cats = new Set();
+  items.forEach(item => cats.add(item.cat));
+
+  return Array.from(cats); 
+}
+
+// ******************** SORTER ******************** \\
+
+/**
+ * SORT ITEMS BY CATEGORY
+ * @param {array} items 
+ * @returns
+ */
+function sortItemsByCat(items) {
+  const itemsByCat = {};
+
+  items.forEach(item => {
+
+    if (!itemsByCat[item.cat]) {
+      itemsByCat[item.cat] = [];
+    }
+
+    itemsByCat[item.cat].push(item);
+    itemsByCat[item.cat].sort((a, b) => (a.name > b.name) ? 1 : -1);
+  });
+
+  return itemsByCat;
+}
+
 // ******************** EXPORT ******************** \\
 
 export default { 
   getData, postData, patchData, putData, deleteData, 
-  checkName, checkEmail, checkPass, checkUrl 
+  checkSession, checkName, checkEmail, checkPass, checkUrl, checkLikes,
+  sortItemsByCat,
+  setCats
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Jan 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 7th Feb 2023 */

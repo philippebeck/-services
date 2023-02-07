@@ -15,8 +15,8 @@ JavaScript Frontend Services
 ## Overview
 
 Servidio is a JavaScript Frontend Service Library.  
-You will find Data Services & String Services for the moment.  
-Data Services are managed by Axios.
+You will find Services about Data, Checker, Setter & Sorter for the moment.  
+Data Services are using Axios.
 
 ## Summary
 
@@ -53,11 +53,19 @@ Data part :
 -   **putData(url, data)**  
 -   **deleteData(url)**
 
-String part :  
+Checker part :  
+-   **checkSession(users, role)**  
 -   **checkName(name)**  
 -   **checkEmail(email)**  
 -   **checkPass(pass)**  
 -   **checkUrl(url)**  
+-   **checkLikes(usersLiked)**  
+
+Setter part :  
+-   **setCats(items)**  
+
+Sorter part :  
+-   **sortItemsByCat(items)**  
 
 ---
 
@@ -65,9 +73,9 @@ String part :
 
 1.  Copy the `servidio/constants.js` file to your project root like this : `/constants.js` & replace values with your own values
 2.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
-3.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/links2code/blob/master/src/main.js))
+3.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/vesan/blob/master/src/main.js))
 4.  Then use it in yours components like in these examples : 
-    -  `this.$serve.getData(url)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/HomeView.vue))  
+    -  `this.$serve.getData(url)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/HomeView.vue))  
     -  `this.$serve.postData(url, data)`  
-    -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/links2code/blob/master/src/views/ContactView.vue))  
+    -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/ContactView.vue))  
     -  `this.$serve.checkPass(user.pass)`  

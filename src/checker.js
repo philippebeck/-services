@@ -12,38 +12,49 @@ function checkSession(users, role) {
 
     for (const user of users) {
       if (userId === user._id) {
-        let auth = null;
 
-        switch (user.role) {
-          case "admin":
-            auth = true;
-            break;
-
-          case "author":
-            if (role === "admin") {
-              auth = false;
-            } else {
-              auth = true;
-            }
-            break;
-
-          case "user":
-            if (role === "user") {
-              auth = true;
-              } else {
-                auth = false;
-              }
-            break;
-
-          default:
-            auth = false;
-            break;
-        }
-        return auth;
+        return checkRole(user.role, role);
       }
     }
   }
   return false;
+}
+
+/**
+ * CHECK ROLE
+ * @param {string} userRole 
+ * @param {string} role 
+ * @returns 
+ */
+function checkRole(userRole, role) {
+  let auth = null;
+
+  switch (userRole) {
+    case "admin":
+      auth = true;
+      break;
+
+    case "editor":
+      if (role === "admin") {
+        auth = false;
+      } else {
+        auth = true;
+      }
+      break;
+
+    case "user":
+      if (role === "user") {
+        auth = true;
+        } else {
+          auth = false;
+        }
+      break;
+
+    default:
+      auth = false;
+      break;
+  }
+  return auth;
 }
 
 /**

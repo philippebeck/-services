@@ -9,6 +9,7 @@ JavaScript Frontend Services
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)
+
 [![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/servidio)](https://github.com/philippebeck/servidio)
 [![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/servidio)](https://github.com/philippebeck/servidio/tree/master)
 
@@ -33,6 +34,7 @@ Data Services are using Axios.
 ## Package
 
 NPM : `npm i servidio`  
+or  
 Yarn : `yarn add servidio`  
 
 ---
@@ -40,7 +42,10 @@ Yarn : `yarn add servidio`
 ## Download
 
 [Latest Release](https://github.com/philippebeck/servidio/releases)  
+or  
 `git clone https://github.com/philippebeck/servidio.git`  
+or  
+[Master ZIP](https://github.com/philippebeck/servidio/archive/refs/heads/master.zip)
   
 ---
 
@@ -55,6 +60,7 @@ Data part :
 
 Checker part :  
 -   **checkSession(users, role)**  
+-   **checkRole(userRole, role)**  
 -   **checkName(name)**  
 -   **checkEmail(email)**  
 -   **checkPass(pass)**  

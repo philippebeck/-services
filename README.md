@@ -51,13 +51,6 @@ or
 
 ## Content
 
-Data part :  
--   **getData(url)**  
--   **postData(url, data)**  
--   **patchData(url, data)**  
--   **putData(url, data)**  
--   **deleteData(url)**
-
 Checker part :  
 -   **checkSession(users, role)**  
 -   **checkRole(userRole, role)**  
@@ -66,6 +59,16 @@ Checker part :
 -   **checkPass(pass)**  
 -   **checkUrl(url)**  
 -   **checkLikes(usersLiked)**  
+
+Data part :  
+-   **getData(url)**  
+-   **postData(url, data)**  
+-   **patchData(url, data)**  
+-   **putData(url, data)**  
+-   **deleteData(url)**
+
+Getter part :  
+-   **getItemName(id, items)**  
 
 Setter part :  
 -   **setCats(items)**  

@@ -8,15 +8,14 @@
 function sortItemsByCat(items) {
   const itemsByCat = {};
 
-  items.forEach(item => {
-
+  for (let item of items) {
     if (!itemsByCat[item.cat]) {
       itemsByCat[item.cat] = [];
     }
 
     itemsByCat[item.cat].push(item);
     itemsByCat[item.cat].sort((a, b) => (a.name > b.name) ? 1 : -1);
-  });
+  }
 
   return itemsByCat;
 }

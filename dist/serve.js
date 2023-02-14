@@ -1,4 +1,4 @@
-/*! servidio v0.7.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.8.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -21,8 +21,8 @@ function checkSession(users, role) {
   if (localStorage.userId) {
     let userId = JSON.parse(localStorage.userId);
 
-    for (const user of users) {
-      if (userId === user._id) {
+    for (let user of users) {
+      if (user._id === userId) {
 
         return checkRole(user.role, role);
       }
@@ -46,19 +46,11 @@ function checkRole(userRole, role) {
       break;
 
     case "editor":
-      if (role === "admin") {
-        auth = false;
-      } else {
-        auth = true;
-      }
+      auth = (role === "admin") ? false : true;
       break;
 
     case "user":
-      if (role === "user") {
-        auth = true;
-        } else {
-          auth = false;
-        }
+      auth = (role === "user") ? true : false;
       break;
 
     default:
@@ -74,11 +66,29 @@ function checkRole(userRole, role) {
  * @returns 
  */
 function checkName(name) {
-  if (name.length >= constants.NAME_MIN && name.length <= constants.NAME_MAX) {
+  if (name.length >= constants.NAME_MIN && 
+    name.length <= constants.NAME_MAX) {
+
     return true;
   }
 
   alert(constants.ALERT_NAME);
+  return false;
+}
+
+/**
+ * CHECK TEXT
+ * @param {string} text 
+ * @returns 
+ */
+function checkText(text) {
+  if (text.length >= constants.TEXT_MIN && 
+    text.length <= constants.TEXT_MAX) {
+
+    return true;
+  }
+
+  alert(constants.ALERT_TEXT);
   return false;
 }
 
@@ -140,8 +150,8 @@ function checkUrl(url) {
  * @returns
  */
 function checkLikes(usersLiked) {
-  for (let i = 0; i < usersLiked.length; i++) {
-    if (constants.USER_ID === usersLiked[i]) {
+  for (let user of usersLiked) {
+    if (user === constants.USER_ID) {
 
       return true;
     }
@@ -281,11 +291,11 @@ function sortItemsByCat(items) {
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkSession, checkRole, checkName, checkEmail, checkPass, checkUrl, checkLikes,
+  checkSession, checkRole, checkName, checkText, checkEmail, checkPass, checkUrl, checkLikes,
   getData, postData, patchData, putData, deleteData, 
   getItemName,
   setCats,
   sortItemsByCat
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 11th Feb 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 14th Feb 2023 */

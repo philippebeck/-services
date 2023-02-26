@@ -2,11 +2,7 @@
 /* eslint-disable */
 
 export default {
-  ALERT_NAME : "The Name must have between 2 & 50 characters.",
-  ALERT_EMAIL : "Your Email is not a valid address.",
-  ALERT_PASS : "Your Password must have 8 to 50 characters, with uppercase, lowercase, 1 number minimum & no space.",
-  ALERT_URL : "This URL is not valid.",
-
+  /* CONFIG */
   API_URL : "http://localhost:3000",
   CONTENT_TYPE : "multipart/form-data", 
 
@@ -17,6 +13,16 @@ export default {
   PASS_MAX : 50,
   PASS_MIN : 8,
 
+  TEXT_MIN : 8,
+  TEXT_MAX : 5000,
+
   TOKEN : JSON.parse(localStorage.getItem("userToken")),
-  USER_ID : JSON.parse(localStorage.getItem("userId"))
+  USER_ID : JSON.parse(localStorage.getItem("userId")),
+
+  /* MESSAGE */
+  CHECK_NAME : "The Name must have between 2 & 50 characters.",
+  CHECK_EMAIL : "Your Email is not a valid address.",
+  CHECK_PASS : "Your Password must have 8 to 50 characters, with uppercase, lowercase, 1 number minimum & no space.",
+  CHECK_URL : "This URL is a valid path.",
+  CHECK_TEXT : "The text must have between 8 & 5000 characters.",
 }

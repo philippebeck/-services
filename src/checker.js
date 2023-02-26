@@ -1,26 +1,6 @@
 // ******************** CHECKER ******************** \\
 
 /**
- * CHECK SESSION
- * @param {array} users
- * @param {string} role
- * @returns
- */
-function checkSession(users, role) {
-  if (localStorage.userId) {
-    let userId = JSON.parse(localStorage.userId);
-
-    for (let user of users) {
-      if (user._id === userId) {
-
-        return checkRole(user.role, role);
-      }
-    }
-  }
-  return false;
-}
-
-/**
  * CHECK ROLE
  * @param {string} userRole 
  * @param {string} role 
@@ -61,7 +41,7 @@ function checkName(name) {
     return true;
   }
 
-  alert(constants.ALERT_NAME);
+  alert(constants.CHECK_NAME);
   return false;
 }
 
@@ -77,7 +57,7 @@ function checkText(text) {
     return true;
   }
 
-  alert(constants.ALERT_TEXT);
+  alert(constants.CHECK_TEXT);
   return false;
 }
 
@@ -91,7 +71,7 @@ function checkEmail(email) {
     return true;
   }
 
-  alert(constants.ALERT_EMAIL);
+  alert(constants.CHECK_EMAIL);
   return false;
 }
 
@@ -115,7 +95,7 @@ function checkPass(pass) {
     return true;
   }
 
-  alert(constants.ALERT_PASS);
+  alert(constants.CHECK_PASS);
   return false;
 }
 
@@ -129,7 +109,7 @@ function checkUrl(url) {
     return true;
   }
 
-  alert(constants.ALERT_URL);
+  alert(constants.CHECK_URL);
   return false;
 }
 

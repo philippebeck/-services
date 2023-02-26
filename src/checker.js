@@ -1,26 +1,6 @@
 // ******************** CHECKER ******************** \\
 
 /**
- * CHECK SESSION
- * @param {array} users
- * @param {string} role
- * @returns
- */
-function checkSession(users, role) {
-  if (localStorage.userId) {
-    let userId = JSON.parse(localStorage.userId);
-
-    for (let user of users) {
-      if (user._id === userId) {
-
-        return checkRole(user.role, role);
-      }
-    }
-  }
-  return false;
-}
-
-/**
  * CHECK ROLE
  * @param {string} userRole 
  * @param {string} role 

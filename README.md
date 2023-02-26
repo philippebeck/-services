@@ -52,7 +52,6 @@ or
 ## Content
 
 Checker part :  
--   **checkSession(users, role)**  
 -   **checkRole(userRole, role)**  
 -   **checkName(name)**  
 -   **checkText(text)**  

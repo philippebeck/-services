@@ -68,13 +68,10 @@ Data part :
 -   **deleteData(url)**
 
 Getter part :  
+-   **getCats(items)**  
 -   **getItemName(id, items)**  
-
-Setter part :  
--   **setCats(items)**  
-
-Sorter part :  
--   **sortItemsByCat(items)**  
+-   **getItemsByCat(items)**  
+-   **getScoreAverage(id, array)**  
 
 ---
 

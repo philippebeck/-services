@@ -54,6 +54,7 @@ or
 Checker part :  
 -   **checkEmail(email)**  
 -   **checkLikes(usersLiked)**  
+-   **checkNumber(number, min, max)**  
 -   **checkPass(pass)**  
 -   **checkRole(userRole, role)**  
 -   **checkString(string, min, max)**  

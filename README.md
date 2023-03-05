@@ -16,7 +16,7 @@ JavaScript Frontend Services
 ## Overview
 
 Servidio is a JavaScript Frontend Service Library.  
-You will find Services about Data, Checker, Setter & Sorter for the moment.  
+You will find some Services with Checkers, Data & Getters.  
 Data Services are using Axios.
 
 ## Summary
@@ -52,13 +52,12 @@ or
 ## Content
 
 Checker part :  
--   **checkRole(userRole, role)**  
--   **checkName(name)**  
--   **checkText(text)**  
 -   **checkEmail(email)**  
--   **checkPass(pass)**  
--   **checkUrl(url)**  
 -   **checkLikes(usersLiked)**  
+-   **checkPass(pass)**  
+-   **checkRole(userRole, role)**  
+-   **checkString(string, min, max)**  
+-   **checkUrl(url)**  
 
 Data part :  
 -   **getData(url)**  

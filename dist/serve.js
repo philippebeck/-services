@@ -1,4 +1,4 @@
-/*! servidio v0.9.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.10.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -10,6 +10,59 @@ import validUrl from "valid-url";
 import constants from "/constants"
 
 // ******************** CHECKER ******************** \\
+
+/**
+ * CHECK EMAIL
+ * @param {string} email 
+ * @returns 
+ */
+function checkEmail(email) {
+  if (emailValidator.validate(email)) {
+    return true;
+  }
+
+  alert(constants.CHECK_EMAIL);
+  return false;
+}
+
+/**
+ * CHECK LIKES
+ * @param {array} usersLiked
+ * @returns
+ */
+function checkLikes(usersLiked) {
+  for (let user of usersLiked) {
+    if (user === constants.USER_ID) {
+
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * CHECK PASSWORD
+ * @param {string} pass 
+ * @returns 
+ */
+function checkPass(pass) {
+  const schema = new passValidator();
+
+  schema
+    .is().min(constants.PASS_MIN)
+    .is().max(constants.PASS_MAX)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits(constants.PASS_INT)
+    .has().not().spaces();
+
+  if (schema.validate(pass)) {
+    return true;
+  }
+
+  alert(constants.CHECK_PASS);
+  return false;
+}
 
 /**
  * CHECK ROLE
@@ -41,72 +94,20 @@ function checkRole(userRole, role) {
 }
 
 /**
- * CHECK NAME
- * @param {string} name 
+ * CHECK STRING
+ * @param {string} string
+ * @param {number} min
+ * @param {number} max
  * @returns 
  */
-function checkName(name) {
-  if (name.length >= constants.NAME_MIN && 
-    name.length <= constants.NAME_MAX) {
+function checkString(string, min = process.env.STRING_MIN, max = process.env.STRING_MAX) {
+  string = String(string);
 
+  if (string.length >= min && string.length <= max) {
     return true;
   }
 
-  alert(constants.CHECK_NAME);
-  return false;
-}
-
-/**
- * CHECK TEXT
- * @param {string} text 
- * @returns 
- */
-function checkText(text) {
-  if (text.length >= constants.TEXT_MIN && 
-    text.length <= constants.TEXT_MAX) {
-
-    return true;
-  }
-
-  alert(constants.CHECK_TEXT);
-  return false;
-}
-
-/**
- * CHECK EMAIL
- * @param {string} email 
- * @returns 
- */
-function checkEmail(email) {
-  if (emailValidator.validate(email)) {
-    return true;
-  }
-
-  alert(constants.CHECK_EMAIL);
-  return false;
-}
-
-/**
- * CHECK PASSWORD
- * @param {string} pass 
- * @returns 
- */
-function checkPass(pass) {
-  const schema = new passValidator();
-
-  schema
-    .is().min(constants.PASS_MIN)
-    .is().max(constants.PASS_MAX)
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(constants.PASS_INT)
-    .has().not().spaces();
-
-  if (schema.validate(pass)) {
-    return true;
-  }
-
-  alert(constants.CHECK_PASS);
+  alert(`${constants.CHECK_STRING} ${min} & ${max} !`);
   return false;
 }
 
@@ -121,21 +122,6 @@ function checkUrl(url) {
   }
 
   alert(constants.CHECK_URL);
-  return false;
-}
-
-/**
- * CHECK LIKES
- * @param {array} usersLiked
- * @returns
- */
-function checkLikes(usersLiked) {
-  for (let user of usersLiked) {
-    if (user === constants.USER_ID) {
-
-      return true;
-    }
-  }
   return false;
 }
 
@@ -307,7 +293,7 @@ function getScoreAverage(id, array) {
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkRole, checkName, checkText, checkEmail, checkPass, checkUrl, checkLikes,
+  checkEmail, checkLikes, checkPass, checkRole, checkString, checkUrl,
   getData, postData, patchData, putData, deleteData, 
   getCats, getItemName, getItemsByCat, getScoreAverage
 };

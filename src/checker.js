@@ -30,6 +30,24 @@ function checkLikes(usersLiked) {
 }
 
 /**
+ * CHECK NUMBER
+ * @param {number} number
+ * @param {number} min
+ * @param {number} max
+ * @returns 
+ */
+function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
+  number = Number(number);
+
+  if (number >= min && number <= max) {
+    return true;
+  }
+
+  alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
+  return false;
+}
+
+/**
  * CHECK PASSWORD
  * @param {string} pass 
  * @returns 
@@ -89,7 +107,7 @@ function checkRole(userRole, role) {
  * @param {number} max
  * @returns 
  */
-function checkString(string, min = process.env.STRING_MIN, max = process.env.STRING_MAX) {
+function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
   string = String(string);
 
   if (string.length >= min && string.length <= max) {

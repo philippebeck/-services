@@ -6,6 +6,9 @@ export default {
   API_URL : "http://localhost:3000",
   CONTENT_TYPE : "multipart/form-data", 
 
+  NUM_MIN : 0,
+  NUM_MAX : 5,
+
   PASS_INT : 1,
   PASS_MAX : 50,
   PASS_MIN : 8,
@@ -18,6 +21,7 @@ export default {
 
   /* MESSAGE */
   CHECK_EMAIL : "Your Email is not a valid address.",
+  CHECK_NUMBER : "The number must be between",
   CHECK_PASS : "Your Password must have 8 to 50 characters, with uppercase, lowercase, 1 number minimum & no space.",
   CHECK_STRING : "The number of characters must be between",
   CHECK_URL : "This URL is a valid path.",

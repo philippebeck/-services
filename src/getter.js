@@ -51,3 +51,42 @@ function getItemsByCat(items) {
 
   return itemsByCat;
 }
+
+/**
+ * GET SCORE AVERAGE
+ * @param {string} id 
+ * @param {array} array 
+ * @returns 
+ */
+function getScoreAverage(id, array) {
+  let sumData     = {};
+  let averageData = [];
+
+  for (let item of array) {
+
+    if (sumData[item.product]) {
+      sumData[item.product].sum += item.score;
+      sumData[item.product].n++;
+
+    } else {
+      sumData[item.product] = {
+        sum: item.score,
+        n: 1
+      };
+    }
+  }
+
+  for (let element of Object.keys(sumData)) {
+      averageData.push({
+        product: element,
+          score: sumData[element].sum / sumData[element].n
+      });
+  }
+
+  for (let data of averageData) {
+    if (id === data.product) {
+
+      return data.score;
+    }
+  }
+}

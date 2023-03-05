@@ -1,4 +1,4 @@
-/*! servidio v0.10.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v0.11.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -37,6 +37,24 @@ function checkLikes(usersLiked) {
       return true;
     }
   }
+  return false;
+}
+
+/**
+ * CHECK NUMBER
+ * @param {number} number
+ * @param {number} min
+ * @param {number} max
+ * @returns 
+ */
+function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
+  number = Number(number);
+
+  if (number >= min && number <= max) {
+    return true;
+  }
+
+  alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
   return false;
 }
 
@@ -100,7 +118,7 @@ function checkRole(userRole, role) {
  * @param {number} max
  * @returns 
  */
-function checkString(string, min = process.env.STRING_MIN, max = process.env.STRING_MAX) {
+function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
   string = String(string);
 
   if (string.length >= min && string.length <= max) {
@@ -293,7 +311,7 @@ function getScoreAverage(id, array) {
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkLikes, checkPass, checkRole, checkString, checkUrl,
+  checkEmail, checkLikes, checkNumber, checkPass, checkRole, checkString, checkUrl,
   getData, postData, patchData, putData, deleteData, 
   getCats, getItemName, getItemsByCat, getScoreAverage
 };

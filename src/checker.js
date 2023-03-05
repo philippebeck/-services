@@ -107,7 +107,7 @@ function checkRole(userRole, role) {
  * @param {number} max
  * @returns 
  */
-function checkString(string, min = process.env.STRING_MIN, max = process.env.STRING_MAX) {
+function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
   string = String(string);
 
   if (string.length >= min && string.length <= max) {

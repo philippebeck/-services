@@ -30,6 +30,24 @@ function checkLikes(usersLiked) {
 }
 
 /**
+ * CHECK NUMBER
+ * @param {number} number
+ * @param {number} min
+ * @param {number} max
+ * @returns 
+ */
+function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
+  number = Number(number);
+
+  if (number >= min && number <= max) {
+    return true;
+  }
+
+  alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
+  return false;
+}
+
+/**
  * CHECK PASSWORD
  * @param {string} pass 
  * @returns 

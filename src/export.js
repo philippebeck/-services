@@ -1,7 +1,8 @@
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkLikes, checkNumber, checkPass, checkRole, checkString, checkUrl,
+  checkEmail, checkPass, checkUrl,
+  checkLikes, checkNumber, checkRole, checkString, 
   getData, postData, patchData, putData, deleteData, 
-  getCats, getItemName, getItemsByCat, getScoreAverage
+  getAverage, getCats, getItemName, getItemsByCat
 };

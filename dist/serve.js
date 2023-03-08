@@ -1,4 +1,4 @@
-/*! servidio v0.11.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v1.0.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -218,6 +218,45 @@ async function deleteData(url) {
 // ******************** GETTER ******************** \\
 
 /**
+ * GET AVERAGE
+ * @param {string} id 
+ * @param {array} array 
+ * @returns 
+ */
+function getAverage(id, array) {
+  let sumData = {};
+  let average = [];
+
+  for (let item of array) {
+
+    if (sumData[item.product]) {
+      sumData[item.product].sum += item.score;
+      sumData[item.product].n++;
+
+    } else {
+      sumData[item.product] = {
+        sum: item.score,
+        n: 1
+      };
+    }
+  }
+
+  for (let element of Object.keys(sumData)) {
+      average.push({
+        product: element,
+        score: sumData[element].sum / sumData[element].n
+      });
+  }
+
+  for (let data of average) {
+    if (id === data.product) {
+
+      return data.score;
+    }
+  }
+}
+
+/**
  * GET CATEGORIES
  * @param {array} items 
  * @returns 
@@ -258,6 +297,7 @@ function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (let item of items) {
+
     if (!itemsByCat[item.cat]) {
       itemsByCat[item.cat] = [];
     }
@@ -269,51 +309,13 @@ function getItemsByCat(items) {
   return itemsByCat;
 }
 
-/**
- * GET SCORE AVERAGE
- * @param {string} id 
- * @param {array} array 
- * @returns 
- */
-function getScoreAverage(id, array) {
-  let sumData     = {};
-  let averageData = [];
-
-  for (let item of array) {
-
-    if (sumData[item.product]) {
-      sumData[item.product].sum += item.score;
-      sumData[item.product].n++;
-
-    } else {
-      sumData[item.product] = {
-        sum: item.score,
-        n: 1
-      };
-    }
-  }
-
-  for (let element of Object.keys(sumData)) {
-      averageData.push({
-        product: element,
-          score: sumData[element].sum / sumData[element].n
-      });
-  }
-
-  for (let data of averageData) {
-    if (id === data.product) {
-
-      return data.score;
-    }
-  }
-}
-
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkLikes, checkNumber, checkPass, checkRole, checkString, checkUrl,
+  checkEmail, checkPass, checkUrl,
+  checkLikes, checkNumber, checkRole, checkString, 
   getData, postData, patchData, putData, deleteData, 
-  getCats, getItemName, getItemsByCat, getScoreAverage
+  getAverage, getCats, getItemName, getItemsByCat
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 5th Mar 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 8th Mar 2023 */

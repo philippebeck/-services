@@ -16,7 +16,7 @@ JavaScript Frontend Services
 ## Overview
 
 Servidio is a JavaScript Frontend Service Library.  
-You will find some Services with Checkers, Data & Getters.  
+You will find some Services about Checkers, Data & Getters.  
 Data Services are using Axios.
 
 ## Summary
@@ -26,12 +26,13 @@ Data Services are using Axios.
 [Summary](#summary)  
 [Package](#package)  
 [Download](#download)  
+[CDN](#cdn)  
 [Content](#content)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
-## Package
+## Package (recommended)
 
 NPM : `npm i servidio`  
 or  
@@ -49,29 +50,38 @@ or
   
 ---
 
+## CDN (not recommanded)
+
+Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
+
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js)  
+
+---
+
 ## Content
 
 Checker part :  
--   **checkEmail(email)**  
--   **checkLikes(usersLiked)**  
--   **checkNumber(number, min, max)**  
--   **checkPass(pass)**  
--   **checkRole(userRole, role)**  
--   **checkString(string, min, max)**  
--   **checkUrl(url)**  
+-   **checkEmail(email)** : check email validity  
+-   **checkLikes(usersLiked)** check likes from array of user ids  
+-   **checkNumber(number, min, max)** : check number min/max  
+-   **checkPass(pass)** : check password validity  
+-   **checkRole(userRole, role)** check role between admin, editor or user  
+-   **checkString(string, min, max)** : check string min/max  
+-   **checkUrl(url)** : check url validity  
 
 Data part :  
--   **getData(url)**  
--   **postData(url, data)**  
--   **patchData(url, data)**  
--   **putData(url, data)**  
--   **deleteData(url)**
+-   **getData(url)** get data with axios  
+-   **postData(url, data)** post data with axios  
+-   **patchData(url, data)** patch data with axios  
+-   **putData(url, data)** put data with axios  
+-   **deleteData(url)** delete data with axios  
 
 Getter part :  
--   **getCats(items)**  
--   **getItemName(id, items)**  
--   **getItemsByCat(items)**  
--   **getScoreAverage(id, array)**  
+-   **getAverage(id, array)** get average from product reviews  
+-   **getCats(items)** get categories from an array of objects  
+-   **getItemName(id, items)** get image name  
+-   **getItemsByCat(items)** get items by category property  
 
 ---
 

@@ -16,7 +16,7 @@ JavaScript Frontend Services
 ## Overview
 
 Servidio is a JavaScript Frontend Service Library.  
-You will find some Services with Checkers, Data & Getters.  
+You will find some Services about Checkers, Data & Getters.  
 Data Services are using Axios.
 
 ## Summary
@@ -26,12 +26,13 @@ Data Services are using Axios.
 [Summary](#summary)  
 [Package](#package)  
 [Download](#download)  
+[CDN](#cdn)  
 [Content](#content)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
-## Package
+## Package (recommended)
 
 NPM : `npm i servidio`  
 or  
@@ -47,6 +48,15 @@ or
 or  
 [Master ZIP](https://github.com/philippebeck/servidio/archive/refs/heads/master.zip)
   
+---
+
+## CDN (not recommanded)
+
+Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
+
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js)  
+
 ---
 
 ## Content

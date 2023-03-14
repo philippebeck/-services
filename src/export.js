@@ -5,5 +5,6 @@ export default {
   checkLikes, checkNumber, checkRole, checkString, 
   getData, postData, patchData, putData, deleteData, 
   getAverage, getCats, getItemName, getItemsByCat,
-  setMeta
+  setTitle, setDescription, setUrl, setImage,
+  setGlobalMeta, setMeta
 };

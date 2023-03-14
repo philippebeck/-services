@@ -78,10 +78,13 @@ Data part :
 -   **deleteData(url)** delete data with axios  
 
 Getter part :  
--   **getAverage(id, array)** get average from product reviews  
+-   **getAverage(id, array)** get average from product score  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
 -   **getItemsByCat(items)** get items by category property  
+
+Setter part :  
+-   **setMeta(title, description)** set head title & meta description  
 
 ---
 

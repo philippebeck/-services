@@ -54,8 +54,8 @@ or
 
 Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.0.0/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.1.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.1.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.1.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.1.0/dist/serve.min.js)  
 
 ---
 
@@ -78,10 +78,13 @@ Data part :
 -   **deleteData(url)** delete data with axios  
 
 Getter part :  
--   **getAverage(id, array)** get average from product reviews  
+-   **getAverage(id, array)** get average from product score  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
 -   **getItemsByCat(items)** get items by category property  
+
+Setter part :  
+-   **setMeta(title, description)** set head title & meta description  
 
 ---
 

@@ -63,6 +63,7 @@ Warning about the CDN: if you want to use the axios functions or checker functio
 
 Checker part :  
 -   **checkEmail(email)** : check email validity  
+-   **checkError(error)** : check error response  
 -   **checkLikes(usersLiked)** check likes from array of user ids  
 -   **checkNumber(number, min, max)** : check number min/max  
 -   **checkPass(pass)** : check password validity  

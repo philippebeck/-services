@@ -15,6 +15,19 @@ function checkEmail(email) {
 }
 
 /**
+ * CHECK ERROR
+ * @param {object} error 
+ */
+function checkError(error) {
+  if (error.response) {
+    alert(error.response.data.message)
+
+  } else {
+    console.log(error);
+  }
+}
+
+/**
  * CHECK LIKES
  * @param {array} usersLiked
  * @returns

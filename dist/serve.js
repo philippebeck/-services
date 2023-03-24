@@ -1,4 +1,4 @@
-/*! servidio v1.2.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v1.3.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -23,6 +23,19 @@ function checkEmail(email) {
 
   alert(constants.CHECK_EMAIL);
   return false;
+}
+
+/**
+ * CHECK ERROR
+ * @param {object} error 
+ */
+function checkError(error) {
+  if (error.response) {
+    alert(error.response.data.message)
+
+  } else {
+    console.log(error);
+  }
 }
 
 /**
@@ -424,11 +437,11 @@ function setMeta(title, description, url = "", image = "") {
 
 export default { 
   checkEmail, checkPass, checkUrl,
-  checkLikes, checkNumber, checkRole, checkString, 
+  checkError, checkLikes, checkNumber, checkRole, checkString, 
   getData, postData, patchData, putData, deleteData, 
   getAverage, getCats, getItemName, getItemsByCat,
   setTitle, setDescription, setUrl, setImage,
   setGlobalMeta, setMeta
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 14th Mar 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 24th Mar 2023 */

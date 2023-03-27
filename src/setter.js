@@ -3,9 +3,14 @@
 /**
  * SET GLOBAL META
  * @param {string} lang 
+ * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(lang = "en", creator = "") {
+function setGlobalMeta(
+  lang = constants.LANG, 
+  icon = constants.ICON, 
+  creator = constants.TW_ID) {
+
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 

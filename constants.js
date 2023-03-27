@@ -6,6 +6,9 @@ export default {
   API_URL : "http://localhost:3000",
   CONTENT_TYPE : "multipart/form-data", 
 
+  ICON : "img/favicon.ico",
+  LANG : "en",
+
   NUM_MIN : 0,
   NUM_MAX : 5,
 
@@ -17,6 +20,7 @@ export default {
   STRING_MAX : 50,
 
   TOKEN : JSON.parse(localStorage.getItem("userToken")),
+  TW_ID : "@your_twitter_pseudo",
   USER_ID : JSON.parse(localStorage.getItem("userId")),
 
   /* MESSAGE */

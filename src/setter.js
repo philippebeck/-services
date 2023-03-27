@@ -9,6 +9,9 @@ function setGlobalMeta(lang = "en", creator = "") {
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 
+  const iconElt = document.querySelector('[rel="icon"]');
+  iconElt.setAttribute("href", icon);
+
   if (document.querySelector('[name="twitter:creator"]')) {
     const creatorElt = document.querySelector('[name="twitter:creator"]');
     creatorElt.setAttribute("content", creator);

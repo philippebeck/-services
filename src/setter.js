@@ -104,13 +104,10 @@ function setImage(image) {
  * @param {string} url 
  * @param {string} image 
  */
-function setMeta(title, description, url = "", image = "") {
+function setMeta(title, description, url, image = "") {
   setTitle(title);
   setDescription(description);
-
-  if (url !== "") {
-    setUrl(url);
-  }
+  setUrl(url);
 
   if (image !== "") {
     setImage(image);

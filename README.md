@@ -54,8 +54,8 @@ or
 
 Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.min.js)  
 
 ---
 

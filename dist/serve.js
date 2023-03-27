@@ -1,4 +1,4 @@
-/*! servidio v1.3.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v1.3.2 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -356,13 +356,13 @@ function setTitle(title) {
   titleElt.textContent  = title;
 
   if (document.querySelector('[property="og:title"]')) {
-    const titleOGElt        = document.querySelector('[property="og:title"]');
-    titleOGElt.textContent  = title;
+    const titleOGElt = document.querySelector('[property="og:title"]');
+    titleOGElt.setAttribute("content", title);
   }
 
   if (document.querySelector('[name="twitter:title"]')) {
-    const titleTwElt        = document.querySelector('[name="twitter:title"]');
-    titleTwElt.textContent  = title;
+    const titleTwElt = document.querySelector('[name="twitter:title"]');
+    titleTwElt.setAttribute("content", title);
   }
 }
 

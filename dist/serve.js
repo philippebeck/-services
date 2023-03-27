@@ -1,4 +1,4 @@
-/*! servidio v1.3.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v1.3.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -327,11 +327,19 @@ function getItemsByCat(items) {
 /**
  * SET GLOBAL META
  * @param {string} lang 
+ * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(lang = "en", creator = "") {
+function setGlobalMeta(
+  lang = constants.LANG, 
+  icon = constants.ICON, 
+  creator = constants.TW_ID) {
+
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
+
+  const iconElt = document.querySelector('[rel="icon"]');
+  iconElt.setAttribute("href", icon);
 
   if (document.querySelector('[name="twitter:creator"]')) {
     const creatorElt = document.querySelector('[name="twitter:creator"]');
@@ -420,13 +428,10 @@ function setImage(image) {
  * @param {string} url 
  * @param {string} image 
  */
-function setMeta(title, description, url = "", image = "") {
+function setMeta(title, description, url, image = "") {
   setTitle(title);
   setDescription(description);
-
-  if (url !== "") {
-    setUrl(url);
-  }
+  setUrl(url);
 
   if (image !== "") {
     setImage(image);
@@ -444,4 +449,4 @@ export default {
   setGlobalMeta, setMeta
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 24th Mar 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Mar 2023 */

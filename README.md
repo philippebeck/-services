@@ -54,8 +54,8 @@ or
 
 Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.0/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.0/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.1/dist/serve.min.js)  
 
 ---
 
@@ -85,7 +85,7 @@ Getter part :
 -   **getItemsByCat(items)** get items by category property  
 
 Setter part :  
--   **setGlobalMeta(lang, creator)** set html lang & meta creator for tw  
+-   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
 -   **setTitle(title)** set head title & title for og/tw  
 -   **setDescription(description)** set meta description & description for og/tw  
 -   **setUrl(url)** set canonical & url/site for og/tw  

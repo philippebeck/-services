@@ -71,9 +71,7 @@ function setMeta(title, description, url, image = "") {
   setDescription(description);
   setUrl(url);
 
-  if (image !== "") {
-    setImage(image);
-  }
+  if (image !== "") setImage(image);
 }
 
 /**

@@ -54,43 +54,43 @@ or
 
 Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.2/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.min.js)  
 
 ---
 
 ## Content
 
-Checker part :  
+Checkers part :  
 -   **checkEmail(email)** : check email validity  
 -   **checkError(error)** : check error response  
--   **checkLikes(usersLiked)** check likes from array of user ids  
 -   **checkNumber(number, min, max)** : check number min/max  
 -   **checkPass(pass)** : check password validity  
 -   **checkRole(userRole, role)** check role between admin, editor or user  
 -   **checkString(string, min, max)** : check string min/max  
 -   **checkUrl(url)** : check url validity  
+-   **checkUser(users)** check current user id from array of user ids  
 
-Data part :  
--   **getData(url)** get data with axios  
--   **postData(url, data)** post data with axios  
--   **patchData(url, data)** patch data with axios  
--   **putData(url, data)** put data with axios  
--   **deleteData(url)** delete data with axios  
+Fetchers part :  
+-   **fetchDelete(url)** delete data with fetch  
+-   **fetchGet(url)** get data with fetch  
+-   **fetchPatch(url, data)** patch data with fetch  
+-   **fetchPost(url, data)** post data with fetch  
+-   **fetchPut(url, data)** put data with fetch  
 
-Getter part :  
+Getters part :  
 -   **getAverage(id, array)** get average from product score  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
 -   **getItemsByCat(items)** get items by category property  
 
-Setter part :  
--   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
--   **setTitle(title)** set head title & title for og/tw  
+Setters part :  
 -   **setDescription(description)** set meta description & description for og/tw  
--   **setUrl(url)** set canonical & url/site for og/tw  
+-   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
 -   **setImage(image)** set image for og & tw  
 -   **setMeta(title, description, url, image)** set all meta for pages  
+-   **setTitle(title)** set head title & title for og/tw  
+-   **setUrl(url)** set canonical & url/site for og/tw  
 
 ---
 
@@ -100,7 +100,7 @@ Setter part :
 2.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
 3.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/vesan/blob/master/src/main.js))
 4.  Then use it in yours components like in these examples : 
-    -  `this.$serve.getData(url)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/HomeView.vue))  
-    -  `this.$serve.postData(url, data)`  
+    -  `this.$serve.fetchGet(url)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/HomeView.vue))  
+    -  `this.$serve.fetchPost(url, data)`  
     -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/ContactView.vue))  
     -  `this.$serve.checkPass(user.pass)`  

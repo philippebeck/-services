@@ -1,46 +1,4 @@
-// ******************** SETTER ******************** \\
-
-/**
- * SET GLOBAL META
- * @param {string} lang 
- * @param {string} icon 
- * @param {string} creator 
- */
-function setGlobalMeta(
-  lang = constants.LANG, 
-  icon = constants.ICON, 
-  creator = constants.TW_ID) {
-
-  const htmlElt = document.querySelector('html');
-  htmlElt.setAttribute("lang", lang);
-
-  const iconElt = document.querySelector('[rel="icon"]');
-  iconElt.setAttribute("href", icon);
-
-  if (document.querySelector('[name="twitter:creator"]')) {
-    const creatorElt = document.querySelector('[name="twitter:creator"]');
-    creatorElt.setAttribute("content", creator);
-  }
-}
-
-/**
- * SET TITLE
- * @param {string} title 
- */
-function setTitle(title) {
-  const titleElt        = document.querySelector('title');
-  titleElt.textContent  = title;
-
-  if (document.querySelector('[property="og:title"]')) {
-    const titleOGElt = document.querySelector('[property="og:title"]');
-    titleOGElt.setAttribute("content", title);
-  }
-
-  if (document.querySelector('[name="twitter:title"]')) {
-    const titleTwElt = document.querySelector('[name="twitter:title"]');
-    titleTwElt.setAttribute("content", title);
-  }
-}
+// ******************** SETTERS ******************** \\
 
 /**
  * SET DESCRIPTION
@@ -62,21 +20,25 @@ function setDescription(description) {
 }
 
 /**
- * SET URL
- * @param {string} url 
+ * SET GLOBAL META
+ * @param {string} lang 
+ * @param {string} icon 
+ * @param {string} creator 
  */
-function setUrl(url) {
-  const urlElt = document.querySelector('[rel="canonical"]');
-  urlElt.setAttribute("href", url);
+function setGlobalMeta(
+  lang = constants.LANG, 
+  icon = constants.ICON, 
+  creator = constants.TW_ID) {
 
-  if (document.querySelector('[property="og:url"]')) {
-    const urlOGElt = document.querySelector('[property="og:url"]');
-    urlOGElt.setAttribute("content", url);
-  }
+  const htmlElt = document.querySelector('html');
+  htmlElt.setAttribute("lang", lang);
 
-  if (document.querySelector('[name="twitter:site"]')) {
-    const urlTwElt = document.querySelector('[name="twitter:site"]');
-    urlTwElt.setAttribute("content", url);
+  const iconElt = document.querySelector('[rel="icon"]');
+  iconElt.setAttribute("href", icon);
+
+  if (document.querySelector('[name="twitter:creator"]')) {
+    const creatorElt = document.querySelector('[name="twitter:creator"]');
+    creatorElt.setAttribute("content", creator);
   }
 }
 
@@ -111,5 +73,43 @@ function setMeta(title, description, url, image = "") {
 
   if (image !== "") {
     setImage(image);
+  }
+}
+
+/**
+ * SET TITLE
+ * @param {string} title 
+ */
+function setTitle(title) {
+  const titleElt        = document.querySelector('title');
+  titleElt.textContent  = title;
+
+  if (document.querySelector('[property="og:title"]')) {
+    const titleOGElt = document.querySelector('[property="og:title"]');
+    titleOGElt.setAttribute("content", title);
+  }
+
+  if (document.querySelector('[name="twitter:title"]')) {
+    const titleTwElt = document.querySelector('[name="twitter:title"]');
+    titleTwElt.setAttribute("content", title);
+  }
+}
+
+/**
+ * SET URL
+ * @param {string} url 
+ */
+function setUrl(url) {
+  const urlElt = document.querySelector('[rel="canonical"]');
+  urlElt.setAttribute("href", url);
+
+  if (document.querySelector('[property="og:url"]')) {
+    const urlOGElt = document.querySelector('[property="og:url"]');
+    urlOGElt.setAttribute("content", url);
+  }
+
+  if (document.querySelector('[name="twitter:site"]')) {
+    const urlTwElt = document.querySelector('[name="twitter:site"]');
+    urlTwElt.setAttribute("content", url);
   }
 }

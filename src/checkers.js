@@ -1,4 +1,4 @@
-// ******************** CHECKER ******************** \\
+// ******************** CHECKERS ******************** \\
 
 /**
  * CHECK EMAIL
@@ -6,7 +6,7 @@
  * @returns 
  */
 function checkEmail(email) {
-  if (emailValidator.validate(email)) {
+  if (constants.REGEX_EMAIL.test(email) === true) {
     return true;
   }
 
@@ -25,21 +25,6 @@ function checkError(error) {
   } else {
     console.log(error);
   }
-}
-
-/**
- * CHECK LIKES
- * @param {array} usersLiked
- * @returns
- */
-function checkLikes(usersLiked) {
-  for (let user of usersLiked) {
-    if (user === constants.USER_ID) {
-
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
@@ -66,17 +51,7 @@ function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
  * @returns 
  */
 function checkPass(pass) {
-  const schema = new passValidator();
-
-  schema
-    .is().min(constants.PASS_MIN)
-    .is().max(constants.PASS_MAX)
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(constants.PASS_INT)
-    .has().not().spaces();
-
-  if (schema.validate(pass)) {
+  if (constants.REGEX_PASS.test(pass) === true) {
     return true;
   }
 
@@ -137,10 +112,25 @@ function checkString(string, min = constants.STRING_MIN, max = constants.STRING_
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
+  if (constants.REGEX_URL.test(url) === true) {
     return true;
   }
 
   alert(constants.CHECK_URL);
+  return false;
+}
+
+/**
+ * CHECK USER
+ * @param {array} users
+ * @returns
+ */
+function checkUser(users) {
+  for (let user of users) {
+
+    if (user === constants.USER_ID) {
+      return true;
+    }
+  }
   return false;
 }

@@ -1,15 +1,10 @@
-/*! servidio v1.3.2 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.0.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
-import axios from "axios"
-import emailValidator from "email-validator";
-import passValidator from "password-validator";
-import validUrl from "valid-url";
-
 import constants from "/constants"
 
-// ******************** CHECKER ******************** \\
+// ******************** CHECKERS ******************** \\
 
 /**
  * CHECK EMAIL
@@ -17,9 +12,7 @@ import constants from "/constants"
  * @returns 
  */
 function checkEmail(email) {
-  if (emailValidator.validate(email)) {
-    return true;
-  }
+  if (constants.REGEX_EMAIL.test(email)) return true;
 
   alert(constants.CHECK_EMAIL);
   return false;
@@ -31,26 +24,10 @@ function checkEmail(email) {
  */
 function checkError(error) {
   if (error.response) {
-    alert(error.response.data.message)
-
+    alert(error.response.data.message);
   } else {
     console.log(error);
   }
-}
-
-/**
- * CHECK LIKES
- * @param {array} usersLiked
- * @returns
- */
-function checkLikes(usersLiked) {
-  for (let user of usersLiked) {
-    if (user === constants.USER_ID) {
-
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
@@ -63,9 +40,7 @@ function checkLikes(usersLiked) {
 function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
   number = Number(number);
 
-  if (number >= min && number <= max) {
-    return true;
-  }
+  if (number >= min && number <= max) return true;
 
   alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
   return false;
@@ -77,19 +52,7 @@ function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
  * @returns 
  */
 function checkPass(pass) {
-  const schema = new passValidator();
-
-  schema
-    .is().min(constants.PASS_MIN)
-    .is().max(constants.PASS_MAX)
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(constants.PASS_INT)
-    .has().not().spaces();
-
-  if (schema.validate(pass)) {
-    return true;
-  }
+  if (constants.REGEX_PASS.test(pass)) return true;
 
   alert(constants.CHECK_PASS);
   return false;
@@ -119,8 +82,8 @@ function checkRole(userRole, role) {
 
     default:
       auth = false;
-      break;
   }
+
   return auth;
 }
 
@@ -134,9 +97,7 @@ function checkRole(userRole, role) {
 function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
   string = String(string);
 
-  if (string.length >= min && string.length <= max) {
-    return true;
-  }
+  if (string.length >= min && string.length <= max) return true;
 
   alert(`${constants.CHECK_STRING} ${min} & ${max} !`);
   return false;
@@ -148,87 +109,147 @@ function checkString(string, min = constants.STRING_MIN, max = constants.STRING_
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
-    return true;
-  }
+  if (constants.REGEX_URL.test(url)) return true;
 
   alert(constants.CHECK_URL);
   return false;
 }
 
-// ******************** DATA ******************** \\
-
 /**
- * SET DEFAULTS
+ * CHECK USER
+ * @param {array} users
+ * @returns
  */
-function setAxios() {
-  axios.defaults.baseURL = constants.API_URL;
-  axios.defaults.headers.post["Content-Type"] = constants.CONTENT_TYPE;
-  
-  if (constants.TOKEN) {
-    axios.defaults.headers.common["Authorization"] = "Bearer " + constants.TOKEN;
+function checkUser(users) {
+  for (let user of users) {
+    if (user === constants.USER_ID) return true;
   }
+
+  return false;
 }
 
+// ******************** FETCHERS ******************** \\
+
 /**
- * GET DATA
+ * FETCH GET DATA
  * @param {string} url 
  * @returns 
  */
-async function getData(url) {
-  setAxios();
-  const response = await axios.get(url);
-  return response.data;
+async function fetchGet(url) {
+  url = url.startsWith("http") ? url : constants.API_URL + url;
+
+  let result;
+  let response = await fetch(url);
+  if (!response.ok) throw new Error(response.text());
+
+  switch (response.headers.get("Content-Type").split(";")[0]) {
+    case "application/json":
+      result = await response.json();
+      break;
+
+    case "multipart/form-data":
+      result = await response.formData();
+      break;
+
+    case "text/html":
+    case "text/plain":
+      result = await response.text();
+      break;
+
+    default:
+      result = response.body;
+  }
+
+  return result;
 }
 
 /**
- * POST DATA
+ * FETCH POST DATA
  * @param {string} url 
- * @param {array} data 
+ * @param {object} data 
  * @returns 
  */
-async function postData(url, data) {
-  setAxios();
-  const response = await axios.post(url, data);
-  return response.data;
+async function fetchPost(url, data) {
+  url = url.startsWith("http") ? url : constants.API_URL + url;
+
+  let options = {
+    method: "POST",
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
+    body: data
+  };
+
+  let response = await fetch(url, options)
+  if (!response.ok) throw new Error(response.text());
+
+  return response.json();
 }
 
 /**
- * PATCH DATA
+ * FETCH PATCH DATA
  * @param {string} url 
- * @param {array} data 
+ * @param {object} data 
  * @returns 
  */
-async function patchData(url, data) {
-  setAxios();
-  const response = await axios.patch(url, data);
-  return response.data;
+async function fetchPatch(url, data) {
+  url = url.startsWith("http") ? url : constants.API_URL + url;
+
+  let options = {
+    method: "PATCH",
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
+    body: data
+  };
+
+  let response = await fetch(url, options);
+  if (!response.ok) throw new Error(response.text());
+
+  return response.json();
 }
 
 /**
- * PUT DATA
+ * FETCH PUT DATA
  * @param {string} url 
- * @param {array} data 
+ * @param {object} data 
  * @returns 
  */
-async function putData(url, data) {
-  setAxios();
-  const response = await axios.put(url, data);
-  return response.data;
+async function fetchPut(url, data) {
+  url = url.startsWith("http") ? url : constants.API_URL + url;
+
+  let options = {
+    method: "PUT",
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
+    body: data
+  };
+
+  let response = await fetch(url, options);
+  if (!response.ok) throw new Error(response.text());
+
+  return response.json();
 }
 
 /**
- * DELETE DATA
+ * FETCH DELETE DATA
  * @param {string} url 
  * @returns 
  */
-async function deleteData(url) {
-  setAxios();
-  const response = await axios.delete(url);
-  return response.data;
+async function fetchDelete(url) {
+  url = url.startsWith("http") ? url : constants.API_URL + url;
+
+  let options = {
+    method: "DELETE",
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` }
+  };
+
+  let response = await fetch(url, options);
+  if (!response.ok) throw new Error(response.text());
+
+  return response.json();
 }
 
-// ******************** GETTER ******************** \\
+// ******************** GETTERS ******************** \\
 
 /**
  * GET AVERAGE
@@ -322,49 +343,7 @@ function getItemsByCat(items) {
   return itemsByCat;
 }
 
-// ******************** SETTER ******************** \\
-
-/**
- * SET GLOBAL META
- * @param {string} lang 
- * @param {string} icon 
- * @param {string} creator 
- */
-function setGlobalMeta(
-  lang = constants.LANG, 
-  icon = constants.ICON, 
-  creator = constants.TW_ID) {
-
-  const htmlElt = document.querySelector('html');
-  htmlElt.setAttribute("lang", lang);
-
-  const iconElt = document.querySelector('[rel="icon"]');
-  iconElt.setAttribute("href", icon);
-
-  if (document.querySelector('[name="twitter:creator"]')) {
-    const creatorElt = document.querySelector('[name="twitter:creator"]');
-    creatorElt.setAttribute("content", creator);
-  }
-}
-
-/**
- * SET TITLE
- * @param {string} title 
- */
-function setTitle(title) {
-  const titleElt        = document.querySelector('title');
-  titleElt.textContent  = title;
-
-  if (document.querySelector('[property="og:title"]')) {
-    const titleOGElt = document.querySelector('[property="og:title"]');
-    titleOGElt.setAttribute("content", title);
-  }
-
-  if (document.querySelector('[name="twitter:title"]')) {
-    const titleTwElt = document.querySelector('[name="twitter:title"]');
-    titleTwElt.setAttribute("content", title);
-  }
-}
+// ******************** SETTERS ******************** \\
 
 /**
  * SET DESCRIPTION
@@ -386,21 +365,25 @@ function setDescription(description) {
 }
 
 /**
- * SET URL
- * @param {string} url 
+ * SET GLOBAL META
+ * @param {string} lang 
+ * @param {string} icon 
+ * @param {string} creator 
  */
-function setUrl(url) {
-  const urlElt = document.querySelector('[rel="canonical"]');
-  urlElt.setAttribute("href", url);
+function setGlobalMeta(
+  lang = constants.LANG, 
+  icon = constants.ICON, 
+  creator = constants.TW_ID) {
 
-  if (document.querySelector('[property="og:url"]')) {
-    const urlOGElt = document.querySelector('[property="og:url"]');
-    urlOGElt.setAttribute("content", url);
-  }
+  const htmlElt = document.querySelector('html');
+  htmlElt.setAttribute("lang", lang);
 
-  if (document.querySelector('[name="twitter:site"]')) {
-    const urlTwElt = document.querySelector('[name="twitter:site"]');
-    urlTwElt.setAttribute("content", url);
+  const iconElt = document.querySelector('[rel="icon"]');
+  iconElt.setAttribute("href", icon);
+
+  if (document.querySelector('[name="twitter:creator"]')) {
+    const creatorElt = document.querySelector('[name="twitter:creator"]');
+    creatorElt.setAttribute("content", creator);
   }
 }
 
@@ -433,20 +416,54 @@ function setMeta(title, description, url, image = "") {
   setDescription(description);
   setUrl(url);
 
-  if (image !== "") {
-    setImage(image);
+  if (image !== "") setImage(image);
+}
+
+/**
+ * SET TITLE
+ * @param {string} title 
+ */
+function setTitle(title) {
+  const titleElt        = document.querySelector('title');
+  titleElt.textContent  = title;
+
+  if (document.querySelector('[property="og:title"]')) {
+    const titleOGElt = document.querySelector('[property="og:title"]');
+    titleOGElt.setAttribute("content", title);
+  }
+
+  if (document.querySelector('[name="twitter:title"]')) {
+    const titleTwElt = document.querySelector('[name="twitter:title"]');
+    titleTwElt.setAttribute("content", title);
+  }
+}
+
+/**
+ * SET URL
+ * @param {string} url 
+ */
+function setUrl(url) {
+  const urlElt = document.querySelector('[rel="canonical"]');
+  urlElt.setAttribute("href", url);
+
+  if (document.querySelector('[property="og:url"]')) {
+    const urlOGElt = document.querySelector('[property="og:url"]');
+    urlOGElt.setAttribute("content", url);
+  }
+
+  if (document.querySelector('[name="twitter:site"]')) {
+    const urlTwElt = document.querySelector('[name="twitter:site"]');
+    urlTwElt.setAttribute("content", url);
   }
 }
 
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkPass, checkUrl,
-  checkError, checkLikes, checkNumber, checkRole, checkString, 
-  getData, postData, patchData, putData, deleteData, 
+  checkEmail, checkError, checkNumber, checkPass, checkRole, checkString, checkUrl, checkUser,
+  fetchDelete, fetchGet, fetchPatch, fetchPost, fetchPut, 
   getAverage, getCats, getItemName, getItemsByCat,
-  setTitle, setDescription, setUrl, setImage,
-  setGlobalMeta, setMeta
+  setDescription, setGlobalMeta, setImage, setMeta, setTitle, setUrl
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Mar 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 26th Apr 2023 */

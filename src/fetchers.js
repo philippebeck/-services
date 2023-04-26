@@ -42,27 +42,17 @@ async function fetchGet(url) {
 async function fetchPost(url, data) {
   url = url.startsWith("http") ? url : constants.API_URL + url;
 
-  console.log(url);
-  console.log(data);
-
   let options = {
     method: "POST",
-    headers: {
-      "Content-Type": constants.CONTENT_TYPE,
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
     body: data
   };
-  console.log(options);
 
   let response = await fetch(url, options)
   if (!response.ok) throw new Error(response.text());
-  console.log(response);
 
-  let result = await response.json();
-  console.log(result);
-
-  return result;
+  return response.json();
 }
 
 /**
@@ -76,11 +66,9 @@ async function fetchPatch(url, data) {
 
   let options = {
     method: "PATCH",
-    headers: {
-      "Content-Type": constants.CONTENT_TYPE,
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
-    body: JSON.stringify(data)
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
+    body: data
   };
 
   let response = await fetch(url, options);
@@ -100,11 +88,9 @@ async function fetchPut(url, data) {
 
   let options = {
     method: "PUT",
-    headers: {
-      "Content-Type": constants.CONTENT_TYPE,
-      "authorization": `Bearer ${constants.TOKEN}`
-    },
-    body: JSON.stringify(data)
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
+    body: data
   };
 
   let response = await fetch(url, options);
@@ -123,10 +109,8 @@ async function fetchDelete(url) {
 
   let options = {
     method: "DELETE",
-    headers: {
-      "Content-Type": constants.CONTENT_TYPE,
-      "authorization": `Bearer ${constants.TOKEN}`
-    }
+    mode: "cors",
+    headers: { "Authorization": `Bearer ${constants.TOKEN}` }
   };
 
   let response = await fetch(url, options);

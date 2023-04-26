@@ -1,42 +1,48 @@
 # Servidio
 
-[![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
-
 JavaScript Frontend Services
 
-[![GitHub Last Commit](https://badgen.net/github/last-commit/philippebeck/servidio)](https://github.com/philippebeck/servidio/commits/master)
-[![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)
-
+[![NPM Version](https://badgen.net/npm/v/servidio)](https://www.npmjs.com/package/servidio)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/servidio)](https://github.com/philippebeck/servidio)
 [![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/servidio)](https://github.com/philippebeck/servidio/tree/master)
 
-## Overview
+[![NPM Downloads](https://badgen.net/npm/dt/servidio)](https://www.npmjs.com/package/servidio)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b65b93fc3484479aa02c1891609e47e2)](https://www.codacy.com/gh/philippebeck/servidio/dashboard)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8ada4e929f6116145366/maintainability)](https://codeclimate.com/github/philippebeck/servidio/maintainability)
 
-Servidio is a JavaScript Frontend Service Library.  
-You will find some Services about Checkers, Data, Getters & Setters.  
-Data Services are using Axios.
+---
 
 ## Summary
 
-[Servidio](#servidio)  
 [Overview](#overview)  
-[Summary](#summary)  
 [Package](#package)  
-[Download](#download)  
 [CDN](#cdn)  
+[Download](#download)  
 [Content](#content)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
-## Package (recommended)
+## Overview
+
+Servidio is a JavaScript Frontend Service Library.  
+You will find some Services with Checkers, Fetchers, Getters & Setters.  
+Servidio use only JS native functions, so it have no dependencies.  
+
+---
+
+## Package
 
 NPM : `npm i servidio`  
 or  
 Yarn : `yarn add servidio`  
+
+---
+
+## CDN
+
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.min.js)  
 
 ---
 
@@ -48,15 +54,6 @@ or
 or  
 [Master ZIP](https://github.com/philippebeck/servidio/archive/refs/heads/master.zip)
   
----
-
-## CDN (not recommanded)
-
-Warning about the CDN: if you want to use the axios functions or checker functions from packages (email, password or url), you need to import them by yourself & before servidio  
-
--   Development : [https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@1.3.3/dist/serve.min.js)  
-
 ---
 
 ## Content

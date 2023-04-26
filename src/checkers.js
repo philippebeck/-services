@@ -1,4 +1,4 @@
-// ******************** CHECKER ******************** \\
+// ******************** CHECKERS ******************** \\
 
 /**
  * CHECK EMAIL
@@ -6,9 +6,7 @@
  * @returns 
  */
 function checkEmail(email) {
-  if (emailValidator.validate(email)) {
-    return true;
-  }
+  if (constants.REGEX_EMAIL.test(email)) return true;
 
   alert(constants.CHECK_EMAIL);
   return false;
@@ -20,26 +18,10 @@ function checkEmail(email) {
  */
 function checkError(error) {
   if (error.response) {
-    alert(error.response.data.message)
-
+    alert(error.response.data.message);
   } else {
     console.log(error);
   }
-}
-
-/**
- * CHECK LIKES
- * @param {array} usersLiked
- * @returns
- */
-function checkLikes(usersLiked) {
-  for (let user of usersLiked) {
-    if (user === constants.USER_ID) {
-
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
@@ -52,9 +34,7 @@ function checkLikes(usersLiked) {
 function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
   number = Number(number);
 
-  if (number >= min && number <= max) {
-    return true;
-  }
+  if (number >= min && number <= max) return true;
 
   alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
   return false;
@@ -66,19 +46,7 @@ function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
  * @returns 
  */
 function checkPass(pass) {
-  const schema = new passValidator();
-
-  schema
-    .is().min(constants.PASS_MIN)
-    .is().max(constants.PASS_MAX)
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(constants.PASS_INT)
-    .has().not().spaces();
-
-  if (schema.validate(pass)) {
-    return true;
-  }
+  if (constants.REGEX_PASS.test(pass)) return true;
 
   alert(constants.CHECK_PASS);
   return false;
@@ -108,8 +76,8 @@ function checkRole(userRole, role) {
 
     default:
       auth = false;
-      break;
   }
+
   return auth;
 }
 
@@ -123,9 +91,7 @@ function checkRole(userRole, role) {
 function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
   string = String(string);
 
-  if (string.length >= min && string.length <= max) {
-    return true;
-  }
+  if (string.length >= min && string.length <= max) return true;
 
   alert(`${constants.CHECK_STRING} ${min} & ${max} !`);
   return false;
@@ -137,10 +103,21 @@ function checkString(string, min = constants.STRING_MIN, max = constants.STRING_
  * @returns 
  */
 function checkUrl(url) {
-  if (validUrl.isUri(url)) {
-    return true;
-  }
+  if (constants.REGEX_URL.test(url)) return true;
 
   alert(constants.CHECK_URL);
+  return false;
+}
+
+/**
+ * CHECK USER
+ * @param {array} users
+ * @returns
+ */
+function checkUser(users) {
+  for (let user of users) {
+    if (user === constants.USER_ID) return true;
+  }
+
   return false;
 }

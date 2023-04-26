@@ -12,9 +12,9 @@ export default {
   NUM_MIN : 0,
   NUM_MAX : 5,
 
-  PASS_INT : 1,
-  PASS_MAX : 50,
-  PASS_MIN : 8,
+  REGEX_EMAIL : /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/,
+  REGEX_PASS : /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,50}$/,
+  REGEX_URL : /((https?|ftp|ssh|mailto):\/\/)?[a-z0-9\/:%_+.,#?!@&=-]+$/,
 
   STRING_MIN : 2,
   STRING_MAX : 50,

@@ -1,3 +1,3 @@
 "use strict";
 
-import constants from "/constants"
+import constants from "../constants"

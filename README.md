@@ -41,8 +41,8 @@ Yarn : `yarn add servidio`
 
 ## CDN
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.0/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.min.js)  
 
 ---
 
@@ -59,21 +59,15 @@ or
 ## Content
 
 Checkers part :  
--   **checkEmail(email)** : check email validity  
 -   **checkError(error)** : check error response  
--   **checkNumber(number, min, max)** : check number min/max  
--   **checkPass(pass)** : check password validity  
+-   **checkId(id, array)** : check id from array  
+-   **checkRange(value, message, min, max)** : check range between min & max  
+-   **checkRegex(value, message, regex)** : check value with regex  
 -   **checkRole(userRole, role)** check role between admin, editor or user  
--   **checkString(string, min, max)** : check string min/max  
--   **checkUrl(url)** : check url validity  
--   **checkUser(users)** check current user id from array of user ids  
 
 Fetchers part :  
--   **fetchDelete(url)** delete data with fetch  
 -   **fetchGet(url)** get data with fetch  
--   **fetchPatch(url, data)** patch data with fetch  
--   **fetchPost(url, data)** post data with fetch  
--   **fetchPut(url, data)** put data with fetch  
+-   **fetchSet(url, options)** set data with fetch  
 
 Getters part :  
 -   **getAverage(id, array)** get average from product score  
@@ -93,11 +87,10 @@ Setters part :
 
 ## Usage for Vue3 + NPM
 
-1.  Copy the `servidio/constants.js` file to your project root like this : `/constants.js` & replace values with your own values
-2.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
-3.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/vesan/blob/master/src/main.js))
-4.  Then use it in yours components like in these examples : 
+1.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
+2.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/vesan/blob/master/src/main.js))
+3.  Then use it in yours components like in these examples : 
     -  `this.$serve.fetchGet(url)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/HomeView.vue))  
-    -  `this.$serve.fetchPost(url, data)`  
-    -  `this.$serve.checkEmail(message.email)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/ContactView.vue))  
-    -  `this.$serve.checkPass(user.pass)`  
+    -  `this.$serve.fetchSet(url, options)`  
+    -  `this.$serve.checkRegex(message.email, message, regex)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/ContactView.vue))  
+    -  `this.$serve.checkRange(user.name, message)`  

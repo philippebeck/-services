@@ -2,6 +2,8 @@
 
 import serve from "../dist/serve"
 
+global.alert = jest.fn();
+
 describe("checkers", () => {
 
   describe("checkEmail", () => {

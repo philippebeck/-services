@@ -1,22 +1,8 @@
-/*! servidio v2.0.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.0.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
-import constants from "/constants"
-
 // ******************** CHECKERS ******************** \\
-
-/**
- * CHECK EMAIL
- * @param {string} email 
- * @returns 
- */
-function checkEmail(email) {
-  if (constants.REGEX_EMAIL.test(email)) return true;
-
-  alert(constants.CHECK_EMAIL);
-  return false;
-}
 
 /**
  * CHECK ERROR
@@ -31,30 +17,50 @@ function checkError(error) {
 }
 
 /**
- * CHECK NUMBER
- * @param {number} number
- * @param {number} min
- * @param {number} max
- * @returns 
+ * CHECK ID
+ * @param {string} id
+ * @param {array} array
+ * @returns
  */
-function checkNumber(number, min = constants.NUM_MIN, max = constants.NUM_MAX) {
-  number = Number(number);
+function checkId(id, array) {
+  for (let item of array) {
+    if (item === id) return true;
+  }
 
-  if (number >= min && number <= max) return true;
-
-  alert(`${constants.CHECK_NUMBER} ${min} & ${max} !`);
   return false;
 }
 
 /**
- * CHECK PASSWORD
- * @param {string} pass 
+ * CHECK RANGE
+ * @param {*} value
+ * @param {string} message
+ * @param {number} min
+ * @param {number} max
  * @returns 
  */
-function checkPass(pass) {
-  if (constants.REGEX_PASS.test(pass)) return true;
+function checkRange(value, message, min = 2, max = 50) {
+  switch (typeof value) {
+    case "number":
+      if (value >= min && value <= max) return true;
+    case "string":
+      if (value.length >= min && value.length <= max) return true;
+    default:
+      alert(`${message} ${min} & ${max}`);
+      return false;
+  }
+}
 
-  alert(constants.CHECK_PASS);
+/**
+ * CHECK REGEX
+ * @param {string} value 
+ * @param {string} message
+ * @param {regex} regex
+ * @returns 
+ */
+function checkRegex(value, message, regex) {
+  if (regex.test(value)) return true;
+
+  alert(message);
   return false;
 }
 
@@ -87,47 +93,6 @@ function checkRole(userRole, role) {
   return auth;
 }
 
-/**
- * CHECK STRING
- * @param {string} string
- * @param {number} min
- * @param {number} max
- * @returns 
- */
-function checkString(string, min = constants.STRING_MIN, max = constants.STRING_MAX) {
-  string = String(string);
-
-  if (string.length >= min && string.length <= max) return true;
-
-  alert(`${constants.CHECK_STRING} ${min} & ${max} !`);
-  return false;
-}
-
-/**
- * CHECK URL
- * @param {string} url 
- * @returns 
- */
-function checkUrl(url) {
-  if (constants.REGEX_URL.test(url)) return true;
-
-  alert(constants.CHECK_URL);
-  return false;
-}
-
-/**
- * CHECK USER
- * @param {array} users
- * @returns
- */
-function checkUser(users) {
-  for (let user of users) {
-    if (user === constants.USER_ID) return true;
-  }
-
-  return false;
-}
-
 // ******************** FETCHERS ******************** \\
 
 /**
@@ -136,8 +101,6 @@ function checkUser(users) {
  * @returns 
  */
 async function fetchGet(url) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
   let result;
   let response = await fetch(url);
   if (!response.ok) throw new Error(response.text());
@@ -164,86 +127,13 @@ async function fetchGet(url) {
 }
 
 /**
- * FETCH POST DATA
+ * FETCH SET DATA
  * @param {string} url 
- * @param {object} data 
+ * @param {object} options 
  * @returns 
  */
-async function fetchPost(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "POST",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
+async function fetchSet(url, options) {
   let response = await fetch(url, options)
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH PATCH DATA
- * @param {string} url 
- * @param {object} data 
- * @returns 
- */
-async function fetchPatch(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "PATCH",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
-  let response = await fetch(url, options);
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH PUT DATA
- * @param {string} url 
- * @param {object} data 
- * @returns 
- */
-async function fetchPut(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "PUT",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
-  let response = await fetch(url, options);
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH DELETE DATA
- * @param {string} url 
- * @returns 
- */
-async function fetchDelete(url) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "DELETE",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` }
-  };
-
-  let response = await fetch(url, options);
   if (!response.ok) throw new Error(response.text());
 
   return response.json();
@@ -370,11 +260,7 @@ function setDescription(description) {
  * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(
-  lang = constants.LANG, 
-  icon = constants.ICON, 
-  creator = constants.TW_ID) {
-
+function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 
@@ -460,10 +346,10 @@ function setUrl(url) {
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkError, checkNumber, checkPass, checkRole, checkString, checkUrl, checkUser,
-  fetchDelete, fetchGet, fetchPatch, fetchPost, fetchPut, 
+  checkError, checkId, checkRange, checkRegex, checkRole,
+  fetchGet, fetchSet, 
   getAverage, getCats, getItemName, getItemsByCat,
   setDescription, setGlobalMeta, setImage, setMeta, setTitle, setUrl
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 26th Apr 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Apr 2023 */

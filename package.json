@@ -17,10 +17,16 @@
   "repository": "github:philippebeck/servidio",
   "homepage": "https://www.npmjs.com/package/servidio",
   "bugs": "https://github.com/philippebeck/servidio/issues",
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.14.4",
+    "babel-jest": "^29.5.0",
     "grunt": "^1.6.1",
     "grunt-contrib-concat": "^2.1.0",
-    "grunt-contrib-uglify": "^5.2.2"
+    "grunt-contrib-uglify": "^5.2.2",
+    "jest": "^29.5.0"
   },
   "author": {
     "name": "Philippe Beck",

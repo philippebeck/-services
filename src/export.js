@@ -1,8 +1,8 @@
 // ******************** EXPORT ******************** \\
 
 export default { 
-  checkEmail, checkError, checkNumber, checkPass, checkRole, checkString, checkUrl, checkUser,
-  fetchDelete, fetchGet, fetchPatch, fetchPost, fetchPut, 
+  checkError, checkId, checkRange, checkRegex, checkRole,
+  fetchGet, fetchSet, 
   getAverage, getCats, getItemName, getItemsByCat,
   setDescription, setGlobalMeta, setImage, setMeta, setTitle, setUrl
 };

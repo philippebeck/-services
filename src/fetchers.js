@@ -6,8 +6,6 @@
  * @returns 
  */
 async function fetchGet(url) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
   let result;
   let response = await fetch(url);
   if (!response.ok) throw new Error(response.text());
@@ -34,86 +32,13 @@ async function fetchGet(url) {
 }
 
 /**
- * FETCH POST DATA
+ * FETCH SET DATA
  * @param {string} url 
- * @param {object} data 
+ * @param {object} options 
  * @returns 
  */
-async function fetchPost(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "POST",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
+async function fetchSet(url, options) {
   let response = await fetch(url, options)
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH PATCH DATA
- * @param {string} url 
- * @param {object} data 
- * @returns 
- */
-async function fetchPatch(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "PATCH",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
-  let response = await fetch(url, options);
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH PUT DATA
- * @param {string} url 
- * @param {object} data 
- * @returns 
- */
-async function fetchPut(url, data) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "PUT",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` },
-    body: data
-  };
-
-  let response = await fetch(url, options);
-  if (!response.ok) throw new Error(response.text());
-
-  return response.json();
-}
-
-/**
- * FETCH DELETE DATA
- * @param {string} url 
- * @returns 
- */
-async function fetchDelete(url) {
-  url = url.startsWith("http") ? url : constants.API_URL + url;
-
-  let options = {
-    method: "DELETE",
-    mode: "cors",
-    headers: { "Authorization": `Bearer ${constants.TOKEN}` }
-  };
-
-  let response = await fetch(url, options);
   if (!response.ok) throw new Error(response.text());
 
   return response.json();

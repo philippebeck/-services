@@ -4,7 +4,6 @@
 export default {
   /* CONFIG */
   API_URL : "http://localhost:3000",
-  CONTENT_TYPE : "multipart/form-data", 
 
   ICON : "img/favicon.ico",
   LANG : "en",
@@ -19,9 +18,9 @@ export default {
   STRING_MIN : 2,
   STRING_MAX : 50,
 
-  TOKEN : JSON.parse(localStorage.getItem("userToken")),
+  TOKEN : "userToken",
   TW_ID : "@your_twitter_pseudo",
-  USER_ID : JSON.parse(localStorage.getItem("userId")),
+  USER_ID : "userId",
 
   /* MESSAGE */
   CHECK_EMAIL : "Your Email is not a valid address.",

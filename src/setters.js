@@ -25,11 +25,7 @@ function setDescription(description) {
  * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(
-  lang = constants.LANG, 
-  icon = constants.ICON, 
-  creator = constants.TW_ID) {
-
+function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 

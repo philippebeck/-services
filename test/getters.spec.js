@@ -4,8 +4,11 @@ import serve from "../dist/serve";
 
 describe("getters", () => {
 
+  /**
+   * GET AVERAGE
+   */
   describe("getAverage", () => {
-    test("should return the average of the scores of the product", () => {
+    test("should return the average of the product scores", () => {
       const id = "1";
       const array = [
         {
@@ -26,6 +29,9 @@ describe("getters", () => {
     })
   })
 
+  /**
+   * GET CATS
+   */
   describe("getCats", () => {
     test("should return an array of categories", () => {
       const items = [
@@ -44,6 +50,9 @@ describe("getters", () => {
     })
   })
 
+  /**
+   * GET ITEM NAME
+   */
   describe("getItemName", () => {
     test("should return the name of the item", () => {
       const id = "1";
@@ -64,8 +73,31 @@ describe("getters", () => {
       const result = serve.getItemName(id, items);
       expect(result).toBe("name1");
     })
+
+    test("should return false if the item doesn't exist", () => {
+      const id = "4";
+      const items = [
+        {
+          _id: "1",
+          name: "name1"
+        },
+        {
+          _id: "2",
+          name: "name2"
+        },
+        {
+          _id: "3",
+          name: "name3"
+        }
+      ];
+      const result = serve.getItemName(id, items);
+      expect(result).toBe(false);
+    })
   })
 
+  /**
+   * GET ITEMS BY CAT
+   */
   describe("getItemsByCat", () => {
     test("should return an array of items of the category", () => {
       const items = [

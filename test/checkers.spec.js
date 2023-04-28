@@ -8,7 +8,7 @@ global.console.log = jest.fn();
 describe("checkers", () => {
 
   /**
-   * CHECKERROR
+   * CHECK ERROR
    */
   describe("checkError", () => {
     test("should alert if error.response exist", () => {
@@ -31,7 +31,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKID
+   * CHECK ID
    */
   describe("checkId", () => {
     test("should return true if id is inside array", () => {
@@ -50,7 +50,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKRANGE FOR NUMBER
+   * CHECK RANGE FOR NUMBER
    */
   describe("checkRange for number", () => {
     const message = "Number is not between";
@@ -69,7 +69,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKRANGE FOR STRING
+   * CHECK RANGE FOR STRING
    */
   describe("checkRange for string", () => {
     const message = "String is not between";
@@ -86,7 +86,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKREGEX FOR EMAIL
+   * CHECK REGEX FOR EMAIL
    */
   describe("checkRegex for email", () => {
     const message = "Email is not valid";
@@ -104,7 +104,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKREGEX FOR PASSWORD
+   * CHECK REGEX FOR PASSWORD
    */
   describe("checkRegex for password", () => {
     const message = "Password is not valid";
@@ -122,7 +122,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKREGEX FOR URL
+   * CHECK REGEX FOR URL
    */
   describe("checkRegex for url", () => {
     const message = "Url is not valid";
@@ -140,7 +140,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKROLE FOR ADMIN
+   * CHECK ROLE FOR ADMIN
    */
   describe("checkRole for admin", () => {
     const role = "admin";
@@ -167,7 +167,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKROLE FOR EDITOR
+   * CHECK ROLE FOR EDITOR
    */
   describe("checkRole for editor", () => {
     const role = "editor";
@@ -194,7 +194,7 @@ describe("checkers", () => {
   })
 
   /**
-   * CHECKROLE FOR USER
+   * CHECK ROLE FOR USER
    */
   describe("checkRole for user", () => {
     const role = "user";

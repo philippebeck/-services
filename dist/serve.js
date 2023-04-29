@@ -1,4 +1,4 @@
-/*! servidio v2.0.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.0.2 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -352,4 +352,4 @@ export default {
   setDescription, setGlobalMeta, setImage, setMeta, setTitle, setUrl
 };
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 27th Apr 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 29th Apr 2023 */

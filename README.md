@@ -88,11 +88,11 @@ Setters part :
 
 ## Test
 
-You can run unit tests with Jest :
-`npm test`
+You can run unit tests with Jest :  
+`npm test`  
 
-Or with coverage :
-`npm test -- --coverage`
+Or with coverage :  
+`npm test -- --coverage`  
 
 ---
 

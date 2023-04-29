@@ -42,8 +42,8 @@ Yarn : `yarn add servidio`
 
 ## CDN
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.3/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.3/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.3/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.3/dist/serve.min.js)  
 
 ---
 
@@ -77,10 +77,10 @@ Getters part :
 -   **getItemsByCat(items)** get items by category property  
 
 Setters part :  
--   **setDescription(description)** set meta description & description for og/tw  
 -   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
--   **setImage(image)** set image for og & tw  
 -   **setMeta(title, description, url, image)** set all meta for pages  
+-   **setDescription(description)** set meta description & description for og/tw  
+-   **setImage(image)** set image for og & tw  
 -   **setTitle(title)** set head title & title for og/tw  
 -   **setUrl(url)** set canonical & url/site for og/tw  
 
@@ -89,9 +89,6 @@ Setters part :
 ## Test
 
 You can run unit tests with Jest :  
-`npm test`  
-
-Or with coverage :  
 `npm test -- --coverage`  
 
 ---

@@ -19,6 +19,7 @@ JavaScript Frontend Services
 [CDN](#cdn)  
 [Download](#download)  
 [Content](#content)  
+[Test](#test)
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
@@ -41,8 +42,8 @@ Yarn : `yarn add servidio`
 
 ## CDN
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.1/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.0.2/dist/serve.min.js)  
 
 ---
 
@@ -82,6 +83,16 @@ Setters part :
 -   **setMeta(title, description, url, image)** set all meta for pages  
 -   **setTitle(title)** set head title & title for og/tw  
 -   **setUrl(url)** set canonical & url/site for og/tw  
+
+---
+
+## Tests
+
+You can run unit tests with Jest :
+`npm test`
+
+Or with coverage :
+`npm test -- --coverage`
 
 ---
 

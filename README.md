@@ -19,7 +19,7 @@ JavaScript Frontend Services
 [CDN](#cdn)  
 [Download](#download)  
 [Content](#content)  
-[Test](#test)
+[Test](#test)  
 [Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
@@ -86,7 +86,7 @@ Setters part :
 
 ---
 
-## Tests
+## Test
 
 You can run unit tests with Jest :
 `npm test`

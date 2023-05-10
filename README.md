@@ -28,7 +28,7 @@ JavaScript Frontend Services
 
 Servidio is a JavaScript Frontend Service Library.  
 You will find some Services with Checkers, Fetchers, Getters & Setters.  
-Servidio use only JS native functions, so it have no dependencies.  
+Servidio use only JS native functions, so it have no dependency.  
 
 ---
 

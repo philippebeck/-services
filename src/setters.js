@@ -4,7 +4,7 @@
  * SET DESCRIPTION
  * @param {string} description 
  */
-function setDescription(description) {
+export function setDescription(description) {
   const descriptionElt = document.querySelector('[name="description"]');
   descriptionElt.setAttribute("content", description);
 
@@ -25,7 +25,7 @@ function setDescription(description) {
  * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
+export function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 
@@ -42,7 +42,7 @@ function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
  * SET IMAGE
  * @param {string} image 
  */
-function setImage(image) {
+export function setImage(image) {
 
   if (document.querySelector('[property="og:image"]')) {
     const imageOGElt = document.querySelector('[property="og:image"]');
@@ -62,7 +62,7 @@ function setImage(image) {
  * @param {string} url 
  * @param {string} image 
  */
-function setMeta(title, description, url, image = "") {
+export function setMeta(title, description, url, image = "") {
   setTitle(title);
   setDescription(description);
   setUrl(url);
@@ -74,7 +74,7 @@ function setMeta(title, description, url, image = "") {
  * SET TITLE
  * @param {string} title 
  */
-function setTitle(title) {
+export function setTitle(title) {
   const titleElt        = document.querySelector('title');
   titleElt.textContent  = title;
 
@@ -93,7 +93,7 @@ function setTitle(title) {
  * SET URL
  * @param {string} url 
  */
-function setUrl(url) {
+export function setUrl(url) {
   const urlElt = document.querySelector('[rel="canonical"]');
   urlElt.setAttribute("href", url);
 

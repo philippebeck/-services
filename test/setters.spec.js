@@ -1,6 +1,6 @@
 // ******************** SETTERS ******************** \\
 
-import serve from "../dist/serve"
+import * as serve from "../dist/serve"
 
 /**
  * @jest-environment jsdom

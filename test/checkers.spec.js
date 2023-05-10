@@ -1,6 +1,6 @@
 // ******************** CHECKERS ******************** \\
 
-import serve from "../dist/serve"
+import * as serve from "../dist/serve"
 
 global.alert = jest.fn();
 global.console.log = jest.fn();

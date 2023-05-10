@@ -5,7 +5,7 @@
  * @param {string} url 
  * @returns 
  */
-async function fetchGet(url) {
+export async function fetchGet(url) {
   let result;
   let response = await fetch(url);
   if (!response.ok) throw new Error(response.text());
@@ -37,7 +37,7 @@ async function fetchGet(url) {
  * @param {object} options 
  * @returns 
  */
-async function fetchSet(url, options) {
+export async function fetchSet(url, options) {
   let response = await fetch(url, options)
   if (!response.ok) throw new Error(response.text());
 

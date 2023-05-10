@@ -4,7 +4,7 @@
  * CHECK ERROR
  * @param {object} error 
  */
-function checkError(error) {
+export function checkError(error) {
   if (error.response) {
     alert(error.response.data.message);
   } else {
@@ -18,7 +18,7 @@ function checkError(error) {
  * @param {array} array
  * @returns
  */
-function checkId(id, array) {
+export function checkId(id, array) {
   for (let item of array) {
     if (item === id) return true;
   }
@@ -34,7 +34,7 @@ function checkId(id, array) {
  * @param {number} max
  * @returns 
  */
-function checkRange(value, message, min = 2, max = 50) {
+export function checkRange(value, message, min = 2, max = 50) {
   switch (typeof value) {
     case "number":
       if (value >= min && value <= max) return true;
@@ -53,7 +53,7 @@ function checkRange(value, message, min = 2, max = 50) {
  * @param {regex} regex
  * @returns 
  */
-function checkRegex(value, message, regex) {
+export function checkRegex(value, message, regex) {
   if (regex.test(value)) return true;
 
   alert(message);
@@ -66,7 +66,7 @@ function checkRegex(value, message, regex) {
  * @param {string} role 
  * @returns 
  */
-function checkRole(userRole, role) {
+export function checkRole(userRole, role) {
   let auth = null;
 
   switch (userRole) {

@@ -1,4 +1,4 @@
-/*! servidio v2.0.3 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.1.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -8,7 +8,7 @@
  * CHECK ERROR
  * @param {object} error 
  */
-function checkError(error) {
+export function checkError(error) {
   if (error.response) {
     alert(error.response.data.message);
   } else {
@@ -22,7 +22,7 @@ function checkError(error) {
  * @param {array} array
  * @returns
  */
-function checkId(id, array) {
+export function checkId(id, array) {
   for (let item of array) {
     if (item === id) return true;
   }
@@ -38,7 +38,7 @@ function checkId(id, array) {
  * @param {number} max
  * @returns 
  */
-function checkRange(value, message, min = 2, max = 50) {
+export function checkRange(value, message, min = 2, max = 50) {
   switch (typeof value) {
     case "number":
       if (value >= min && value <= max) return true;
@@ -57,7 +57,7 @@ function checkRange(value, message, min = 2, max = 50) {
  * @param {regex} regex
  * @returns 
  */
-function checkRegex(value, message, regex) {
+export function checkRegex(value, message, regex) {
   if (regex.test(value)) return true;
 
   alert(message);
@@ -70,7 +70,7 @@ function checkRegex(value, message, regex) {
  * @param {string} role 
  * @returns 
  */
-function checkRole(userRole, role) {
+export function checkRole(userRole, role) {
   let auth = null;
 
   switch (userRole) {
@@ -100,7 +100,7 @@ function checkRole(userRole, role) {
  * @param {string} url 
  * @returns 
  */
-async function fetchGet(url) {
+export async function fetchGet(url) {
   let result;
   let response = await fetch(url);
   if (!response.ok) throw new Error(response.text());
@@ -132,7 +132,7 @@ async function fetchGet(url) {
  * @param {object} options 
  * @returns 
  */
-async function fetchSet(url, options) {
+export async function fetchSet(url, options) {
   let response = await fetch(url, options)
   if (!response.ok) throw new Error(response.text());
 
@@ -147,7 +147,7 @@ async function fetchSet(url, options) {
  * @param {array} array 
  * @returns 
  */
-function getAverage(id, array) {
+export function getAverage(id, array) {
   let sumData = {};
   let average = [];
 
@@ -185,7 +185,7 @@ function getAverage(id, array) {
  * @param {array} items 
  * @returns 
  */
-function getCats(items) {
+export function getCats(items) {
   const cats = new Set();
 
   for (let item of items) {
@@ -202,7 +202,7 @@ function getCats(items) {
  * @param {array} items
  * @returns
  */
-function getItemName(id, items) {
+export function getItemName(id, items) {
   for (let item of items) {
     if (item._id === id) {
 
@@ -217,7 +217,7 @@ function getItemName(id, items) {
  * @param {array} items 
  * @returns
  */
-function getItemsByCat(items) {
+export function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (let item of items) {
@@ -239,7 +239,7 @@ function getItemsByCat(items) {
  * SET DESCRIPTION
  * @param {string} description 
  */
-function setDescription(description) {
+export function setDescription(description) {
   const descriptionElt = document.querySelector('[name="description"]');
   descriptionElt.setAttribute("content", description);
 
@@ -260,7 +260,7 @@ function setDescription(description) {
  * @param {string} icon 
  * @param {string} creator 
  */
-function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
+export function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
   const htmlElt = document.querySelector('html');
   htmlElt.setAttribute("lang", lang);
 
@@ -277,7 +277,7 @@ function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
  * SET IMAGE
  * @param {string} image 
  */
-function setImage(image) {
+export function setImage(image) {
 
   if (document.querySelector('[property="og:image"]')) {
     const imageOGElt = document.querySelector('[property="og:image"]');
@@ -297,7 +297,7 @@ function setImage(image) {
  * @param {string} url 
  * @param {string} image 
  */
-function setMeta(title, description, url, image = "") {
+export function setMeta(title, description, url, image = "") {
   setTitle(title);
   setDescription(description);
   setUrl(url);
@@ -309,7 +309,7 @@ function setMeta(title, description, url, image = "") {
  * SET TITLE
  * @param {string} title 
  */
-function setTitle(title) {
+export function setTitle(title) {
   const titleElt        = document.querySelector('title');
   titleElt.textContent  = title;
 
@@ -328,7 +328,7 @@ function setTitle(title) {
  * SET URL
  * @param {string} url 
  */
-function setUrl(url) {
+export function setUrl(url) {
   const urlElt = document.querySelector('[rel="canonical"]');
   urlElt.setAttribute("href", url);
 
@@ -343,13 +343,4 @@ function setUrl(url) {
   }
 }
 
-// ******************** EXPORT ******************** \\
-
-export default { 
-  checkError, checkId, checkRange, checkRegex, checkRole,
-  fetchGet, fetchSet, 
-  getAverage, getCats, getItemName, getItemsByCat,
-  setDescription, setGlobalMeta, setImage, setMeta, setTitle, setUrl
-};
-
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 29th Apr 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 11th May 2023 */

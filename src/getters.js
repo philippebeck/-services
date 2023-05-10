@@ -6,7 +6,7 @@
  * @param {array} array 
  * @returns 
  */
-function getAverage(id, array) {
+export function getAverage(id, array) {
   let sumData = {};
   let average = [];
 
@@ -44,7 +44,7 @@ function getAverage(id, array) {
  * @param {array} items 
  * @returns 
  */
-function getCats(items) {
+export function getCats(items) {
   const cats = new Set();
 
   for (let item of items) {
@@ -61,7 +61,7 @@ function getCats(items) {
  * @param {array} items
  * @returns
  */
-function getItemName(id, items) {
+export function getItemName(id, items) {
   for (let item of items) {
     if (item._id === id) {
 
@@ -76,7 +76,7 @@ function getItemName(id, items) {
  * @param {array} items 
  * @returns
  */
-function getItemsByCat(items) {
+export function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (let item of items) {

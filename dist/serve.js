@@ -1,4 +1,4 @@
-/*! servidio v2.1.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.1.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -42,8 +42,12 @@ export function checkRange(value, message, min = 2, max = 50) {
   switch (typeof value) {
     case "number":
       if (value >= min && value <= max) return true;
+      break;
+
     case "string":
       if (value.length >= min && value.length <= max) return true;
+      break;
+
     default:
       alert(`${message} ${min} & ${max}`);
       return false;
@@ -343,4 +347,4 @@ export function setUrl(url) {
   }
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 11th May 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 13th May 2023 */

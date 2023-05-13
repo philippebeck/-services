@@ -38,8 +38,12 @@ export function checkRange(value, message, min = 2, max = 50) {
   switch (typeof value) {
     case "number":
       if (value >= min && value <= max) return true;
+      break;
+
     case "string":
       if (value.length >= min && value.length <= max) return true;
+      break;
+
     default:
       alert(`${message} ${min} & ${max}`);
       return false;

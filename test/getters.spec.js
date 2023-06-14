@@ -32,7 +32,7 @@ describe("getAverage", () => {
 
     const expected2 = 4.5; // (6+3)/2 = 4.5
     expect(getAverage('Z', items2)).toEqual(expected2);
-  })
+  });
 
   test('getAverage returns undefined if the given product id is not found in the array', () => {
     const items3 = [
@@ -43,8 +43,8 @@ describe("getAverage", () => {
 
     const expected3 = undefined;
     expect(getAverage('C', items3)).toEqual(expected3);
-  })
-})
+  });
+});
 
 /**
  * ? GET CATS
@@ -55,28 +55,28 @@ describe('getCats', () => {
     const result = getCats(items);
 
     expect(result).toEqual([]);
-  })
+  });
 
   test('returns an array with one category when given an array with one item', () => {
     const items = [{cat: 'A'}];
     const result = getCats(items);
 
     expect(result).toEqual(['A']);
-  })
+  });
 
   test('returns an array with unique categories when given an array with multiple items', () => {
     const items = [{cat: 'A'}, {cat: 'B'}, {cat: 'A'}, {cat: 'C'}];
     const result = getCats(items);
 
     expect(result).toEqual(['A', 'B', 'C']);
-  })
+  });
 
   test('returns an array with unique categories when given an array with duplicates', () => {
     const items = [{cat: 'A'}, {cat: 'B'}, {cat: 'A'}, {cat: 'B'}];
     const result = getCats(items);
 
     expect(result).toEqual(['A', 'B']);
-  })
+  });
 });
 
 /**
@@ -90,7 +90,7 @@ describe('getItemName', () => {
 
     const result = getItemName(id, items);
     expect(result).toEqual(expected);
-  })
+  });
 
   test('should return false if no item is found with the given id', () => {
     const items = [{ _id: '1', name: 'Item 1' }, { _id: '2', name: 'Item 2' }];
@@ -98,7 +98,7 @@ describe('getItemName', () => {
 
     const result = getItemName(id, items);
     expect(result).toBe(false);
-  })
+  });
 
   test('should return false if the provided items array is empty', () => {
     const items = [];
@@ -106,8 +106,8 @@ describe('getItemName', () => {
 
     const result = getItemName(id, items);
     expect(result).toBe(false);
-  })
-})
+  });
+});
 
 /**
  * ? GET ITEMS BY CAT
@@ -136,7 +136,7 @@ describe('getItemsByCat', () => {
 
     const actual = getItemsByCat(items);
     assert.deepStrictEqual(actual, expected);
-  })
+  });
 
   test('should return an empty object if the input array is empty', () => {
     const items = [];
@@ -144,7 +144,7 @@ describe('getItemsByCat', () => {
 
     const actual = getItemsByCat(items);
     assert.deepStrictEqual(actual, expected);
-  })
+  });
 
   test('should handle an array with only one item', () => {
     const items = [{ name: 'apple', cat: 'fruit' }];
@@ -152,7 +152,7 @@ describe('getItemsByCat', () => {
 
     const actual = getItemsByCat(items);
     assert.deepStrictEqual(actual, expected);
-  })
+  });
 
   test('should handle an array with items in only one category', () => {
     const items = [
@@ -171,7 +171,7 @@ describe('getItemsByCat', () => {
 
     const actual = getItemsByCat(items);
     assert.deepStrictEqual(actual, expected);
-  })
+  });
 
   test('should handle an array with items in multiple categories with same names', () => {
     const items = [
@@ -194,5 +194,5 @@ describe('getItemsByCat', () => {
 
     const actual = getItemsByCat(items);
     assert.deepStrictEqual(actual, expected);
-  })
-})
+  });
+});

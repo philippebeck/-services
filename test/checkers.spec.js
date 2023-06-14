@@ -1,6 +1,6 @@
 // ! **************************************** CHECKERS TESTS ****************************************
 
-import { checkRange, checkRegex, checkRole } from "../src/checkers"
+import { checkRange, checkRegex, checkRole } from "../src/checkers";
 
 global.alert = jest.fn();
 
@@ -15,14 +15,14 @@ describe("checkRange()", () => {
     expect(checkRange(50, msg)).toBe(true);
     expect(checkRange("aA", msg)).toBe(true);
     expect(checkRange("abcdefghijklmnopqrstuvwxyz", msg)).toBe(true);
-  })
+  });
 
   test("should return false if value is not within the specified range", () => {
     expect(checkRange(1, msg)).toBe(false);
     expect(checkRange(51, msg)).toBe(false);
     expect(checkRange("", msg)).toBe(false);
     expect(checkRange("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", msg)).toBe(false);
-  })
+  });
 
   test("should display the correct message if value is not within the specified range", () => {
     const min = 2;
@@ -39,8 +39,8 @@ describe("checkRange()", () => {
 
     checkRange("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", msg, min, max);
     expect(alert).toHaveBeenCalledWith(`${msg} ${min} & ${max}`);
-  })
-})
+  });
+});
 
 /**
  * ? CHECK REGEX
@@ -54,7 +54,7 @@ describe("checkRegex()", () => {
 
     const result = checkRegex(value, msg, regex);
     expect(result).toBe(true);
-  })
+  });
 
   test("value does not match regex", () => {
     const value = "12a4";
@@ -64,8 +64,8 @@ describe("checkRegex()", () => {
     const result = checkRegex(value, msg, regex);
     expect(alert).toHaveBeenCalledWith(msg);
     expect(result).toBe(false);
-  })
-})
+  });
+});
 
 /**
  * ? CHECK ROLE
@@ -74,25 +74,25 @@ describe("checkRole()", () => {
 
   test("returns true if userRole is admin & role is admin", () => {
     expect(checkRole("admin", "admin")).toBe(true);
-  })
+  });
 
   test("returns false if userRole is editor & role is admin", () => {
     expect(checkRole("editor", "admin")).toBe(false);
-  })
+  });
 
   test("returns true if userRole is editor & role is editor", () => {
     expect(checkRole("editor", "editor")).toBe(true);
-  })
+  });
 
   test("returns false if userRole is user & role is editor", () => {
     expect(checkRole("user", "editor")).toBe(false);
-  })
+  });
 
   test("returns true if userRole is user & role is user", () => {
     expect(checkRole("user", "user")).toBe(true);
-  })
+  });
 
   test("returns false if userRole is test & role is user", () => {
     expect(checkRole("test", "user")).toBe(false);
-  })
-})
+  });
+});

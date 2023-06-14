@@ -1,65 +1,38 @@
-/*! servidio v2.1.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.2.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
-// ******************** CHECKERS ******************** \\
+// ! **************************************** CHECKERS ****************************************
 
 /**
- * CHECK ERROR
- * @param {object} error 
- */
-export function checkError(error) {
-  if (error.response) {
-    alert(error.response.data.message);
-  } else {
-    console.log(error);
-  }
-}
-
-/**
- * CHECK ID
- * @param {string} id
- * @param {array} array
- * @returns
- */
-export function checkId(id, array) {
-  for (let item of array) {
-    if (item === id) return true;
-  }
-
-  return false;
-}
-
-/**
- * CHECK RANGE
- * @param {*} value
- * @param {string} message
- * @param {number} min
- * @param {number} max
- * @returns 
+ * ? CHECK RANGE
+ * * Checks whether a given value is within a specified range of min & max values,
+ * * either by comparing their string length or their numerical value
+ *
+ * @param {number|string} value - The value to check against the range
+ * @param {string} message - The message to display if the value is not within range
+ * @param {number} [min=2] - The minimum value of range
+ * @param {number} [max=50] - The maximum value of range
+ * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
 export function checkRange(value, message, min = 2, max = 50) {
-  switch (typeof value) {
-    case "number":
-      if (value >= min && value <= max) return true;
-      break;
+  const inRange = (typeof value === "number" && value >= min && value <= max) ||
+                  (typeof value === "string" && value.length >= min && value.length <= max);
 
-    case "string":
-      if (value.length >= min && value.length <= max) return true;
-      break;
+  if (!inRange) alert(`${message} ${min} & ${max}`);
 
-    default:
-      alert(`${message} ${min} & ${max}`);
-      return false;
-  }
+  return inRange;
 }
 
 /**
- * CHECK REGEX
- * @param {string} value 
- * @param {string} message
- * @param {regex} regex
- * @returns 
+ * ? CHECK REGEX
+ * * Checks if a given value matches a regular expression
+ * * If it does not, it displays an alert message & returns false
+ *
+ * @param {any} value - The value to be tested against the regular expression
+ * @param {string} message - The message to be displayed in case the value does not match the regex
+ * @param {RegExp} regex - The regular expression to test the value against
+ * @returns {boolean} - Returns true if the value matches the regex, false otherwise
  */
 export function checkRegex(value, message, regex) {
   if (regex.test(value)) return true;
@@ -69,282 +42,211 @@ export function checkRegex(value, message, regex) {
 }
 
 /**
- * CHECK ROLE
- * @param {string} userRole 
- * @param {string} role 
- * @returns 
+ * ? CHECK ROLE
+ * * Checks if a given user role has the required role permission
+ *
+ * @param {string} userRole - The role of the user being checked
+ * @param {string} role - The required role permission
+ * @return {boolean} Returns true if the user has the required role permission, else false
  */
 export function checkRole(userRole, role) {
-  let auth = null;
 
-  switch (userRole) {
-    case "admin":
-      auth = true;
-      break;
-
-    case "editor":
-      auth = (role === "admin") ? false : true;
-      break;
-
-    case "user":
-      auth = (role === "user") ? true : false;
-      break;
-
-    default:
-      auth = false;
-  }
-
-  return auth;
+  return userRole === "admin" ? true
+  : userRole === "editor" ? role !== "admin"
+  : userRole === "user" ? role === "user"
+  : false;
 }
 
-// ******************** FETCHERS ******************** \\
+// ! **************************************** FETCHERS ****************************************
+// ! ******************************************************************************************
 
 /**
- * FETCH GET DATA
- * @param {string} url 
- * @returns 
+ * ? FETCH GET
+ * * An asynchronous function that fetches data from a given URL and returns the response based on the content type.
+ *
+ * @param {string} url - The URL to fetch data from.
+ * @throws {Error} Throws an error if the response status is not ok.
+ * @return {Promise} Returns a Promise that resolves with the appropriate data based on the content type of the response.
  */
 export async function fetchGet(url) {
-  let result;
-  let response = await fetch(url);
-  if (!response.ok) throw new Error(response.text());
+  const response = await fetch(url);
+
+  if (!response.ok) throw new Error(await response.text());
 
   switch (response.headers.get("Content-Type").split(";")[0]) {
     case "application/json":
-      result = await response.json();
-      break;
+      return await response.json();
 
     case "multipart/form-data":
-      result = await response.formData();
-      break;
+      return await response.formData();
 
     case "text/html":
     case "text/plain":
-      result = await response.text();
-      break;
+      return await response.text();
 
     default:
-      result = response.body;
+      return response.body;
   }
-
-  return result;
 }
 
 /**
- * FETCH SET DATA
- * @param {string} url 
- * @param {object} options 
- * @returns 
+ * ? FETCH SET
+ * * Asynchronously fetches data from a given URL using the provided options object.
+ *
+ * @param {string} url - The URL to fetch data from.
+ * @param {object} options - An options object that is passed to the fetch function.
+ * @throws {Error} If the response is not OK.
+ * @return {Promise<object>} A promise that resolves to a JSON object representing the fetched data.
  */
 export async function fetchSet(url, options) {
-  let response = await fetch(url, options)
-  if (!response.ok) throw new Error(response.text());
+  const response = await fetch(url, options);
 
-  return response.json();
+  if (!response.ok) throw new Error(await response.text());
+
+  return await response.json();
 }
 
-// ******************** GETTERS ******************** \\
+// ! **************************************** GETTERS ****************************************
 
 /**
- * GET AVERAGE
- * @param {string} id 
- * @param {array} array 
- * @returns 
+ * ? GET AVERAGE
+ * * Calculates the average score for a given product id from an array of items
+ *
+ * @param {string} id - The id of the product to calculate the average score for
+ * @param {Array} array - An array of objects containing a product id and a score
+ * @return {number} The average score for the given product id, or undefined if it is not found in the array
  */
 export function getAverage(id, array) {
-  let sumData = {};
-  let average = [];
+  const sumData = {};
 
-  for (let item of array) {
+  for (const item of array) {
+    const { product, score } = item;
 
-    if (sumData[item.product]) {
-      sumData[item.product].sum += item.score;
-      sumData[item.product].n++;
+    if (!sumData[product]) sumData[product] = { sum: 0, n: 0 };
 
-    } else {
-      sumData[item.product] = {
-        sum: item.score,
-        n: 1
-      };
-    }
+    sumData[product].sum += score;
+    sumData[product].n++;
   }
 
-  for (let element of Object.keys(sumData)) {
-      average.push({
-        product: element,
-        score: sumData[element].sum / sumData[element].n
-      });
+  for (const product in sumData) {
+    const { sum, n } = sumData[product];
+    sumData[product] = sum / n;
   }
 
-  for (let data of average) {
-    if (id === data.product) {
-
-      return data.score;
-    }
-  }
+  return sumData[id];
 }
 
 /**
- * GET CATEGORIES
- * @param {array} items 
- * @returns 
+ * ? GET CATEGORIES
+ * * Returns an array of unique categories from the given items
+ *
+ * @param {Array} items - An array of objects representing items with a 'cat' property
+ * @return {Array} An array of unique cat categories from the given items
  */
 export function getCats(items) {
-  const cats = new Set();
 
-  for (let item of items) {
-    cats.add(item.cat)
-  }
-
-  return Array.from(cats); 
+  return [...new Set(items.map(item => item.cat))];
 }
 
-
 /**
- * GET ITEM NAME
- * @param {string} id 
- * @param {array} items
- * @returns
+ * ? GET ITEM NAME
+ * * Returns the name of the item with the given id from the provided array of items
+ *
+ * @param {string} id - The id of the item to search for
+ * @param {Array} items - An array of items to search through
+ * @return {string|boolean} The name of the item with the given id if found, false otherwise
  */
 export function getItemName(id, items) {
-  for (let item of items) {
-    if (item._id === id) {
+  const item = items.find(item => item._id === id);
 
-      return item.name;
-    }
-  }
-  return false;
+  return item ? item.name : false;
 }
 
 /**
- * GET ITEMS BY CATEGORY
- * @param {array} items 
- * @returns
+ * ? GET ITEMS BY CATEGORY
+ * * Groups an array of items by category and sorts each category's item list by name
+ *
+ * @param {Array} items - The array of items to group
+ * @return {Object} An object where each key is a category and its value is the array of items belonging to that category
  */
 export function getItemsByCat(items) {
   const itemsByCat = {};
 
-  for (let item of items) {
+  for (const item of items) {
+    const cat = item.cat;
 
-    if (!itemsByCat[item.cat]) {
-      itemsByCat[item.cat] = [];
-    }
+    if (!itemsByCat[cat]) itemsByCat[cat] = [];
+    itemsByCat[cat].push(item);
+  }
 
-    itemsByCat[item.cat].push(item);
-    itemsByCat[item.cat].sort((a, b) => (a.name > b.name) ? 1 : -1);
+  for (const cat in itemsByCat) {
+    itemsByCat[cat].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   return itemsByCat;
 }
 
-// ******************** SETTERS ******************** \\
+// ! **************************************** SETTERS ****************************************
 
 /**
- * SET DESCRIPTION
- * @param {string} description 
+ * ? SET ERROR
+ * * Logs an error message from the provided error object
+ *
+ * @param {Error} error - The error object to log the message from
  */
-export function setDescription(description) {
-  const descriptionElt = document.querySelector('[name="description"]');
-  descriptionElt.setAttribute("content", description);
-
-  if (document.querySelector('[property="og:description"]')) {
-    const descriptionOGElt = document.querySelector('[property="og:description"]');
-    descriptionOGElt.setAttribute("content", description);
-  }
-
-  if (document.querySelector('[name="twitter:description"]')) {
-    const descriptionTwElt = document.querySelector('[name="twitter:description"]');
-    descriptionTwElt.setAttribute("content", description);
-  }
+export function setError(error) {
+  console.error(error.response ? error.response.data.message : error.message);
 }
 
 /**
- * SET GLOBAL META
- * @param {string} lang 
- * @param {string} icon 
- * @param {string} creator 
+ * ? SET GLOBAL META
+ * * Sets the global metadata of the page including language, favicon & Twitter creator
+ *
+ * @param {string} creator - The Twitter creator handle to set in the metadata
+ * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
+ * @param {string} [lang="en"] - The language code to set in the metadata
  */
 export function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
-  const htmlElt = document.querySelector('html');
-  htmlElt.setAttribute("lang", lang);
+  const iconElt     = document.querySelector('[rel="icon"]');
+  const creatorElt  = document.querySelector('[name="twitter:creator"]');
 
-  const iconElt = document.querySelector('[rel="icon"]');
-  iconElt.setAttribute("href", icon);
+  document.documentElement.lang = lang;
+  if (iconElt) iconElt.href = icon;
 
-  if (document.querySelector('[name="twitter:creator"]')) {
-    const creatorElt = document.querySelector('[name="twitter:creator"]');
-    creatorElt.setAttribute("content", creator);
+  if (creatorElt) {
+    if (creator === undefined) {
+      creatorElt.remove();
+    } else {
+      creatorElt.content = creator;
+    }
   }
 }
 
 /**
- * SET IMAGE
- * @param {string} image 
- */
-export function setImage(image) {
-
-  if (document.querySelector('[property="og:image"]')) {
-    const imageOGElt = document.querySelector('[property="og:image"]');
-    imageOGElt.setAttribute("content", image);
-  }
-
-  if (document.querySelector('[name="twitter:image"]')) {
-    const imageTwElt = document.querySelector('[name="twitter:image"]');
-    imageTwElt.setAttribute("content", image);
-  }
-}
-
-/**
- * SET META
- * @param {string} title 
- * @param {string} description 
- * @param {string} url 
- * @param {string} image 
+ * ? SET META
+ * * Sets the metadata of the page including title, description, url & image
+ *
+ * @param {string} title - the new title to set
+ * @param {string} description - The new description to set
+ * @param {string} url - The new URL to set
+ * @param {string} [image=""] - The new image to set
  */
 export function setMeta(title, description, url, image = "") {
-  setTitle(title);
-  setDescription(description);
-  setUrl(url);
+  const descriptionTags = '[name="description"], [property="og:description"], [name="twitter:description"]';
+  const titleTags       = '[property="og:title"], [name="twitter:title"]';
+  const urlTags         = '[property="og:url"], [name="twitter:site"]';
 
-  if (image !== "") setImage(image);
-}
+  document.querySelector('title').innerText         = title;
+  document.querySelector('[rel="canonical"]').href  = url;
 
-/**
- * SET TITLE
- * @param {string} title 
- */
-export function setTitle(title) {
-  const titleElt        = document.querySelector('title');
-  titleElt.textContent  = title;
+  document.querySelectorAll(titleTags).forEach(titleTag => titleTag.setAttribute("content", title));
+  document.querySelectorAll(descriptionTags).forEach(descriptionTag => descriptionTag.setAttribute("content", description));
+  document.querySelectorAll(urlTags).forEach(urlTag => urlTag.setAttribute("content", url));
 
-  if (document.querySelector('[property="og:title"]')) {
-    const titleOGElt = document.querySelector('[property="og:title"]');
-    titleOGElt.setAttribute("content", title);
-  }
-
-  if (document.querySelector('[name="twitter:title"]')) {
-    const titleTwElt = document.querySelector('[name="twitter:title"]');
-    titleTwElt.setAttribute("content", title);
+  if (image !== "") {
+    const imgTags = '[property="og:image"], [name="twitter:image"]';
+    document.querySelectorAll(imgTags).forEach(imgTag => imgTag.setAttribute("content", image));
   }
 }
 
-/**
- * SET URL
- * @param {string} url 
- */
-export function setUrl(url) {
-  const urlElt = document.querySelector('[rel="canonical"]');
-  urlElt.setAttribute("href", url);
-
-  if (document.querySelector('[property="og:url"]')) {
-    const urlOGElt = document.querySelector('[property="og:url"]');
-    urlOGElt.setAttribute("content", url);
-  }
-
-  if (document.querySelector('[name="twitter:site"]')) {
-    const urlTwElt = document.querySelector('[name="twitter:site"]');
-    urlTwElt.setAttribute("content", url);
-  }
-}
-
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 13th May 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 15th Jun 2023 */

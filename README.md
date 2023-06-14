@@ -42,8 +42,8 @@ Yarn : `yarn add servidio`
 
 ## CDN
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@2.1.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.1.1/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@2.1.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.1.1/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@2.2.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.2.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@2.2.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.2.0/dist/serve.min.js)  
 
 ---
 
@@ -60,8 +60,6 @@ or
 ## Content
 
 Checkers part :  
--   **checkError(error)** : check error response  
--   **checkId(id, array)** : check id from array  
 -   **checkRange(value, message, min, max)** : check range between min & max  
 -   **checkRegex(value, message, regex)** : check value with regex  
 -   **checkRole(userRole, role)** check role between admin, editor or user  
@@ -77,12 +75,9 @@ Getters part :
 -   **getItemsByCat(items)** get items by category property  
 
 Setters part :  
+-   **setError(error)** : set error message  
 -   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
 -   **setMeta(title, description, url, image)** set all meta for pages  
--   **setDescription(description)** set meta description & description for og/tw  
--   **setImage(image)** set image for og & tw  
--   **setTitle(title)** set head title & title for og/tw  
--   **setUrl(url)** set canonical & url/site for og/tw  
 
 ---
 

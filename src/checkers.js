@@ -1,61 +1,34 @@
-// ******************** CHECKERS ******************** \\
+// ! **************************************** CHECKERS ****************************************
 
 /**
- * CHECK ERROR
- * @param {object} error 
- */
-export function checkError(error) {
-  if (error.response) {
-    alert(error.response.data.message);
-  } else {
-    console.log(error);
-  }
-}
-
-/**
- * CHECK ID
- * @param {string} id
- * @param {array} array
- * @returns
- */
-export function checkId(id, array) {
-  for (let item of array) {
-    if (item === id) return true;
-  }
-
-  return false;
-}
-
-/**
- * CHECK RANGE
- * @param {*} value
- * @param {string} message
- * @param {number} min
- * @param {number} max
- * @returns 
+ * ? CHECK RANGE
+ * * Checks whether a given value is within a specified range of min & max values,
+ * * either by comparing their string length or their numerical value
+ *
+ * @param {number|string} value - The value to check against the range
+ * @param {string} message - The message to display if the value is not within range
+ * @param {number} [min=2] - The minimum value of range
+ * @param {number} [max=50] - The maximum value of range
+ * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
 export function checkRange(value, message, min = 2, max = 50) {
-  switch (typeof value) {
-    case "number":
-      if (value >= min && value <= max) return true;
-      break;
+  const inRange = (typeof value === "number" && value >= min && value <= max) ||
+                  (typeof value === "string" && value.length >= min && value.length <= max);
 
-    case "string":
-      if (value.length >= min && value.length <= max) return true;
-      break;
+  if (!inRange) alert(`${message} ${min} & ${max}`);
 
-    default:
-      alert(`${message} ${min} & ${max}`);
-      return false;
-  }
+  return inRange;
 }
 
 /**
- * CHECK REGEX
- * @param {string} value 
- * @param {string} message
- * @param {regex} regex
- * @returns 
+ * ? CHECK REGEX
+ * * Checks if a given value matches a regular expression
+ * * If it does not, it displays an alert message & returns false
+ *
+ * @param {any} value - The value to be tested against the regular expression
+ * @param {string} message - The message to be displayed in case the value does not match the regex
+ * @param {RegExp} regex - The regular expression to test the value against
+ * @returns {boolean} - Returns true if the value matches the regex, false otherwise
  */
 export function checkRegex(value, message, regex) {
   if (regex.test(value)) return true;
@@ -65,30 +38,17 @@ export function checkRegex(value, message, regex) {
 }
 
 /**
- * CHECK ROLE
- * @param {string} userRole 
- * @param {string} role 
- * @returns 
+ * ? CHECK ROLE
+ * * Checks if a given user role has the required role permission
+ *
+ * @param {string} userRole - The role of the user being checked
+ * @param {string} role - The required role permission
+ * @return {boolean} Returns true if the user has the required role permission, else false
  */
 export function checkRole(userRole, role) {
-  let auth = null;
 
-  switch (userRole) {
-    case "admin":
-      auth = true;
-      break;
-
-    case "editor":
-      auth = (role === "admin") ? false : true;
-      break;
-
-    case "user":
-      auth = (role === "user") ? true : false;
-      break;
-
-    default:
-      auth = false;
-  }
-
-  return auth;
+  return userRole === "admin" ? true
+  : userRole === "editor" ? role !== "admin"
+  : userRole === "user" ? role === "user"
+  : false;
 }

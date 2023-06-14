@@ -1,205 +1,150 @@
-// ******************** SETTERS ******************** \\
+// ! **************************************** SETTERS TESTS ****************************************
 
-import * as serve from "../dist/serve"
+import { setError, setGlobalMeta, setMeta } from "../src/setters"
 
 /**
- * @jest-environment jsdom
+ * ? SET ERROR
  */
-describe("setters", () => {
-  /**
-   * CREATE META ELEMENTS
-   */
-  const titleElt    = document.createElement("title");
-  const titleOGElt  = document.createElement("meta");
-  const titleTwElt  = document.createElement("meta");
+describe("setError", () => {
 
-  const urlElt    = document.createElement("link");
-  const urlOGElt  = document.createElement("meta");
-  const urlTwElt  = document.createElement("meta");
-
-  const descriptionElt    = document.createElement("meta");
-  const descriptionOGElt  = document.createElement("meta");
-  const descriptionTwElt  = document.createElement("meta");
-
-  const imageOGElt = document.createElement("meta");
-  const imageTwElt = document.createElement("meta");
-
-  /**
-   * SET ATTRIBUTES
-   */
-  titleOGElt.setAttribute("property", "og:title");
-  titleTwElt.setAttribute("name", "twitter:title");
-
-  urlElt.setAttribute("rel", "canonical");
-  urlOGElt.setAttribute("property", "og:url");
-  urlTwElt.setAttribute("name", "twitter:site");
-
-  descriptionElt.setAttribute("name", "description");
-  descriptionOGElt.setAttribute("property", "og:description");
-  descriptionTwElt.setAttribute("name", "twitter:description");
-
-  imageOGElt.setAttribute("property", "og:image");
-  imageTwElt.setAttribute("name", "twitter:image");
-
-  /**
-   * APPEND ELEMENTS
-   */
-  document.head.appendChild(titleElt);
-  document.head.appendChild(titleOGElt);
-  document.head.appendChild(titleTwElt);
-
-  document.head.appendChild(urlElt);
-  document.head.appendChild(urlOGElt);
-  document.head.appendChild(urlTwElt);
-
-  document.head.appendChild(descriptionElt);
-  document.head.appendChild(descriptionOGElt);
-  document.head.appendChild(descriptionTwElt);
-
-  document.head.appendChild(imageOGElt);
-  document.head.appendChild(imageTwElt);
-
-  /**
-   * SET GLOBAL META
-   */
-  describe("setGlobalMeta", () => {
-    const htmlElt       = document.createElement("html");
-    const iconElt       = document.createElement("link");
-    const creatorTwElt  = document.createElement("meta");
-
-    htmlElt.setAttribute("lang", "en");
-    iconElt.setAttribute("rel", "icon");
-    creatorTwElt.setAttribute("name", "twitter:creator");
-
-    document.head.appendChild(htmlElt);
-    document.head.appendChild(iconElt);
-    document.head.appendChild(creatorTwElt);
-
-    serve.setGlobalMeta("ph_beck", "img/favicon.png", "fr");
-
-    // test("should set the lang attribute to fr", () => {
-    //   let attribute = htmlElt.getAttribute("lang");
-    //   expect(attribute).toBe("fr");
-    // })
-
-    test("should set the favicon to png", () => {
-      let attribute = iconElt.getAttribute("href");
-      expect(attribute).toBe("img/favicon.png");
-    })
-
-    test("should set the Twitter creator", () => {
-      let attribute = creatorTwElt.getAttribute("content");
-      expect(attribute).toBe("ph_beck");
-    })
+  test("logs the error message from the provided error object", () => {
+    const error = new Error("Test error message");
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    setError(error);
+    expect(consoleErrorSpy).toHaveBeenCalledWith("Test error message");
+    consoleErrorSpy.mockRestore();
   })
 
-  /**
-   * SET TITLE
-   */
-  describe("setTitle", () => {
-    serve.setTitle("Test Title");
+  test("logs the error message from the error response data if it exists", () => {
+    const error = {
+      response: {
+        data: {
+          message: "Test error message"
+        }
+      },
+      message: "Error message without response data"
+    };
 
-    test("should set the title", () => {
-      let attribute = titleElt.textContent;
-      expect(attribute).toBe("Test Title");
-    })
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    setError(error);
+    expect(consoleErrorSpy).toHaveBeenCalledWith("Test error message");
+    consoleErrorSpy.mockRestore();
+  })
+})
 
-    test("should set the OG title", () => {
-      let attribute = titleOGElt.getAttribute("content");
-      expect(attribute).toBe("Test Title");
-    })
+/**
+ * ? SET GLOBAL META
+ */
+describe("setGlobalMeta()", () => {
+  const htmlElt       = document.createElement("html");
+  const iconElt       = document.createElement("link");
+  const creatorTwElt  = document.createElement("meta");
 
-    test("should set the Twitter title", () => {
-      let attribute = titleTwElt.getAttribute("content");
-      expect(attribute).toBe("Test Title");
-    })
+  htmlElt.setAttribute("lang", "en");
+  iconElt.setAttribute("rel", "icon");
+  creatorTwElt.setAttribute("name", "twitter:creator");
+
+  document.head.appendChild(htmlElt);
+  document.head.appendChild(iconElt);
+  document.head.appendChild(creatorTwElt);
+
+  test("sets the language code when passed as an argument", () => {
+    const lang = "fr";
+    setGlobalMeta("test_creator", "test_icon", lang);
+    expect(document.querySelector("html").lang).toEqual(lang);
   })
 
-  /**
-   * SET URL
-   */
-  describe("setUrl", () => {
-    serve.setUrl("https://test.com");
-    
-    test("should set the canonical url", () => {
-      let attribute = urlElt.getAttribute("href");
-      expect(attribute).toBe("https://test.com");
-    })
-
-    test("should set the OG url", () => {
-      let attribute = urlOGElt.getAttribute("content");
-      expect(attribute).toBe("https://test.com");
-    })
-
-    test("should set the Twitter url", () => {
-      let attribute = urlTwElt.getAttribute("content");
-      expect(attribute).toBe("https://test.com");
-    })
+  test("sets the default language code when no argument is passed", () => {
+    setGlobalMeta("test_creator", "test_icon");
+    expect(document.querySelector("html").lang).toEqual("en");
   })
 
-  /**
-   * SET DESCRIPTION
-   */
-  describe("setDescription", () => {
-    serve.setDescription("test description");
-
-    test("should set the main description", () => {
-      let attribute = descriptionElt.getAttribute("content");
-      expect(attribute).toBe("test description");
-    })
-
-    test("should set the OG description", () => {
-      let attribute = descriptionOGElt.getAttribute("content");
-      expect(attribute).toBe("test description");
-    })
-
-    test("should set the Twitter description", () => {
-      let attribute = descriptionTwElt.getAttribute("content");
-      expect(attribute).toBe("test description");
-    })
+  test("sets the favicon when passed as an argument", () => {
+    const icon = "test_icon";
+    setGlobalMeta("test_creator", icon);
+    expect(document.querySelector('[rel="icon"]').href).toEqual('http://localhost/' + icon);
   })
 
-  /**
-   * SET IMAGE
-   */
-  describe("setImage", () => {
-    serve.setImage("img/test.png");
+  test("sets the favicon when passed as an argument", () => {
+    const faviconUrl = "test_icon";
+    setGlobalMeta("test_creator", faviconUrl);
+    const faviconLink = document.querySelector('[rel="icon"]');
+    expect(faviconLink.href).toEqual('http://localhost/' + faviconUrl);
+  })  
 
-    test("should set the OG image", () => {
-      let attribute = imageOGElt.getAttribute("content");
-      expect(attribute).toBe("img/test.png");
-    })
-
-    test("should set the Twitter image", () => {
-      let attribute = imageTwElt.getAttribute("content");
-      expect(attribute).toBe("img/test.png");
-    })
+  test("sets the default favicon when no argument is passed", () => {
+    setGlobalMeta("test_creator");
+    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/img/favicon.ico");
   })
 
-  /**
-   * SET META
-   */
-  describe("setMeta", () => {
-    serve.setMeta("Test Title", "test description", "https://test.com", "img/test.png");
+  test("sets the Twitter creator handle when passed as an argument", () => {
+    const creator = "test_creator";
+    setGlobalMeta(creator, "test_icon", "es");
+    expect(document.querySelector('[name="twitter:creator"]').content).toEqual(creator);
+  })
 
-    test("should call setTitle()", () => {
-      let attribute = titleElt.textContent;
-      expect(attribute).toBe("Test Title");
-    })
+  test("does not set the Twitter creator handle when no argument is passed", () => {
+    setGlobalMeta(undefined, "test_icon", "es");
+    expect(document.querySelector('[name="twitter:creator"]')).toBeNull();
+  })
+})
 
-    test("should call setDescription()", () => {
-      let attribute = descriptionElt.getAttribute("content");
-      expect(attribute).toBe("test description");
-    })
+/**
+ * ? SET META
+ */
+describe("setMeta", () => {
 
-    test("should call setUrl()", () => {
-      let attribute = urlElt.getAttribute("href");
-      expect(attribute).toBe("https://test.com");
-    })
+  beforeEach(() => {
+    document.head.innerHTML = `
+      <title></title>
+      <meta name="description" content="">
+      <meta property="og:description" content="">
+      <meta name="twitter:description" content="">
+      <meta property="og:title" content="">
+      <meta name="twitter:title" content="">
+      <meta property="og:url" content="">
+      <meta name="twitter:site" content="">
+      <meta property="og:image" content="">
+      <meta name="twitter:image" content="">
+      <link rel="canonical" href="">
+    `;
+  })
 
-    test("should call setImage()", () => {
-      let attribute = imageOGElt.getAttribute("content");
-      expect(attribute).toBe("img/test.png");
-    })
+  test("should set the title correctly", () => {
+    setMeta("New Title", "Description", "https://example.com");
+
+    expect(document.querySelector('title').innerText).toEqual("New Title");
+    expect(document.querySelector('[property="og:title"]').getAttribute("content")).toEqual("New Title");
+    expect(document.querySelector('[name="twitter:title"]').getAttribute("content")).toEqual("New Title");
+  })
+
+  test("should set the description correctly", () => {
+    setMeta("Title", "New Description", "https://example.com");
+
+    expect(document.querySelector('[name="description"]').getAttribute("content")).toEqual("New Description");
+    expect(document.querySelector('[property="og:description"]').getAttribute("content")).toEqual("New Description");
+    expect(document.querySelector('[name="twitter:description"]').getAttribute("content")).toEqual("New Description");
+  })
+
+  test("should set the url correctly", () => {
+    setMeta("Title", "Description", "https://example.com/new-url");
+
+    expect(document.querySelector('[property="og:url"]').getAttribute("content")).toEqual("https://example.com/new-url");
+    expect(document.querySelector('[name="twitter:site"]').getAttribute("content")).toEqual("https://example.com/new-url");
+    expect(document.querySelector('[rel="canonical"]').getAttribute("href")).toEqual("https://example.com/new-url");
+  })
+
+  test("should set the image correctly", () => {
+    setMeta("Title", "Description", "https://example.com", "https://example.com/image.jpg");
+
+    expect(document.querySelector('[property="og:image"]').getAttribute("content")).toEqual("https://example.com/image.jpg");
+    expect(document.querySelector('[name="twitter:image"]').getAttribute("content")).toEqual("https://example.com/image.jpg");
+  })
+
+  test("should not set the image if it is not provided", () => {
+    setMeta("Title", "Description", "https://example.com");
+
+    expect(document.querySelector('[property="og:image"]').getAttribute("content")).toEqual("");
+    expect(document.querySelector('[name="twitter:image"]').getAttribute("content")).toEqual("");
   })
 })

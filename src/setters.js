@@ -1,109 +1,62 @@
-// ******************** SETTERS ******************** \\
+// ! **************************************** SETTERS ****************************************
 
 /**
- * SET DESCRIPTION
- * @param {string} description 
+ * ? SET ERROR
+ * * Logs an error message from the provided error object
+ *
+ * @param {Error} error - The error object to log the message from
  */
-export function setDescription(description) {
-  const descriptionElt = document.querySelector('[name="description"]');
-  descriptionElt.setAttribute("content", description);
-
-  if (document.querySelector('[property="og:description"]')) {
-    const descriptionOGElt = document.querySelector('[property="og:description"]');
-    descriptionOGElt.setAttribute("content", description);
-  }
-
-  if (document.querySelector('[name="twitter:description"]')) {
-    const descriptionTwElt = document.querySelector('[name="twitter:description"]');
-    descriptionTwElt.setAttribute("content", description);
-  }
+export function setError(error) {
+  console.error(error.response ? error.response.data.message : error.message);
 }
 
 /**
- * SET GLOBAL META
- * @param {string} lang 
- * @param {string} icon 
- * @param {string} creator 
+ * ? SET GLOBAL META
+ * * Sets the global metadata of the page including language, favicon & Twitter creator
+ *
+ * @param {string} creator - The Twitter creator handle to set in the metadata
+ * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
+ * @param {string} [lang="en"] - The language code to set in the metadata
  */
 export function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
-  const htmlElt = document.querySelector('html');
-  htmlElt.setAttribute("lang", lang);
+  const iconElt     = document.querySelector('[rel="icon"]');
+  const creatorElt  = document.querySelector('[name="twitter:creator"]');
 
-  const iconElt = document.querySelector('[rel="icon"]');
-  iconElt.setAttribute("href", icon);
+  document.documentElement.lang = lang;
+  if (iconElt) iconElt.href = icon;
 
-  if (document.querySelector('[name="twitter:creator"]')) {
-    const creatorElt = document.querySelector('[name="twitter:creator"]');
-    creatorElt.setAttribute("content", creator);
+  if (creatorElt) {
+    if (creator === undefined) {
+      creatorElt.remove();
+    } else {
+      creatorElt.content = creator;
+    }
   }
 }
 
 /**
- * SET IMAGE
- * @param {string} image 
- */
-export function setImage(image) {
-
-  if (document.querySelector('[property="og:image"]')) {
-    const imageOGElt = document.querySelector('[property="og:image"]');
-    imageOGElt.setAttribute("content", image);
-  }
-
-  if (document.querySelector('[name="twitter:image"]')) {
-    const imageTwElt = document.querySelector('[name="twitter:image"]');
-    imageTwElt.setAttribute("content", image);
-  }
-}
-
-/**
- * SET META
- * @param {string} title 
- * @param {string} description 
- * @param {string} url 
- * @param {string} image 
+ * ? SET META
+ * * Sets the metadata of the page including title, description, url & image
+ *
+ * @param {string} title - the new title to set
+ * @param {string} description - The new description to set
+ * @param {string} url - The new URL to set
+ * @param {string} [image=""] - The new image to set
  */
 export function setMeta(title, description, url, image = "") {
-  setTitle(title);
-  setDescription(description);
-  setUrl(url);
+  const descriptionTags = '[name="description"], [property="og:description"], [name="twitter:description"]';
+  const titleTags       = '[property="og:title"], [name="twitter:title"]';
+  const urlTags         = '[property="og:url"], [name="twitter:site"]';
 
-  if (image !== "") setImage(image);
-}
+  document.querySelector('title').innerText         = title;
+  document.querySelector('[rel="canonical"]').href  = url;
 
-/**
- * SET TITLE
- * @param {string} title 
- */
-export function setTitle(title) {
-  const titleElt        = document.querySelector('title');
-  titleElt.textContent  = title;
+  document.querySelectorAll(titleTags).forEach(titleTag => titleTag.setAttribute("content", title));
+  document.querySelectorAll(descriptionTags).forEach(descriptionTag => descriptionTag.setAttribute("content", description));
+  document.querySelectorAll(urlTags).forEach(urlTag => urlTag.setAttribute("content", url));
 
-  if (document.querySelector('[property="og:title"]')) {
-    const titleOGElt = document.querySelector('[property="og:title"]');
-    titleOGElt.setAttribute("content", title);
-  }
-
-  if (document.querySelector('[name="twitter:title"]')) {
-    const titleTwElt = document.querySelector('[name="twitter:title"]');
-    titleTwElt.setAttribute("content", title);
-  }
-}
-
-/**
- * SET URL
- * @param {string} url 
- */
-export function setUrl(url) {
-  const urlElt = document.querySelector('[rel="canonical"]');
-  urlElt.setAttribute("href", url);
-
-  if (document.querySelector('[property="og:url"]')) {
-    const urlOGElt = document.querySelector('[property="og:url"]');
-    urlOGElt.setAttribute("content", url);
-  }
-
-  if (document.querySelector('[name="twitter:site"]')) {
-    const urlTwElt = document.querySelector('[name="twitter:site"]');
-    urlTwElt.setAttribute("content", url);
+  if (image !== "") {
+    const imgTags = '[property="og:image"], [name="twitter:image"]';
+    document.querySelectorAll(imgTags).forEach(imgTag => imgTag.setAttribute("content", image));
   }
 }

@@ -5,7 +5,7 @@ import { setError, setGlobalMeta, setMeta } from "../src/setters"
 /**
  * ? SET ERROR
  */
-describe("setError", () => {
+describe("setError()", () => {
 
   test("logs the error message from the provided error object", () => {
     const error = new Error("Test error message");
@@ -62,14 +62,14 @@ describe("setGlobalMeta()", () => {
   test("sets the favicon when passed as an argument", () => {
     const icon = "test_icon";
     setGlobalMeta("test_creator", icon);
-    expect(document.querySelector('[rel="icon"]').href).toEqual('http://localhost/' + icon);
+    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/" + icon);
   });
 
   test("sets the favicon when passed as an argument", () => {
     const faviconUrl = "test_icon";
     setGlobalMeta("test_creator", faviconUrl);
     const faviconLink = document.querySelector('[rel="icon"]');
-    expect(faviconLink.href).toEqual('http://localhost/' + faviconUrl);
+    expect(faviconLink.href).toEqual("http://localhost/" + faviconUrl);
   });
 
   test("sets the default favicon when no argument is passed", () => {
@@ -92,7 +92,7 @@ describe("setGlobalMeta()", () => {
 /**
  * ? SET META
  */
-describe("setMeta", () => {
+describe("setMeta()", () => {
 
   beforeEach(() => {
     document.head.innerHTML = `
@@ -113,7 +113,7 @@ describe("setMeta", () => {
   test("should set the title correctly", () => {
     setMeta("New Title", "Description", "https://example.com");
 
-    expect(document.querySelector('title').innerText).toEqual("New Title");
+    expect(document.querySelector("title").innerText).toEqual("New Title");
     expect(document.querySelector('[property="og:title"]').getAttribute("content")).toEqual("New Title");
     expect(document.querySelector('[name="twitter:title"]').getAttribute("content")).toEqual("New Title");
   });

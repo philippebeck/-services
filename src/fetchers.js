@@ -12,7 +12,7 @@
 export async function fetchGet(url) {
   const response = await fetch(url);
 
-  if (!response.ok) throw new Error(await response.text())
+  if (!response.ok) throw new Error(await response.text());
 
   switch (response.headers.get("Content-Type").split(";")[0]) {
     case "application/json":
@@ -40,9 +40,9 @@ export async function fetchGet(url) {
  * @return {Promise<object>} A promise that resolves to a JSON object representing the fetched data.
  */
 export async function fetchSet(url, options) {
-  const response = await fetch(url, options)
+  const response = await fetch(url, options);
 
-  if (!response.ok) throw new Error(await response.text())
+  if (!response.ok) throw new Error(await response.text());
 
   return await response.json();
 }

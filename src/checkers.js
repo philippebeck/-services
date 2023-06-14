@@ -15,7 +15,7 @@ export function checkRange(value, message, min = 2, max = 50) {
   const inRange = (typeof value === "number" && value >= min && value <= max) ||
                   (typeof value === "string" && value.length >= min && value.length <= max);
 
-  if (!inRange) alert(`${message} ${min} & ${max}`)
+  if (!inRange) alert(`${message} ${min} & ${max}`);
 
   return inRange;
 }
@@ -31,7 +31,7 @@ export function checkRange(value, message, min = 2, max = 50) {
  * @returns {boolean} - Returns true if the value matches the regex, false otherwise
  */
 export function checkRegex(value, message, regex) {
-  if (regex.test(value)) return true
+  if (regex.test(value)) return true;
 
   alert(message);
   return false;

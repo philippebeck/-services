@@ -14,7 +14,7 @@ export function getAverage(id, array) {
   for (const item of array) {
     const { product, score } = item;
 
-    if (!sumData[product]) sumData[product] = { sum: 0, n: 0 }
+    if (!sumData[product]) sumData[product] = { sum: 0, n: 0 };
 
     sumData[product].sum += score;
     sumData[product].n++;

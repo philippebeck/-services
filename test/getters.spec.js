@@ -17,6 +17,7 @@ describe("getAverage()", () => {
     ];
 
     const expected1 = 3; // (5+3+1)/3 = 3
+
     expect(getAverage("A", items1)).toEqual(expected1);
 
     const items2 = [
@@ -31,6 +32,7 @@ describe("getAverage()", () => {
     ];
 
     const expected2 = 4.5; // (6+3)/2 = 4.5
+
     expect(getAverage("Z", items2)).toEqual(expected2);
   });
 
@@ -42,6 +44,7 @@ describe("getAverage()", () => {
     ];
 
     const expected3 = undefined;
+
     expect(getAverage("C", items3)).toEqual(expected3);
   });
 });
@@ -87,24 +90,24 @@ describe("getItemName()", () => {
     const items = [{ _id: "1", name: "Item 1" }, { _id: "2", name: "Item 2" }];
     const id = "2";
     const expected = "Item 2";
-
     const result = getItemName(id, items);
+
     expect(result).toEqual(expected);
   });
 
   test("should return false if no item is found with the given id", () => {
     const items = [{ _id: "1", name: "Item 1" }, { _id: "2", name: "Item 2" }];
     const id = "3";
-
     const result = getItemName(id, items);
+
     expect(result).toBe(false);
   });
 
   test("should return false if the provided items array is empty", () => {
     const items = [];
     const id = "1";
-
     const result = getItemName(id, items);
+
     expect(result).toBe(false);
   });
 });
@@ -135,22 +138,23 @@ describe("getItemsByCat()", () => {
     };
 
     const actual = getItemsByCat(items);
+
     assert.deepStrictEqual(actual, expected);
   });
 
   test("should return an empty object if the input array is empty", () => {
     const items = [];
     const expected = {};
-
     const actual = getItemsByCat(items);
+
     assert.deepStrictEqual(actual, expected);
   });
 
   test("should handle an array with only one item", () => {
     const items = [{ name: "apple", cat: "fruit" }];
     const expected = { fruit: [{ name: "apple", cat: "fruit" }] };
-
     const actual = getItemsByCat(items);
+
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -170,6 +174,7 @@ describe("getItemsByCat()", () => {
     };
 
     const actual = getItemsByCat(items);
+
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -193,6 +198,7 @@ describe("getItemsByCat()", () => {
     };
 
     const actual = getItemsByCat(items);
+
     assert.deepStrictEqual(actual, expected);
   });
 });

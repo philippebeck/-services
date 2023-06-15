@@ -11,6 +11,7 @@ describe("checkRange()", () => {
   const msg = "Value out of range";
 
   test("should return true if value is within the specified range", () => {
+
     expect(checkRange(2, msg)).toBe(true);
     expect(checkRange(50, msg)).toBe(true);
     expect(checkRange("aA", msg)).toBe(true);
@@ -18,6 +19,7 @@ describe("checkRange()", () => {
   });
 
   test("should return false if value is not within the specified range", () => {
+
     expect(checkRange(1, msg)).toBe(false);
     expect(checkRange(51, msg)).toBe(false);
     expect(checkRange("", msg)).toBe(false);
@@ -51,8 +53,8 @@ describe("checkRegex()", () => {
     const value = "1234";
     const regex = /^\d+$/;
     const msg = "Value must contain only digits";
-
     const result = checkRegex(value, msg, regex);
+
     expect(result).toBe(true);
   });
 
@@ -60,8 +62,8 @@ describe("checkRegex()", () => {
     const value = "12a4";
     const regex = /^\d+$/;
     const msg = "Value must contain only digits";
-
     const result = checkRegex(value, msg, regex);
+
     expect(alert).toHaveBeenCalledWith(msg);
     expect(result).toBe(false);
   });

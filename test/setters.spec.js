@@ -11,6 +11,7 @@ describe("setError()", () => {
     const error = new Error("Test error message");
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
     setError(error);
+
     expect(consoleErrorSpy).toHaveBeenCalledWith("Test error message");
     consoleErrorSpy.mockRestore();
   });
@@ -27,6 +28,7 @@ describe("setError()", () => {
 
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
     setError(error);
+
     expect(consoleErrorSpy).toHaveBeenCalledWith("Test error message");
     consoleErrorSpy.mockRestore();
   });
@@ -51,40 +53,39 @@ describe("setGlobalMeta()", () => {
   test("sets the language code when passed as an argument", () => {
     const lang = "fr";
     setGlobalMeta("test_creator", "test_icon", lang);
+
     expect(document.querySelector("html").lang).toEqual(lang);
   });
 
   test("sets the default language code when no argument is passed", () => {
     setGlobalMeta("test_creator", "test_icon");
+
     expect(document.querySelector("html").lang).toEqual("en");
   });
 
   test("sets the favicon when passed as an argument", () => {
     const icon = "test_icon";
     setGlobalMeta("test_creator", icon);
-    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/" + icon);
-  });
 
-  test("sets the favicon when passed as an argument", () => {
-    const faviconUrl = "test_icon";
-    setGlobalMeta("test_creator", faviconUrl);
-    const faviconLink = document.querySelector('[rel="icon"]');
-    expect(faviconLink.href).toEqual("http://localhost/" + faviconUrl);
+    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/" + icon);
   });
 
   test("sets the default favicon when no argument is passed", () => {
     setGlobalMeta("test_creator");
+
     expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/img/favicon.ico");
   });
 
   test("sets the Twitter creator handle when passed as an argument", () => {
     const creator = "test_creator";
-    setGlobalMeta(creator, "test_icon", "es");
+    setGlobalMeta(creator);
+
     expect(document.querySelector('[name="twitter:creator"]').content).toEqual(creator);
   });
 
   test("does not set the Twitter creator handle when no argument is passed", () => {
-    setGlobalMeta(undefined, "test_icon", "es");
+    setGlobalMeta();
+
     expect(document.querySelector('[name="twitter:creator"]')).toBeNull();
   });
 });

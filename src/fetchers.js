@@ -3,7 +3,7 @@
 
 /**
  * ? FETCH GET
- * * An asynchronous function that fetches data from a given URL and returns the response based on the content type.
+ * * An asynchronous function that fetches data from a given URL & returns the response based on the content type.
  *
  * @param {string} url - The URL to fetch data from.
  * @throws {Error} Throws an error if the response status is not ok.

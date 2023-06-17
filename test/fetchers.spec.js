@@ -24,22 +24,6 @@ describe("fetchGet()", () => {
     expect(global.fetch).toHaveBeenCalledWith(url);
   });
 
-  // test("should fetch data from a given URL with multipart/form-data content type", async () => {
-  //   const data = new FormData();
-  //   data.append("name", "John");
-
-  //   const mockedResponse = new Response(data, {
-  //     status: 200,
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //   });
-
-  //   jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-  //   const result = await fetchGet(url);
-
-  //   expect(result).toEqual(data);
-  //   expect(global.fetch).toHaveBeenCalledWith(url);
-  // });
-
   test("should fetch data from a given URL with text/html content type", async () => {
     const data = "<html><body><h1>Hello World!</h1></body></html>";
 
@@ -109,12 +93,10 @@ describe("fetchSet()", () => {
 
     const originalFetch = globalThis.fetch;
     globalThis.fetch = jest.fn(() => Promise.resolve(response));
-
     const result = await fetchSet(url, options);
 
     expect(result).toEqual(data);
     expect(globalThis.fetch).toHaveBeenCalledWith(url, options);
-
     globalThis.fetch = originalFetch;
   });
 
@@ -127,7 +109,6 @@ describe("fetchSet()", () => {
     globalThis.fetch = jest.fn(() => Promise.resolve(response));
 
     await expect(fetchSet(url, options)).rejects.toThrowError();
-
     globalThis.fetch = originalFetch;
   });
 });

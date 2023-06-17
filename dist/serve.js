@@ -1,4 +1,4 @@
-/*! servidio v2.2.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v2.2.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -62,7 +62,7 @@ export function checkRole(userRole, role) {
 
 /**
  * ? FETCH GET
- * * An asynchronous function that fetches data from a given URL and returns the response based on the content type.
+ * * An asynchronous function that fetches data from a given URL & returns the response based on the content type.
  *
  * @param {string} url - The URL to fetch data from.
  * @throws {Error} Throws an error if the response status is not ok.
@@ -113,7 +113,7 @@ export async function fetchSet(url, options) {
  * * Calculates the average score for a given product id from an array of items
  *
  * @param {string} id - The id of the product to calculate the average score for
- * @param {Array} array - An array of objects containing a product id and a score
+ * @param {Array} array - An array of objects containing a product id & a score
  * @return {number} The average score for the given product id, or undefined if it is not found in the array
  */
 export function getAverage(id, array) {
@@ -164,10 +164,10 @@ export function getItemName(id, items) {
 
 /**
  * ? GET ITEMS BY CATEGORY
- * * Groups an array of items by category and sorts each category's item list by name
+ * * Groups an array of items by category & sorts each category's item list by name
  *
  * @param {Array} items - The array of items to group
- * @return {Object} An object where each key is a category and its value is the array of items belonging to that category
+ * @return {Object} An object where each key is a category & its value is the array of items belonging to that category
  */
 export function getItemsByCat(items) {
   const itemsByCat = {};
@@ -249,4 +249,4 @@ export function setMeta(title, description, url, image = "") {
   }
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 15th Jun 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Jun 2023 */

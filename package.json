@@ -18,7 +18,7 @@
   "homepage": "https://www.npmjs.com/package/servidio",
   "bugs": "https://github.com/philippebeck/servidio/issues",
   "scripts": {
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom -- --coverage"
   },
   "jest": {
     "automock": false,

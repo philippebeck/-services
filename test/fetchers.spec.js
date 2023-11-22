@@ -16,9 +16,9 @@ beforeEach(() => {
 describe('setAxios()', () => {
   test('should set the base URL and headers for Axios requests without token', () => {
     const url = 'https://example.com';
-    const type = 'application/json';
+    const type = 'multipart/form-data';
 
-    setAxios(url, type);
+    setAxios(url);
 
     expect(axios.defaults.baseURL).toBe(url);
     expect(axios.defaults.headers.post['Content-Type']).toBe(type);
@@ -30,7 +30,7 @@ describe('setAxios()', () => {
     const type = 'application/json';
     const token = 'myToken';
 
-    setAxios(url, type, token);
+    setAxios(url, token, type);
 
     expect(axios.defaults.baseURL).toBe(url);
     expect(axios.defaults.headers.post['Content-Type']).toBe(type);
@@ -51,7 +51,7 @@ describe('postData()', () => {
 
     axios.post.mockResolvedValueOnce({ data: expectedResponse });
 
-    const response = await postData(url, type, data);
+    const response = await postData(url, data, type);
 
     expect(axios.post).toHaveBeenCalledWith(url, data);
     expect(response).toEqual(expectedResponse);
@@ -66,7 +66,7 @@ describe('postData()', () => {
 
     axios.post.mockResolvedValueOnce({ data: expectedResponse });
 
-    const response = await postData(url, type, data, token);
+    const response = await postData(url, data, token, type);
 
     expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
     expect(axios.post).toHaveBeenCalledWith(url, data);
@@ -99,7 +99,7 @@ describe('getData()', () => {
 
     axios.get.mockResolvedValueOnce({ data: {} });
 
-    await getData(url, type, token);
+    await getData(url, token, type);
 
     expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
   });
@@ -118,7 +118,7 @@ describe('putData', () => {
 
     axios.put.mockResolvedValueOnce({ data: 'Success' });
 
-    const response = await putData(url, type, data, token);
+    const response = await putData(url, data, token, type);
 
     expect(axios.put).toHaveBeenCalledWith(url, data);
     expect(response).toBe('Success');
@@ -132,7 +132,7 @@ describe('putData', () => {
 
     axios.put.mockResolvedValueOnce({ data: 'Success' });
 
-    await putData(url, type, data, token);
+    await putData(url, data, token, type);
 
     expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
   });
@@ -145,7 +145,7 @@ describe('putData', () => {
 
     axios.put.mockResolvedValueOnce({ data: responseData });
 
-    const response = await putData(url, type, data);
+    const response = await putData(url, data, type);
 
     expect(response).toBe(responseData);
   });
@@ -174,7 +174,7 @@ describe('deleteData()', () => {
     const expectedResponse = { success: true };
 
     axios.delete.mockResolvedValueOnce({ data: expectedResponse });
-    const result = await deleteData(url, type, token);
+    const result = await deleteData(url, token, type);
 
     expect(result).toBeDefined();
   });

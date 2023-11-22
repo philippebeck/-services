@@ -2,6 +2,8 @@
 
 // ! ******************** FETCHERS ********************
 
+import axios from "axios";
+
 /**
  * ? SET AXIOS
  * * Sets the base URL and headers for Axios requests
@@ -33,7 +35,7 @@ export async function postData(url, type, data, token = null) {
   setAxios(url, type, token);
   const response = await axios.post(url, data);
 
-  return response.data;
+  return response?.data;
 }
 
 /**
@@ -49,7 +51,7 @@ export async function getData(url, type, token = null) {
   setAxios(url, type, token);
   const response = await axios.get(url);
 
-  return response.data;
+  return response?.data;
 }
 
 /**
@@ -66,7 +68,7 @@ export async function putData(url, type, data, token = null) {
   setAxios(url, type, token);
   const response = await axios.put(url, data);
 
-  return response.data;
+  return response?.data;
 }
 
 /**
@@ -82,7 +84,7 @@ export async function deleteData(url, type, token = null) {
   setAxios(url, type, token);
   const response = await axios.delete(url);
 
-  return response.data;
+  return response?.data;
 }
 
 /**

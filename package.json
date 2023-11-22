@@ -26,6 +26,9 @@
       "./setupJest.js"
     ]
   },
+  "dependencies": {
+    "axios": "^1.6.2"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",
     "babel-jest": "^29.5.0",

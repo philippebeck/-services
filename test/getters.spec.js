@@ -1,4 +1,4 @@
-// ! **************************************** GETTERS TESTS ****************************************
+// ! ******************** GETTERS TESTS ********************
 
 import { getAverage, getCats, getItemName, getItemsByCat } from "../src/getters"
 

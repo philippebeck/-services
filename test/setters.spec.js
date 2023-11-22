@@ -1,4 +1,4 @@
-// ! **************************************** SETTERS TESTS ****************************************
+// ! ******************** SETTERS TESTS ********************
 
 import { setError, setGlobalMeta, setMeta } from "../src/setters"
 

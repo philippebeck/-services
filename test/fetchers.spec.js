@@ -1,5 +1,4 @@
-// ! **************************************** FETCHERS ****************************************
-// ! ******************************************************************************************
+// ! ******************** FETCHERS TESTS ********************
 
 import axios from "axios";
 import { setAxios, postData, getData, putData, deleteData, fetchGet, fetchSet } from "../src/fetchers";

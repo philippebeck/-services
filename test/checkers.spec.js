@@ -1,4 +1,4 @@
-// ! **************************************** CHECKERS TESTS ****************************************
+// ! ******************** CHECKERS TESTS ********************
 
 import { checkRange, checkRegex, checkRole } from "../src/checkers";
 

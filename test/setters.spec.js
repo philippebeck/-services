@@ -4,6 +4,7 @@ import { setError, setGlobalMeta, setMeta } from "../src/setters"
 
 /**
  * ? SET ERROR
+ * * Logs an error message from the provided error object 
  */
 describe("setError()", () => {
 
@@ -36,6 +37,7 @@ describe("setError()", () => {
 
 /**
  * ? SET GLOBAL META
+ * * Sets the metadata of the website including language & favicon
  */
 describe("setGlobalMeta()", () => {
   const htmlElt       = document.createElement("html");
@@ -79,6 +81,7 @@ describe("setGlobalMeta()", () => {
 
 /**
  * ? SET META
+ * * Sets the metadata of the page including title, description, url & image
  */
 describe("setMeta()", () => {
 

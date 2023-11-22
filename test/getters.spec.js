@@ -4,6 +4,7 @@ import { getAverage, getCats, getItemName, getItemsByCat } from "../src/getters"
 
 /**
  * ? GET AVERAGE
+ * * Calculates the average score for a given product id from an array of items
  */
 describe("getAverage()", () => {
 
@@ -16,7 +17,7 @@ describe("getAverage()", () => {
       { product: "A", score: 1 },
     ];
 
-    const expected1 = 3; // (5+3+1)/3 = 3
+    const expected1 = 3;
 
     expect(getAverage("A", items1)).toEqual(expected1);
 
@@ -31,7 +32,7 @@ describe("getAverage()", () => {
       { product: "Y", score: 1 },
     ];
 
-    const expected2 = 4.5; // (6+3)/2 = 4.5
+    const expected2 = 4.5;
 
     expect(getAverage("Z", items2)).toEqual(expected2);
   });
@@ -51,6 +52,7 @@ describe("getAverage()", () => {
 
 /**
  * ? GET CATS
+ * * Returns an array of unique categories from the given items
  */
 describe("getCats()", () => {
   test("returns an empty array when given an empty array", () => {
@@ -84,6 +86,7 @@ describe("getCats()", () => {
 
 /**
  * ? GET ITEM NAME
+ * * Returns the name of the item with the given id from the provided array of items
  */
 describe("getItemName()", () => {
   test("should return the correct name of the item with the given id", () => {
@@ -114,6 +117,7 @@ describe("getItemName()", () => {
 
 /**
  * ? GET ITEMS BY CAT
+ * * Groups an array of items by category & sorts each category's item list by name
  */
 describe("getItemsByCat()", () => {
   const assert = require("assert");

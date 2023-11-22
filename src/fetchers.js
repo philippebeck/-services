@@ -9,10 +9,10 @@ import axios from "axios";
  * * Sets the base URL and headers for Axios requests
  *
  * @param {string} url - The base URL for Axios requests
- * @param {string} type - The content type for Axios requests
- * @param {string|null} token - The authorization token for Axios requests
+ * @param {string|null} [token=null] - The authorization token for Axios requests
+ * @param {string} [type="multipart/form-data"] - The content type for Axios requests
  */
-export function setAxios(url, type, token = null) {
+export function setAxios(url, token = null, type = "multipart/form-data") {
   axios.defaults.baseURL = url;
   axios.defaults.headers.post["Content-Type"] = type;
   
@@ -26,13 +26,13 @@ export function setAxios(url, type, token = null) {
  * * Sends a POST request to the specified URL with the provided data
  *
  * @param {string} url - The URL to send the POST request to
- * @param {string} type - The type of data being sent
  * @param {object} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - The type of data being sent
  * @return {Promise} A Promise that resolves to the response data
  */
-export async function postData(url, type, data, token = null) {
-  setAxios(url, type, token);
+export async function postData(url, data, token = null, type = "multipart/form-data") {
+  setAxios(url, token, type);
   const response = await axios.post(url, data);
 
   return response?.data;
@@ -43,12 +43,12 @@ export async function postData(url, type, data, token = null) {
  * * Retrieves data from a specified URL using a GET request
  *
  * @param {string} url - The URL to fetch the data from
- * @param {string} type - The type of data being fetched
  * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - The type of data being fetched
  * @return {Promise} - A promise that resolves with the fetched data
  */
-export async function getData(url, type, token = null) {
-  setAxios(url, type, token);
+export async function getData(url, token = null, type = "multipart/form-data") {
+  setAxios(url, token, type);
   const response = await axios.get(url);
 
   return response?.data;
@@ -59,13 +59,13 @@ export async function getData(url, type, token = null) {
  * * Sends a PUT request to the specified URL with the provided data
  *
  * @param {string} url - The URL to send the request to
- * @param {string} type - The type of data being sent
  * @param {any} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - The type of data being sent
  * @return {Promise} A promise that resolves to the response data
  */
-export async function putData(url, type, data, token = null) {
-  setAxios(url, type, token);
+export async function putData(url, data, token = null, type = "multipart/form-data") {
+  setAxios(url, token, type);
   const response = await axios.put(url, data);
 
   return response?.data;
@@ -76,12 +76,12 @@ export async function putData(url, type, data, token = null) {
  * * Deletes data from the given URL using the specified HTTP method & optional token
  *
  * @param {string} url - The URL to send the delete request to
- * @param {string} type - The HTTP method to use for the delete request
  * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - The type of data being deleteed
  * @return {Promise} - A Promise that resolves with the response data
  */
-export async function deleteData(url, type, token = null) {
-  setAxios(url, type, token);
+export async function deleteData(url, token = null, type = "multipart/form-data") {
+  setAxios(url, token, type);
   const response = await axios.delete(url);
 
   return response?.data;

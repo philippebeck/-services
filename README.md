@@ -65,6 +65,11 @@ Checkers part :
 -   **checkRole(userRole, role)** check role between admin, editor or user  
 
 Fetchers part :  
+-   **setAxios(url, token, type)** set axios params  
+-   **postData(url, data, token, type)** post data with axios  
+-   **getData(url, token, type)** get data with axios  
+-   **putData(url, data, token, type)** put data with axios  
+-   **deleteData(url, token, type)** delete data with axios  
 -   **fetchGet(url)** get data with fetch  
 -   **fetchSet(url, options)** set data with fetch  
 
@@ -76,7 +81,7 @@ Getters part :
 
 Setters part :  
 -   **setError(error)** : set error message  
--   **setGlobalMeta(lang, icon, creator)** set html lang, favicon & meta creator for tw  
+-   **setGlobalMeta(lang, icon)** set html lang & favicon  
 -   **setMeta(title, description, url, image)** set all meta for pages  
 
 ---
@@ -84,7 +89,7 @@ Setters part :
 ## Test
 
 You can run unit tests with Jest :  
-`npm test -- --coverage`  
+`npm test`  
 
 ---
 

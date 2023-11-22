@@ -109,50 +109,45 @@ describe('getData()', () => {
  * ? PUT DATA
  * * Sends a PUT request to the specified URL with the provided data
  */
-describe('putData()', () => {
-  beforeEach(() => {
-    axios.put.mockClear();
+describe('putData', () => {
+  test('should send a PUT request to the specified URL with the provided data', async () => {
+    const url = 'https://example.com/api/data';
+    const type = 'application/json';
+    const data = { name: 'John Doe', age: 30 };
+    const token = 'abc123';
+
+    axios.put.mockResolvedValueOnce({ data: 'Success' });
+
+    const response = await putData(url, type, data, token);
+
+    expect(axios.put).toHaveBeenCalledWith(url, data);
+    expect(response).toBe('Success');
   });
 
-  test('sends a PUT request to the specified URL with the provided data', async () => {
-    const url1 = 'http://example.com/api';
-    const type1 = 'json';
-    const data1 = { name: 'John Doe' };
-    const token1 = 'abc123';
-    const response1 = await putData(url1, type1, data1, token1);
-    expect(response1).toEqual(data1);
+  test('should set the authentication token if provided', async () => {
+    const url = 'https://example.com/api/data';
+    const type = 'application/json';
+    const data = { name: 'John Doe', age: 30 };
+    const token = 'abc123';
 
-    const url2 = 'http://example.com/api';
-    const type2 = 'xml';
-    const data2 = { age: 30 };
-    const response2 = await putData(url2, type2, data2);
-    expect(response2).toEqual(data2);
+    axios.put.mockResolvedValueOnce({ data: 'Success' });
 
-    const url3 = 'http://example.com/api';
-    const type3 = 'text';
-    const data3 = { id: 123 };
-    const token3 = 'def456';
-    const response3 = await putData(url3, type3, data3, token3);
-    expect(response3).toEqual(data3);
+    await putData(url, type, data, token);
+
+    expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
   });
 
-  test('sets the appropriate headers & authentication token', async () => {
-    const url1 = 'http://example.com/api';
-    const type1 = 'json';
-    const data1 = { name: 'John Doe' };
-    const token1 = 'abc123';
-    await putData(url1, type1, data1, token1);
+  test('should return the response data', async () => {
+    const url = 'https://example.com/api/data';
+    const type = 'application/json';
+    const data = { name: 'John Doe', age: 30 };
+    const responseData = { id: 1, name: 'John Doe', age: 30 };
 
-    const url2 = 'http://example.com/api';
-    const type2 = 'xml';
-    const data2 = { age: 30 };
-    await putData(url2, type2, data2);
+    axios.put.mockResolvedValueOnce({ data: responseData });
 
-    const url3 = 'http://example.com/api';
-    const type3 = 'text';
-    const data3 = { id: 123 };
-    const token3 = 'def456';
-    await putData(url3, type3, data3, token3);
+    const response = await putData(url, type, data);
+
+    expect(response).toBe(responseData);
   });
 });
 

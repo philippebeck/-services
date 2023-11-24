@@ -6,14 +6,12 @@ import axios from "axios";
 
 /**
  * ? SET AXIOS
- * * Sets the base URL and headers for Axios requests
+ * * Sets the base headers for Axios requests
  *
- * @param {string} url - The base URL for Axios requests
  * @param {string|null} [token=null] - The authorization token for Axios requests
  * @param {string} [type="multipart/form-data"] - The content type for Axios requests
  */
-export function setAxios(url, token = null, type = "multipart/form-data") {
-  axios.defaults.baseURL = url;
+export function setAxios(token = null, type = "multipart/form-data") {
   axios.defaults.headers.post["Content-Type"] = type;
   
   if (token) {
@@ -32,7 +30,7 @@ export function setAxios(url, token = null, type = "multipart/form-data") {
  * @return {Promise} A Promise that resolves to the response data
  */
 export async function postData(url, data, token = null, type = "multipart/form-data") {
-  setAxios(url, token, type);
+  setAxios(token, type);
   const response = await axios.post(url, data);
 
   return response?.data;
@@ -48,7 +46,7 @@ export async function postData(url, data, token = null, type = "multipart/form-d
  * @return {Promise} - A promise that resolves with the fetched data
  */
 export async function getData(url, token = null, type = "multipart/form-data") {
-  setAxios(url, token, type);
+  setAxios(token, type);
   const response = await axios.get(url);
 
   return response?.data;
@@ -65,7 +63,7 @@ export async function getData(url, token = null, type = "multipart/form-data") {
  * @return {Promise} A promise that resolves to the response data
  */
 export async function putData(url, data, token = null, type = "multipart/form-data") {
-  setAxios(url, token, type);
+  setAxios(token, type);
   const response = await axios.put(url, data);
 
   return response?.data;
@@ -81,7 +79,7 @@ export async function putData(url, data, token = null, type = "multipart/form-da
  * @return {Promise} - A Promise that resolves with the response data
  */
 export async function deleteData(url, token = null, type = "multipart/form-data") {
-  setAxios(url, token, type);
+  setAxios(token, type);
   const response = await axios.delete(url);
 
   return response?.data;

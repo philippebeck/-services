@@ -37,9 +37,9 @@ export function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (const item of items) {
-    const cat = item.cat;
+    const cat       = item.cat;
+    itemsByCat[cat] = itemsByCat[cat] ?? [];
 
-    if (!itemsByCat[cat]) itemsByCat[cat] = [];
     itemsByCat[cat].push(item);
   }
 

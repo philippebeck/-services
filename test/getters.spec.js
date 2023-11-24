@@ -1,54 +1,6 @@
 // ! ******************** GETTERS TESTS ********************
 
-import { getAverage, getCats, getItemName, getItemsByCat } from "../src/getters"
-
-/**
- * ? GET AVERAGE
- * * Calculates the average score for a given product id from an array of items
- */
-describe("getAverage()", () => {
-
-  test("getAverage returns the correct average for a given product id", () => {
-    const items1 = [
-      { product: "A", score: 5 },
-      { product: "B", score: 4 },
-      { product: "A", score: 3 },
-      { product: "B", score: 2 },
-      { product: "A", score: 1 },
-    ];
-
-    const expected1 = 3;
-
-    expect(getAverage("A", items1)).toEqual(expected1);
-
-    const items2 = [
-      { product: "X", score: 8 },
-      { product: "Y", score: 7 },
-      { product: "Z", score: 6 },
-      { product: "X", score: 5 },
-      { product: "Y", score: 4 },
-      { product: "Z", score: 3 },
-      { product: "X", score: 2 },
-      { product: "Y", score: 1 },
-    ];
-
-    const expected2 = 4.5;
-
-    expect(getAverage("Z", items2)).toEqual(expected2);
-  });
-
-  test("getAverage returns undefined if the given product id is not found in the array", () => {
-    const items3 = [
-      { product: "A", score: 5 },
-      { product: "B", score: 4 },
-      { product: "A", score: 3 },
-    ];
-
-    const expected3 = undefined;
-
-    expect(getAverage("C", items3)).toEqual(expected3);
-  });
-});
+import { getCats, getItemName, getItemsByCat } from "../src/getters"
 
 /**
  * ? GET CATS

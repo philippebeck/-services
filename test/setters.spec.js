@@ -40,42 +40,47 @@ describe("setError()", () => {
  * * Sets the metadata of the website including language & favicon
  */
 describe("setGlobalMeta()", () => {
-  const htmlElt       = document.createElement("html");
-  const iconElt       = document.createElement("link");
-  const creatorTwElt  = document.createElement("meta");
+  const ICON = "favicon.ico";
+  const LANG = "fr";
+
+  const htmlElt = document.createElement("html");
+  const iconElt = document.createElement("link");
 
   htmlElt.setAttribute("lang", "en");
   iconElt.setAttribute("rel", "icon");
-  creatorTwElt.setAttribute("name", "twitter:creator");
 
   document.head.appendChild(htmlElt);
   document.head.appendChild(iconElt);
-  document.head.appendChild(creatorTwElt);
 
-  test("sets the language code when passed as an argument", () => {
-    const lang = "fr";
-    setGlobalMeta(lang, "test_icon");
-
-    expect(document.querySelector("html").lang).toEqual(lang);
-  });
-
-  test("sets the default language code when no argument is passed", () => {
+  test("sets the default language & the default favicon when no argument is passed", () => {
     setGlobalMeta();
 
-    expect(document.querySelector("html").lang).toEqual("en");
+    expect(document.documentElement.lang).toBe("en");
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/img/${ICON}`);
   });
 
-  test("sets the favicon when passed as an argument", () => {
-    const icon = "test_icon";
-    setGlobalMeta("fr", icon);
+  test("sets the language passed as an argument & the default favicon", () => {
+    setGlobalMeta(LANG);
 
-    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/" + icon);
+    expect(document.documentElement.lang).toBe(LANG);
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/img/${ICON}`);
   });
 
-  test("sets the default favicon when no argument is passed", () => {
-    setGlobalMeta();
+  test("sets the language & the favicon passed as arguments", () => {
+    setGlobalMeta(LANG, ICON);
 
-    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/img/favicon.ico");
+    expect(document.documentElement.lang).toBe(LANG);
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/${ICON}`);
+  });
+
+  test("should not update the icon element if it does not exist", () => {
+    jest.spyOn(document, "querySelector").mockReturnValue(null);
+  
+    setGlobalMeta(LANG, ICON);
+
+    expect(document.querySelector).toHaveBeenCalledTimes(1);
+
+    document.querySelector.mockRestore();
   });
 });
 

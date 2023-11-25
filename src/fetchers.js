@@ -6,10 +6,11 @@ import axios from "axios";
 
 /**
  * ? SET AXIOS
- * * Sets the base headers for Axios requests
+ * * Sets Axios default headers
+ * * with an optional token & an optional content-type
  *
- * @param {string|null} [token=null] - The authorization token for Axios requests
- * @param {string} [type="multipart/form-data"] - The content type for Axios requests
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
  */
 export function setAxios(token = null, type = "multipart/form-data") {
   axios.defaults.headers.post["Content-Type"] = type;
@@ -21,12 +22,13 @@ export function setAxios(token = null, type = "multipart/form-data") {
 
 /**
  * ? POST DATA
- * * Sends a POST request to the specified URL with the provided data
+ * * Sends a POST request to the specified URL
+ * * with the provided data, an optional token & an optional content-type
  *
  * @param {string} url - The URL to send the POST request to
  * @param {object} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
- * @param {string} [type="multipart/form-data"] - The type of data being sent
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
  * @return {Promise} A Promise that resolves to the response data
  */
 export async function postData(url, data, token = null, type = "multipart/form-data") {
@@ -38,12 +40,13 @@ export async function postData(url, data, token = null, type = "multipart/form-d
 
 /**
  * ? GET DATA
- * * Retrieves data from a specified URL using a GET request
+ * * Sends a GET request to the specified URL
+ * * with an optional token & an optional content-type
  *
- * @param {string} url - The URL to fetch the data from
+ * @param {string} url - The URL to send the GET request to
  * @param {string|null} [token=null] - An optional authentication token
- * @param {string} [type="multipart/form-data"] - The type of data being fetched
- * @return {Promise} - A promise that resolves with the fetched data
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
  */
 export async function getData(url, token = null, type = "multipart/form-data") {
   setAxios(token, type);
@@ -54,13 +57,14 @@ export async function getData(url, token = null, type = "multipart/form-data") {
 
 /**
  * ? PUT DATA
- * * Sends a PUT request to the specified URL with the provided data
+ * * Sends a PUT request to the specified URL
+ * * with the provided data, an optional token & an optional content-type
  *
- * @param {string} url - The URL to send the request to
+ * @param {string} url - The URL to send the PUT request to
  * @param {any} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
- * @param {string} [type="multipart/form-data"] - The type of data being sent
- * @return {Promise} A promise that resolves to the response data
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
  */
 export async function putData(url, data, token = null, type = "multipart/form-data") {
   setAxios(token, type);
@@ -71,12 +75,13 @@ export async function putData(url, data, token = null, type = "multipart/form-da
 
 /**
  * ? DELETE DATA
- * * Deletes data from the given URL using the specified HTTP method & optional token
+ * * Sends a DELETE request to the specified URL
+ * * with an optional token & an optional content-type
  *
- * @param {string} url - The URL to send the delete request to
+ * @param {string} url - The URL to send the DELETE request to
  * @param {string|null} [token=null] - An optional authentication token
- * @param {string} [type="multipart/form-data"] - The type of data being deleteed
- * @return {Promise} - A Promise that resolves with the response data
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
  */
 export async function deleteData(url, token = null, type = "multipart/form-data") {
   setAxios(token, type);

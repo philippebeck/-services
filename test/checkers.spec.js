@@ -1,4 +1,4 @@
-// ! **************************************** CHECKERS TESTS ****************************************
+// ! ******************** CHECKERS TESTS ********************
 
 import { checkRange, checkRegex, checkRole } from "../src/checkers";
 
@@ -6,6 +6,7 @@ global.alert = jest.fn();
 
 /**
  * ? CHECK RANGE
+ * * Checks whether a given value is within a specified range of min & max values,
  */
 describe("checkRange()", () => {
   const msg = "Value out of range";
@@ -46,6 +47,7 @@ describe("checkRange()", () => {
 
 /**
  * ? CHECK REGEX
+ * * Checks if a given value matches a regular expression
  */
 describe("checkRegex()", () => {
 
@@ -71,6 +73,7 @@ describe("checkRegex()", () => {
 
 /**
  * ? CHECK ROLE
+ * * Checks if a given user role has the required role permission
  */
 describe("checkRole()", () => {
 

@@ -1,9 +1,10 @@
-// ! **************************************** SETTERS TESTS ****************************************
+// ! ******************** SETTERS TESTS ********************
 
 import { setError, setGlobalMeta, setMeta } from "../src/setters"
 
 /**
  * ? SET ERROR
+ * * Logs an error message from the provided error object 
  */
 describe("setError()", () => {
 
@@ -36,62 +37,56 @@ describe("setError()", () => {
 
 /**
  * ? SET GLOBAL META
+ * * Sets the metadata of the website including language & favicon
  */
 describe("setGlobalMeta()", () => {
-  const htmlElt       = document.createElement("html");
-  const iconElt       = document.createElement("link");
-  const creatorTwElt  = document.createElement("meta");
+  const ICON = "favicon.ico";
+  const LANG = "fr";
+
+  const htmlElt = document.createElement("html");
+  const iconElt = document.createElement("link");
 
   htmlElt.setAttribute("lang", "en");
   iconElt.setAttribute("rel", "icon");
-  creatorTwElt.setAttribute("name", "twitter:creator");
 
   document.head.appendChild(htmlElt);
   document.head.appendChild(iconElt);
-  document.head.appendChild(creatorTwElt);
 
-  test("sets the language code when passed as an argument", () => {
-    const lang = "fr";
-    setGlobalMeta("test_creator", "test_icon", lang);
-
-    expect(document.querySelector("html").lang).toEqual(lang);
-  });
-
-  test("sets the default language code when no argument is passed", () => {
-    setGlobalMeta("test_creator", "test_icon");
-
-    expect(document.querySelector("html").lang).toEqual("en");
-  });
-
-  test("sets the favicon when passed as an argument", () => {
-    const icon = "test_icon";
-    setGlobalMeta("test_creator", icon);
-
-    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/" + icon);
-  });
-
-  test("sets the default favicon when no argument is passed", () => {
-    setGlobalMeta("test_creator");
-
-    expect(document.querySelector('[rel="icon"]').href).toEqual("http://localhost/img/favicon.ico");
-  });
-
-  test("sets the Twitter creator handle when passed as an argument", () => {
-    const creator = "test_creator";
-    setGlobalMeta(creator);
-
-    expect(document.querySelector('[name="twitter:creator"]').content).toEqual(creator);
-  });
-
-  test("does not set the Twitter creator handle when no argument is passed", () => {
+  test("sets the default language & the default favicon when no argument is passed", () => {
     setGlobalMeta();
 
-    expect(document.querySelector('[name="twitter:creator"]')).toBeNull();
+    expect(document.documentElement.lang).toBe("en");
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/img/${ICON}`);
+  });
+
+  test("sets the language passed as an argument & the default favicon", () => {
+    setGlobalMeta(LANG);
+
+    expect(document.documentElement.lang).toBe(LANG);
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/img/${ICON}`);
+  });
+
+  test("sets the language & the favicon passed as arguments", () => {
+    setGlobalMeta(LANG, ICON);
+
+    expect(document.documentElement.lang).toBe(LANG);
+    expect(document.querySelector('[rel="icon"]').href).toEqual(`http://localhost/${ICON}`);
+  });
+
+  test("should not update the icon element if it does not exist", () => {
+    jest.spyOn(document, "querySelector").mockReturnValue(null);
+  
+    setGlobalMeta(LANG, ICON);
+
+    expect(document.querySelector).toHaveBeenCalledTimes(1);
+
+    document.querySelector.mockRestore();
   });
 });
 
 /**
  * ? SET META
+ * * Sets the metadata of the page including title, description, url & image
  */
 describe("setMeta()", () => {
 
@@ -99,15 +94,11 @@ describe("setMeta()", () => {
     document.head.innerHTML = `
       <title></title>
       <meta name="description" content="">
-      <meta property="og:description" content="">
-      <meta name="twitter:description" content="">
-      <meta property="og:title" content="">
-      <meta name="twitter:title" content="">
-      <meta property="og:url" content="">
-      <meta name="twitter:site" content="">
-      <meta property="og:image" content="">
-      <meta name="twitter:image" content="">
       <link rel="canonical" href="">
+      <meta property="og:title" content="">
+      <meta property="og:description" content="">
+      <meta property="og:url" content="">
+      <meta property="og:image" content="">
     `;
   });
 
@@ -116,7 +107,6 @@ describe("setMeta()", () => {
 
     expect(document.querySelector("title").innerText).toEqual("New Title");
     expect(document.querySelector('[property="og:title"]').getAttribute("content")).toEqual("New Title");
-    expect(document.querySelector('[name="twitter:title"]').getAttribute("content")).toEqual("New Title");
   });
 
   test("should set the description correctly", () => {
@@ -124,14 +114,12 @@ describe("setMeta()", () => {
 
     expect(document.querySelector('[name="description"]').getAttribute("content")).toEqual("New Description");
     expect(document.querySelector('[property="og:description"]').getAttribute("content")).toEqual("New Description");
-    expect(document.querySelector('[name="twitter:description"]').getAttribute("content")).toEqual("New Description");
   });
 
   test("should set the url correctly", () => {
     setMeta("Title", "Description", "https://example.com/new-url");
 
     expect(document.querySelector('[property="og:url"]').getAttribute("content")).toEqual("https://example.com/new-url");
-    expect(document.querySelector('[name="twitter:site"]').getAttribute("content")).toEqual("https://example.com/new-url");
     expect(document.querySelector('[rel="canonical"]').getAttribute("href")).toEqual("https://example.com/new-url");
   });
 
@@ -139,13 +127,11 @@ describe("setMeta()", () => {
     setMeta("Title", "Description", "https://example.com", "https://example.com/image.jpg");
 
     expect(document.querySelector('[property="og:image"]').getAttribute("content")).toEqual("https://example.com/image.jpg");
-    expect(document.querySelector('[name="twitter:image"]').getAttribute("content")).toEqual("https://example.com/image.jpg");
   });
 
   test("should not set the image if it is not provided", () => {
     setMeta("Title", "Description", "https://example.com");
 
     expect(document.querySelector('[property="og:image"]').getAttribute("content")).toEqual("");
-    expect(document.querySelector('[name="twitter:image"]').getAttribute("content")).toEqual("");
   });
 });

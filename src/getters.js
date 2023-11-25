@@ -1,32 +1,4 @@
-// ! **************************************** GETTERS ****************************************
-
-/**
- * ? GET AVERAGE
- * * Calculates the average score for a given product id from an array of items
- *
- * @param {string} id - The id of the product to calculate the average score for
- * @param {Array} array - An array of objects containing a product id & a score
- * @return {number} The average score for the given product id, or undefined if it is not found in the array
- */
-export function getAverage(id, array) {
-  const sumData = {};
-
-  for (const item of array) {
-    const { product, score } = item;
-
-    if (!sumData[product]) sumData[product] = { sum: 0, n: 0 };
-
-    sumData[product].sum += score;
-    sumData[product].n++;
-  }
-
-  for (const product in sumData) {
-    const { sum, n } = sumData[product];
-    sumData[product] = sum / n;
-  }
-
-  return sumData[id];
-}
+// ! ******************** GETTERS ********************
 
 /**
  * ? GET CATEGORIES
@@ -65,9 +37,9 @@ export function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (const item of items) {
-    const cat = item.cat;
+    const cat       = item.cat;
+    itemsByCat[cat] = itemsByCat[cat] ?? [];
 
-    if (!itemsByCat[cat]) itemsByCat[cat] = [];
     itemsByCat[cat].push(item);
   }
 

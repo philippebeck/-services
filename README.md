@@ -20,7 +20,6 @@ JavaScript Frontend Services
 [Download](#download)  
 [Content](#content)  
 [Test](#test)  
-[Usage for Vue3 + NPM](#usage-for-vue3--npm)  
 
 ---
 
@@ -28,11 +27,11 @@ JavaScript Frontend Services
 
 Servidio is a JavaScript Frontend Service Library.  
 You will find some Services with Checkers, Fetchers, Getters & Setters.  
-Servidio use only JS native functions, so it have no dependency.  
+Servidio use only Axios as dependency.  
 
 ---
 
-## Package
+## Package *(recommended)*
 
 NPM : `npm i servidio`  
 or  
@@ -40,10 +39,10 @@ Yarn : `yarn add servidio`
 
 ---
 
-## CDN
+## CDN *(not recommended)*
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@2.2.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@2.2.1/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@2.2.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@2.2.1/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@3.0.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@3.0.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@3.0.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@3.0.0/dist/serve.min.js)  
 
 ---
 

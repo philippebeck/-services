@@ -61,7 +61,7 @@ export async function getData(url, token = null, type = "multipart/form-data") {
  * * with the provided data, an optional token & an optional content-type
  *
  * @param {string} url - The URL to send the PUT request to
- * @param {any} data - The data to send in the request body
+ * @param {object} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
  * @param {string} [type="multipart/form-data"] - An optional Content-Type
  * @return {Promise} A Promise that resolves to the response data

@@ -65,16 +65,13 @@ Checkers part :
 -   **checkRole(userRole, role)** check role between admin, editor or user  
 
 Fetchers part :  
--   **setAxios(url, token, type)** set axios params  
+-   **setAxios(token, type)** set axios params  
 -   **postData(url, data, token, type)** post data with axios  
 -   **getData(url, token, type)** get data with axios  
 -   **putData(url, data, token, type)** put data with axios  
 -   **deleteData(url, token, type)** delete data with axios  
--   **fetchGet(url)** get data with fetch  
--   **fetchSet(url, options)** set data with fetch  
 
 Getters part :  
--   **getAverage(id, array)** get average from product score  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
 -   **getItemsByCat(items)** get items by category property  

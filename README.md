@@ -87,15 +87,3 @@ Setters part :
 
 You can run unit tests with Jest :  
 `npm test`  
-
----
-
-## Usage for Vue3 + NPM
-
-1.  In `main.js` of Vue3, import `servidio` like this : `import serve from "servidio"`
-2.  Then, add this line after creating App but before mounting : `app.config.globalProperties.$serve = serve` ([example](https://github.com/philippebeck/vesan/blob/master/src/main.js))
-3.  Then use it in yours components like in these examples : 
-    -  `this.$serve.fetchGet(url)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/HomeView.vue))  
-    -  `this.$serve.fetchSet(url, options)`  
-    -  `this.$serve.checkRegex(message.email, message, regex)` ([example](https://github.com/philippebeck/vesan/blob/master/src/views/ContactView.vue))  
-    -  `this.$serve.checkRange(user.name, message)`  

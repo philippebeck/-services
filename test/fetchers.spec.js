@@ -3,196 +3,193 @@
 import axios from "axios";
 import { setAxios, postData, getData, putData, deleteData } from "../src/fetchers";
 
-jest.mock('axios');
+const DEFAULT = "multipart/form-data";
+const TOKEN   = "abc123";
+const TYPE    = "application/json";
+const URL     = "https://example.com/api";
+
+jest.mock("axios");
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  axios.defaults.headers = {
+    common: {},
+    post: {},
+    get: {},
+    put: {},
+    delete: {}
+  };
 });
 
 /**
  * ? SET AXIOS
- * * Sets the base URL & headers for Axios requests
+ * * Sets Axios default headers
+ * * with an optional TOKEN & an optional content-type
  */
-describe('setAxios()', () => {
-  test('should set the headers for Axios requests without parameter', () => {
+describe("setAxios()", () => {
+  test("should set the headers for Axios requests without parameter", () => {
     setAxios();
 
-    expect(axios.defaults.headers.post["Content-Type"]).toBe('multipart/form-data');
     expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should set the headers for Axios requests with only the token parameter', () => {
-    setAxios('your-token');
+  test("should set the headers for Axios requests with only the TOKEN parameter", () => {
+    setAxios(TOKEN);
 
-    expect(axios.defaults.headers.post["Content-Type"]).toBe('multipart/form-data');
-    expect(axios.defaults.headers.common["Authorization"]).toBe('Bearer your-token');
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should set the headers for Axios requests with all parameters', () => {
-    setAxios('your-token', 'application/json');
+  test("should set the headers for Axios requests with all parameters", () => {
+    setAxios(TOKEN, TYPE);
 
-    expect(axios.defaults.headers.post["Content-Type"]).toBe('application/json');
-    expect(axios.defaults.headers.common["Authorization"]).toBe('Bearer your-token');
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(TYPE);
   });
 });
 
 /**
  * ? POST DATA
- * * Sends a POST request to the specified URL with the provided data
+ * * Sends a POST request to the specified URL
+ * * with the provided data, an optional TOKEN & an optional content-type
  */
-describe('postData()', () => {
-  beforeEach(() => {
-    axios.post.mockReset();
-  });
-  
-  test('should send a post request with the provided data', async () => {
-    const url   = 'https://example.com/api';
-    const data  = { name: 'John Doe', age: 30 };
-    
-    await postData(url, data);
-    
-    expect(axios.post).toHaveBeenCalledWith(url, data);
-  });
+describe("postData()", () => {
+  const data    = { name: "John Doe", age: 30 };
+  const result  = { id: 1, name: "John Doe", age: 30 };
 
-  test('should set the authentication token if provided', async () => {
-    const url   = 'https://example.com/api';
-    const data  = { name: 'John Doe', age: 30 };
-    const token = 'your-auth-token';
+  test("should POST data to the given URL with the provided data", async () => {
+    axios.post.mockResolvedValueOnce({ data: result });
+    const response = await postData(URL, data);
 
-    await postData(url, data, token);
-    
-    expect(axios.post).toHaveBeenCalledWith(url, data, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should set the content type if provided', async () => {
-    const url   = 'https://example.com/api';
-    const data  = { name: 'John Doe', age: 30 };
-    const type  = 'application/json';
+  test("should POST data to the given URL with the provided data & a TOKEN", async () => {
+    axios.post.mockResolvedValueOnce({ data: result });
+    const response = await postData(URL, data, TOKEN);
 
-    await postData(url, data, null, type);
-    
-    expect(axios.post).toHaveBeenCalledWith(url, data, {
-      headers: { 'Content-Type': type },
-    });
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should return the response data', async () => {
-    const url   = 'https://example.com/api';
-    const data  = { name: 'John Doe', age: 30 };
-    const res   = { success: true };
+  test("should POST data to the given URL with the provided data, a TOKEN & a content-type", async () => {
+    axios.post.mockResolvedValueOnce({ data: result });
+    const response = await postData(URL, data, TOKEN, TYPE);
 
-    axios.post.mockResolvedValueOnce({ data: res });
-
-    const result = await postData(url, data);
-    
-    expect(result).toEqual(res);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(TYPE);
   });
 });
 
 /**
  * ? GET DATA
- * * Retrieves data from a specified URL using a GET request
+ * * Sends a GET request to the specified URL
+ * * with an optional TOKEN & an optional content-type
  */
-describe('getData()', () => {
-  test('should fetch data from a specified URL', async () => {
-    const url = 'https://example.com/api/data';
-    const type = 'json';
-    const expectedResult = { id: 1, name: 'John Doe' };
+describe("getData()", () => {
+  const result = { success: true };
 
-    axios.get.mockResolvedValueOnce({ data: expectedResult });
+  test("should GET data from the given URL", async () => {
+    axios.get.mockResolvedValueOnce({ data: result });
+    const response = await getData(URL);
 
-    const result = await getData(url, type);
-
-    expect(axios.get).toHaveBeenCalledWith(url);
-    expect(result).toEqual(expectedResult);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should set the authentication token if provided', async () => {
-    const url = 'https://example.com/api/data';
-    const type = 'json';
-    const token = 'your-auth-token';
+  test("should GET data from the given URL with a TOKEN", async () => {
+    axios.get.mockResolvedValueOnce({ data: result });
+    const response = await getData(URL, TOKEN);
 
-    axios.get.mockResolvedValueOnce({ data: {} });
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
+  });
 
-    await getData(url, token, type);
+  test("should GET data from the given URL with a TOKEN & a content-type", async () => {
+    axios.get.mockResolvedValueOnce({ data: result });
+    const response = await getData(URL, TOKEN, TYPE);
 
-    expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(TYPE);
   });
 });
 
 /**
  * ? PUT DATA
- * * Sends a PUT request to the specified URL with the provided data
+ * * Sends a PUT request to the specified URL
+ * * with the provided data, an optional TOKEN & an optional content-type
  */
-describe('putData', () => {
-  test('should send a PUT request to the specified URL with the provided data', async () => {
-    const url = 'https://example.com/api/data';
-    const type = 'application/json';
-    const data = { name: 'John Doe', age: 30 };
-    const token = 'abc123';
+describe("putData", () => {
+  const data    = { name: "John Doe", age: 30 };
+  const result  = { id: 1, name: "John Doe", age: 30 };
 
-    axios.put.mockResolvedValueOnce({ data: 'Success' });
+  test("should PUT data to the given URL with the provided data", async () => {
+    axios.put.mockResolvedValueOnce({ data: result });
+    const response = await putData(URL, data);
 
-    const response = await putData(url, data, token, type);
-
-    expect(axios.put).toHaveBeenCalledWith(url, data);
-    expect(response).toBe('Success');
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should set the authentication token if provided', async () => {
-    const url = 'https://example.com/api/data';
-    const type = 'application/json';
-    const data = { name: 'John Doe', age: 30 };
-    const token = 'abc123';
+  test("should PUT data to the given URL with the provided data & a TOKEN", async () => {
+    axios.put.mockResolvedValueOnce({ data: result });
+    const response = await putData(URL, data, TOKEN);
 
-    axios.put.mockResolvedValueOnce({ data: 'Success' });
-
-    await putData(url, data, token, type);
-
-    expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should return the response data', async () => {
-    const url = 'https://example.com/api/data';
-    const type = 'application/json';
-    const data = { name: 'John Doe', age: 30 };
-    const responseData = { id: 1, name: 'John Doe', age: 30 };
+  test("should PUT data to the given URL with the provided data, a TOKEN & a content-type", async () => {
+    axios.put.mockResolvedValueOnce({ data: result });
+    const response = await putData(URL, data, TOKEN, TYPE);
 
-    axios.put.mockResolvedValueOnce({ data: responseData });
-
-    const response = await putData(url, data, type);
-
-    expect(response).toBe(responseData);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(TYPE);
   });
 });
 
 /**
  * ? DELETE DATA
- * * Deletes data from the given URL using the specified HTTP method & optional token
+ * * Sends a DELETE request to the specified URL
+ * * with an optional TOKEN & an optional content-type
  */
-describe('deleteData()', () => {
-  test('should delete data from the given URL using the specified HTTP method', async () => {
-    const url = 'http://example.com/data';
-    const type = 'DELETE';
-    const expectedResponse = { success: true };
+describe("deleteData()", () => {
+  const result = { success: true };
 
-    axios.delete.mockResolvedValueOnce({ data: expectedResponse });
-    const result = await deleteData(url, type);
+  test("should DELETE data from the given URL", async () => {
+    axios.delete.mockResolvedValueOnce({ data: result });
+    const response = await deleteData(URL);
 
-    expect(result).toBeDefined();
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
   });
 
-  test('should delete data from the given URL using the specified HTTP method with a token', async () => {
-    const url = 'http://example.com/data';
-    const type = 'DELETE';
-    const token = 'abc123';
-    const expectedResponse = { success: true };
+  test("should DELETE data from the given URL with a TOKEN", async () => {
+    axios.delete.mockResolvedValueOnce({ data: result });
+    const response = await deleteData(URL, TOKEN);
 
-    axios.delete.mockResolvedValueOnce({ data: expectedResponse });
-    const result = await deleteData(url, token, type);
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(DEFAULT);
+  });
 
-    expect(result).toBeDefined();
+  test("should DELETE data from the given URL with a TOKEN & a content-type", async () => {
+    axios.delete.mockResolvedValueOnce({ data: result });
+    const response = await deleteData(URL, TOKEN, TYPE);
+
+    expect(response).toBe(result);
+    expect(axios.defaults.headers.common["Authorization"]).toBe(`Bearer ${TOKEN}`);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe(TYPE);
   });
 });

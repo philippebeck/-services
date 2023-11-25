@@ -1,8 +1,98 @@
-/*! servidio v2.2.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v3.0.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
-// ! **************************************** CHECKERS ****************************************
+// ! ******************** FETCHERS ********************
+
+import axios from "axios";
+
+/**
+ * ? SET AXIOS
+ * * Sets Axios default headers
+ * * with an optional token & an optional content-type
+ *
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ */
+export function setAxios(token = null, type = "multipart/form-data") {
+  axios.defaults.headers.post["Content-Type"] = type;
+  
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  }
+}
+
+/**
+ * ? POST DATA
+ * * Sends a POST request to the specified URL
+ * * with the provided data, an optional token & an optional content-type
+ *
+ * @param {string} url - The URL to send the POST request to
+ * @param {object} data - The data to send in the request body
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
+ */
+export async function postData(url, data, token = null, type = "multipart/form-data") {
+  setAxios(token, type);
+  const response = await axios.post(url, data);
+
+  return response?.data;
+}
+
+/**
+ * ? GET DATA
+ * * Sends a GET request to the specified URL
+ * * with an optional token & an optional content-type
+ *
+ * @param {string} url - The URL to send the GET request to
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
+ */
+export async function getData(url, token = null, type = "multipart/form-data") {
+  setAxios(token, type);
+  const response = await axios.get(url);
+
+  return response?.data;
+}
+
+/**
+ * ? PUT DATA
+ * * Sends a PUT request to the specified URL
+ * * with the provided data, an optional token & an optional content-type
+ *
+ * @param {string} url - The URL to send the PUT request to
+ * @param {object} data - The data to send in the request body
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
+ */
+export async function putData(url, data, token = null, type = "multipart/form-data") {
+  setAxios(token, type);
+  const response = await axios.put(url, data);
+
+  return response?.data;
+}
+
+/**
+ * ? DELETE DATA
+ * * Sends a DELETE request to the specified URL
+ * * with an optional token & an optional content-type
+ *
+ * @param {string} url - The URL to send the DELETE request to
+ * @param {string|null} [token=null] - An optional authentication token
+ * @param {string} [type="multipart/form-data"] - An optional Content-Type
+ * @return {Promise} A Promise that resolves to the response data
+ */
+export async function deleteData(url, token = null, type = "multipart/form-data") {
+  setAxios(token, type);
+  const response = await axios.delete(url);
+
+  return response?.data;
+}
+
+// ! ******************** CHECKERS ********************
 
 /**
  * ? CHECK RANGE
@@ -57,84 +147,7 @@ export function checkRole(userRole, role) {
   : false;
 }
 
-// ! **************************************** FETCHERS ****************************************
-// ! ******************************************************************************************
-
-/**
- * ? FETCH GET
- * * An asynchronous function that fetches data from a given URL & returns the response based on the content type.
- *
- * @param {string} url - The URL to fetch data from.
- * @throws {Error} Throws an error if the response status is not ok.
- * @return {Promise} Returns a Promise that resolves with the appropriate data based on the content type of the response.
- */
-export async function fetchGet(url) {
-  const response = await fetch(url);
-
-  if (!response.ok) throw new Error(await response.text());
-
-  switch (response.headers.get("Content-Type").split(";")[0]) {
-    case "application/json":
-      return await response.json();
-
-    case "multipart/form-data":
-      return await response.formData();
-
-    case "text/html":
-    case "text/plain":
-      return await response.text();
-
-    default:
-      return response.body;
-  }
-}
-
-/**
- * ? FETCH SET
- * * Asynchronously fetches data from a given URL using the provided options object.
- *
- * @param {string} url - The URL to fetch data from.
- * @param {object} options - An options object that is passed to the fetch function.
- * @throws {Error} If the response is not OK.
- * @return {Promise<object>} A promise that resolves to a JSON object representing the fetched data.
- */
-export async function fetchSet(url, options) {
-  const response = await fetch(url, options);
-
-  if (!response.ok) throw new Error(await response.text());
-
-  return await response.json();
-}
-
-// ! **************************************** GETTERS ****************************************
-
-/**
- * ? GET AVERAGE
- * * Calculates the average score for a given product id from an array of items
- *
- * @param {string} id - The id of the product to calculate the average score for
- * @param {Array} array - An array of objects containing a product id & a score
- * @return {number} The average score for the given product id, or undefined if it is not found in the array
- */
-export function getAverage(id, array) {
-  const sumData = {};
-
-  for (const item of array) {
-    const { product, score } = item;
-
-    if (!sumData[product]) sumData[product] = { sum: 0, n: 0 };
-
-    sumData[product].sum += score;
-    sumData[product].n++;
-  }
-
-  for (const product in sumData) {
-    const { sum, n } = sumData[product];
-    sumData[product] = sum / n;
-  }
-
-  return sumData[id];
-}
+// ! ******************** GETTERS ********************
 
 /**
  * ? GET CATEGORIES
@@ -173,9 +186,9 @@ export function getItemsByCat(items) {
   const itemsByCat = {};
 
   for (const item of items) {
-    const cat = item.cat;
+    const cat       = item.cat;
+    itemsByCat[cat] = itemsByCat[cat] ?? [];
 
-    if (!itemsByCat[cat]) itemsByCat[cat] = [];
     itemsByCat[cat].push(item);
   }
 
@@ -186,7 +199,7 @@ export function getItemsByCat(items) {
   return itemsByCat;
 }
 
-// ! **************************************** SETTERS ****************************************
+// ! ******************** SETTERS ********************
 
 /**
  * ? SET ERROR
@@ -200,53 +213,39 @@ export function setError(error) {
 
 /**
  * ? SET GLOBAL META
- * * Sets the global metadata of the page including language, favicon & Twitter creator
+ * * Sets the metadata of the website including language & favicon
  *
- * @param {string} creator - The Twitter creator handle to set in the metadata
- * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
  * @param {string} [lang="en"] - The language code to set in the metadata
+ * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
  */
-export function setGlobalMeta(creator, icon = "img/favicon.ico", lang = "en") {
-  const iconElt     = document.querySelector('[rel="icon"]');
-  const creatorElt  = document.querySelector('[name="twitter:creator"]');
+export function setGlobalMeta(lang = "en", icon = "img/favicon.ico") {
+  const iconElt = document.querySelector('[rel="icon"]');
 
   document.documentElement.lang = lang;
   if (iconElt) iconElt.href = icon;
-
-  if (creatorElt) {
-    if (creator === undefined) {
-      creatorElt.remove();
-    } else {
-      creatorElt.content = creator;
-    }
-  }
 }
 
 /**
  * ? SET META
  * * Sets the metadata of the page including title, description, url & image
  *
- * @param {string} title - the new title to set
- * @param {string} description - The new description to set
- * @param {string} url - The new URL to set
- * @param {string} [image=""] - The new image to set
+ * @param {string} title - the title to set
+ * @param {string} description - The description to set
+ * @param {string} url - The URL to set
+ * @param {string|null} [image] - The image to set
  */
-export function setMeta(title, description, url, image = "") {
-  const descriptionTags = '[name="description"], [property="og:description"], [name="twitter:description"]';
-  const titleTags       = '[property="og:title"], [name="twitter:title"]';
-  const urlTags         = '[property="og:url"], [name="twitter:site"]';
+export function setMeta(title, description, url, image = null) {
+  const descriptionTags = '[name="description"], [property="og:description"]';
 
   document.querySelector('title').innerText         = title;
   document.querySelector('[rel="canonical"]').href  = url;
 
-  document.querySelectorAll(titleTags).forEach(titleTag => titleTag.setAttribute("content", title));
-  document.querySelectorAll(descriptionTags).forEach(descriptionTag => descriptionTag.setAttribute("content", description));
-  document.querySelectorAll(urlTags).forEach(urlTag => urlTag.setAttribute("content", url));
+  document.querySelector('[property="og:title"]').setAttribute("content", title);
+  document.querySelector('[property="og:url"]').setAttribute("content", url);
 
-  if (image !== "") {
-    const imgTags = '[property="og:image"], [name="twitter:image"]';
-    document.querySelectorAll(imgTags).forEach(imgTag => imgTag.setAttribute("content", image));
-  }
+  document.querySelectorAll(descriptionTags).forEach(descriptionTag => descriptionTag.setAttribute("content", description));
+
+  if (image) document.querySelector('[property="og:image"]').setAttribute("content", image);
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Jun 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 25th Nov 2023 */

@@ -1,7 +1,7 @@
 // ! ******************** FETCHERS TESTS ********************
 
 import axios from "axios";
-import { setAxios, postData, getData, putData, deleteData, fetchGet, fetchSet } from "../src/fetchers";
+import { setAxios, postData, getData, putData, deleteData } from "../src/fetchers";
 
 jest.mock('axios');
 
@@ -14,27 +14,25 @@ beforeEach(() => {
  * * Sets the base URL & headers for Axios requests
  */
 describe('setAxios()', () => {
-  test('should set the base URL and headers for Axios requests without token', () => {
-    const url = 'https://example.com';
-    const type = 'multipart/form-data';
+  test('should set the headers for Axios requests without parameter', () => {
+    setAxios();
 
-    setAxios(url);
-
-    expect(axios.defaults.baseURL).toBe(url);
-    expect(axios.defaults.headers.post['Content-Type']).toBe(type);
-    expect(axios.defaults.headers.common['Authorization']).toBeUndefined();
+    expect(axios.defaults.headers.post["Content-Type"]).toBe('multipart/form-data');
+    expect(axios.defaults.headers.common["Authorization"]).toBeUndefined();
   });
 
-  test('should set the base URL and headers for Axios requests', () => {
-    const url = 'https://example.com';
-    const type = 'application/json';
-    const token = 'myToken';
+  test('should set the headers for Axios requests with only the token parameter', () => {
+    setAxios('your-token');
 
-    setAxios(url, token, type);
+    expect(axios.defaults.headers.post["Content-Type"]).toBe('multipart/form-data');
+    expect(axios.defaults.headers.common["Authorization"]).toBe('Bearer your-token');
+  });
 
-    expect(axios.defaults.baseURL).toBe(url);
-    expect(axios.defaults.headers.post['Content-Type']).toBe(type);
-    expect(axios.defaults.headers.common['Authorization']).toBe('Bearer ' + token);
+  test('should set the headers for Axios requests with all parameters', () => {
+    setAxios('your-token', 'application/json');
+
+    expect(axios.defaults.headers.post["Content-Type"]).toBe('application/json');
+    expect(axios.defaults.headers.common["Authorization"]).toBe('Bearer your-token');
   });
 });
 
@@ -43,34 +41,53 @@ describe('setAxios()', () => {
  * * Sends a POST request to the specified URL with the provided data
  */
 describe('postData()', () => {
-  test('should send a POST request with the provided data', async () => {
-    const url = 'https://example.com/api';
-    const type = 'json';
-    const data = { name: 'John Doe' };
-    const expectedResponse = { success: true };
-
-    axios.post.mockResolvedValueOnce({ data: expectedResponse });
-
-    const response = await postData(url, data, type);
-
+  beforeEach(() => {
+    axios.post.mockReset();
+  });
+  
+  test('should send a post request with the provided data', async () => {
+    const url   = 'https://example.com/api';
+    const data  = { name: 'John Doe', age: 30 };
+    
+    await postData(url, data);
+    
     expect(axios.post).toHaveBeenCalledWith(url, data);
-    expect(response).toEqual(expectedResponse);
   });
 
-  test('should set the provided authentication token if given', async () => {
-    const url = 'https://example.com/api';
-    const type = 'json';
-    const data = { name: 'John Doe' };
-    const token = '12345';
-    const expectedResponse = { success: true };
+  test('should set the authentication token if provided', async () => {
+    const url   = 'https://example.com/api';
+    const data  = { name: 'John Doe', age: 30 };
+    const token = 'your-auth-token';
 
-    axios.post.mockResolvedValueOnce({ data: expectedResponse });
+    await postData(url, data, token);
+    
+    expect(axios.post).toHaveBeenCalledWith(url, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  });
 
-    const response = await postData(url, data, token, type);
+  test('should set the content type if provided', async () => {
+    const url   = 'https://example.com/api';
+    const data  = { name: 'John Doe', age: 30 };
+    const type  = 'application/json';
 
-    expect(axios.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
-    expect(axios.post).toHaveBeenCalledWith(url, data);
-    expect(response).toEqual(expectedResponse);
+    await postData(url, data, null, type);
+    
+    expect(axios.post).toHaveBeenCalledWith(url, data, {
+      headers: { 'Content-Type': type },
+    });
+  });
+
+  test('should return the response data', async () => {
+    const url   = 'https://example.com/api';
+    const data  = { name: 'John Doe', age: 30 };
+    const res   = { success: true };
+
+    axios.post.mockResolvedValueOnce({ data: res });
+
+    const result = await postData(url, data);
+    
+    expect(result).toEqual(res);
   });
 });
 
@@ -177,117 +194,5 @@ describe('deleteData()', () => {
     const result = await deleteData(url, token, type);
 
     expect(result).toBeDefined();
-  });
-});
-
-/**
- * ? FETCH GET
- * * An asynchronous function that fetches data from a given URL
- */
-describe("fetchGet()", () => {
-  const url = "https://example.com/data";
-
-  test("should fetch data from a given URL with application/json content type", async () => {
-    const data = { name: "John", age: 30 };
-
-    const mockedResponse = new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-
-    jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-    const result = await fetchGet(url);
-
-    expect(result).toEqual(data);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-  });
-
-  test("should fetch data from a given URL with text/html content type", async () => {
-    const data = "<html><body><h1>Hello World!</h1></body></html>";
-
-    const mockedResponse = new Response(data, {
-      status: 200,
-      headers: { "Content-Type": "text/html" },
-    });
-
-    jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-    const result = await fetchGet(url);
-
-    expect(result).toEqual(data);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-  });
-
-  test("should fetch data from a given URL with text/plain content type", async () => {
-    const data = "Hello World!";
-
-    const mockedResponse = new Response(data, {
-      status: 200,
-      headers: { "Content-Type": "text/plain" },
-    });
-
-    jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-    const result = await fetchGet(url);
-
-    expect(result).toEqual(data);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-  });
-
-  test("should return the response body for an unknown content type", async () => {
-    const mockedResponse = new Response("Hello World!", {
-      status: 200,
-      headers: { "Content-Type": "application/octet-stream" },
-    });
-
-    jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-    const result = await fetchGet(url);
-
-    expect(result).toEqual(mockedResponse.body);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-  });
-
-  test("should throw an error if the response status is not ok", async () => {
-    const mockedResponse = new Response("Not Found", {
-      status: 404,
-      headers: { "Content-Type": "text/plain" },
-    });
-
-    jest.spyOn(global, "fetch").mockResolvedValueOnce(mockedResponse);
-
-    await expect(fetchGet(url)).rejects.toThrow(Error);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-  });
-});
-
-/**
- * ? FETCH SET
- * * Asynchronously fetches data from a given URL using the provided options object
- */
-describe("fetchSet()", () => {
-
-  test("should fetch data from a given URL using provided options", async () => {
-    const url = "http://example.com";
-    const options = { method: "GET" };
-    const data = { message: "Hello, world!" };
-    const response = new Response(JSON.stringify(data), { status: 200 });
-
-    const originalFetch = globalThis.fetch;
-    globalThis.fetch = jest.fn(() => Promise.resolve(response));
-    const result = await fetchSet(url, options);
-
-    expect(result).toEqual(data);
-    expect(globalThis.fetch).toHaveBeenCalledWith(url, options);
-    globalThis.fetch = originalFetch;
-  });
-
-  test("should throw an error if the response is not OK", async () => {
-    const url = "http://example.com";
-    const options = { method: "GET" };
-    const response = new Response("Not found", { status: 404 });
-
-    const originalFetch = globalThis.fetch;
-    globalThis.fetch = jest.fn(() => Promise.resolve(response));
-
-    await expect(fetchSet(url, options)).rejects.toThrowError();
-    globalThis.fetch = originalFetch;
   });
 });

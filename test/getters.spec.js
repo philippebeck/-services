@@ -42,7 +42,7 @@ describe("getCats()", () => {
  */
 describe("getItemName()", () => {
   test("should return the correct name of the item with the given id", () => {
-    const items = [{ _id: "1", name: "Item 1" }, { _id: "2", name: "Item 2" }];
+    const items = [{ id: "1", name: "Item 1" }, { id: "2", name: "Item 2" }];
     const id = "2";
     const expected = "Item 2";
     const result = getItemName(id, items);
@@ -51,7 +51,7 @@ describe("getItemName()", () => {
   });
 
   test("should return false if no item is found with the given id", () => {
-    const items = [{ _id: "1", name: "Item 1" }, { _id: "2", name: "Item 2" }];
+    const items = [{ id: "1", name: "Item 1" }, { id: "2", name: "Item 2" }];
     const id = "3";
     const result = getItemName(id, items);
 

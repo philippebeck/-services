@@ -21,7 +21,7 @@ export function getCats(items) {
  * @return {string|boolean} The name of the item with the given id if found, false otherwise
  */
 export function getItemName(id, items) {
-  const item = items.find(item => item._id === id);
+  const item = items.find(item => item.id === id);
 
   return item ? item.name : false;
 }

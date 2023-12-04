@@ -1,4 +1,4 @@
-/*! servidio v3.0.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v3.0.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -170,7 +170,7 @@ export function getCats(items) {
  * @return {string|boolean} The name of the item with the given id if found, false otherwise
  */
 export function getItemName(id, items) {
-  const item = items.find(item => item._id === id);
+  const item = items.find(item => item.id === id);
 
   return item ? item.name : false;
 }
@@ -248,4 +248,4 @@ export function setMeta(title, description, url, image = null) {
   if (image) document.querySelector('[property="og:image"]').setAttribute("content", image);
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 25th Nov 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 4th Dec 2023 */

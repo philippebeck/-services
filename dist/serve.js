@@ -1,4 +1,4 @@
-/*! servidio v3.0.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v3.0.2 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -10,23 +10,19 @@ import axios from "axios";
  * ? SET AXIOS
  * * Sets Axios default headers
  * * with an optional token & an optional content-type
- *
  * @param {string|null} [token=null] - An optional authentication token
  * @param {string} [type="multipart/form-data"] - An optional Content-Type
  */
 export function setAxios(token = null, type = "multipart/form-data") {
   axios.defaults.headers.post["Content-Type"] = type;
   
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-  }
+  if (token) axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
 /**
  * ? POST DATA
  * * Sends a POST request to the specified URL
  * * with the provided data, an optional token & an optional content-type
- *
  * @param {string} url - The URL to send the POST request to
  * @param {object} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
@@ -44,7 +40,6 @@ export async function postData(url, data, token = null, type = "multipart/form-d
  * ? GET DATA
  * * Sends a GET request to the specified URL
  * * with an optional token & an optional content-type
- *
  * @param {string} url - The URL to send the GET request to
  * @param {string|null} [token=null] - An optional authentication token
  * @param {string} [type="multipart/form-data"] - An optional Content-Type
@@ -61,7 +56,6 @@ export async function getData(url, token = null, type = "multipart/form-data") {
  * ? PUT DATA
  * * Sends a PUT request to the specified URL
  * * with the provided data, an optional token & an optional content-type
- *
  * @param {string} url - The URL to send the PUT request to
  * @param {object} data - The data to send in the request body
  * @param {string|null} [token=null] - An optional authentication token
@@ -79,7 +73,6 @@ export async function putData(url, data, token = null, type = "multipart/form-da
  * ? DELETE DATA
  * * Sends a DELETE request to the specified URL
  * * with an optional token & an optional content-type
- *
  * @param {string} url - The URL to send the DELETE request to
  * @param {string|null} [token=null] - An optional authentication token
  * @param {string} [type="multipart/form-data"] - An optional Content-Type
@@ -102,16 +95,17 @@ export async function deleteData(url, token = null, type = "multipart/form-data"
  * @param {number|string} value - The value to check against the range
  * @param {string} message - The message to display if the value is not within range
  * @param {number} [min=2] - The minimum value of range
- * @param {number} [max=50] - The maximum value of range
+ * @param {number} [max=200] - The maximum value of range
  * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
-export function checkRange(value, message, min = 2, max = 50) {
-  const inRange = (typeof value === "number" && value >= min && value <= max) ||
-                  (typeof value === "string" && value.length >= min && value.length <= max);
+export function checkRange(value, message, min = 2, max = 200) {
+  const NUMBER = (typeof value === "number" && value >= min && value <= max);
+  const STRING = (typeof value === "string" && value.length >= min && value.length <= max);
 
-  if (!inRange) alert(`${message} ${min} & ${max}`);
+  const IN_RANGE = NUMBER || STRING;
+  if (!IN_RANGE) alert(`${message} ${min} & ${max}`);
 
-  return inRange;
+  return IN_RANGE;
 }
 
 /**
@@ -152,7 +146,6 @@ export function checkRole(userRole, role) {
 /**
  * ? GET CATEGORIES
  * * Returns an array of unique categories from the given items
- *
  * @param {Array} items - An array of objects representing items with a 'cat' property
  * @return {Array} An array of unique cat categories from the given items
  */
@@ -164,7 +157,6 @@ export function getCats(items) {
 /**
  * ? GET ITEM NAME
  * * Returns the name of the item with the given id from the provided array of items
- *
  * @param {string} id - The id of the item to search for
  * @param {Array} items - An array of items to search through
  * @return {string|boolean} The name of the item with the given id if found, false otherwise
@@ -178,7 +170,6 @@ export function getItemName(id, items) {
 /**
  * ? GET ITEMS BY CATEGORY
  * * Groups an array of items by category & sorts each category's item list by name
- *
  * @param {Array} items - The array of items to group
  * @return {Object} An object where each key is a category & its value is the array of items belonging to that category
  */
@@ -204,17 +195,17 @@ export function getItemsByCat(items) {
 /**
  * ? SET ERROR
  * * Logs an error message from the provided error object
- *
  * @param {Error} error - The error object to log the message from
  */
 export function setError(error) {
-  console.error(error.response ? error.response.data.message : error.message);
+  const { message, response } = error;
+
+  console.error(response && response.data ? response.data.message : message);
 }
 
 /**
  * ? SET GLOBAL META
  * * Sets the metadata of the website including language & favicon
- *
  * @param {string} [lang="en"] - The language code to set in the metadata
  * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
  */
@@ -228,7 +219,6 @@ export function setGlobalMeta(lang = "en", icon = "img/favicon.ico") {
 /**
  * ? SET META
  * * Sets the metadata of the page including title, description, url & image
- *
  * @param {string} title - the title to set
  * @param {string} description - The description to set
  * @param {string} url - The URL to set
@@ -248,4 +238,4 @@ export function setMeta(title, description, url, image = null) {
   if (image) document.querySelector('[property="og:image"]').setAttribute("content", image);
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 4th Dec 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Dec 2023 */

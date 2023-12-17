@@ -4,27 +4,25 @@
  * ? CHECK RANGE
  * * Checks whether a given value is within a specified range of min & max values,
  * * either by comparing their string length or their numerical value
- *
  * @param {number|string} value - The value to check against the range
  * @param {string} message - The message to display if the value is not within range
  * @param {number} [min=2] - The minimum value of range
- * @param {number} [max=50] - The maximum value of range
+ * @param {number} [max=200] - The maximum value of range
  * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
-export function checkRange(value, message, min = 2, max = 50) {
-  const inRange = (typeof value === "number" && value >= min && value <= max) ||
-                  (typeof value === "string" && value.length >= min && value.length <= max);
+export function checkRange(value, message, min = 2, max = 200) {
+  const IS_NUMBER = (typeof value === "number" && value >= min && value <= max);
+  const IS_STRING = (typeof value === "string" && value.length >= min && value.length <= max);
 
-  if (!inRange) alert(`${message} ${min} & ${max}`);
+  if (!IS_NUMBER || !IS_STRING) alert(`${message} ${min} & ${max}`);
 
-  return inRange;
+  return IS_NUMBER || IS_STRING;
 }
 
 /**
  * ? CHECK REGEX
  * * Checks if a given value matches a regular expression
  * * If it does not, it displays an alert message & returns false
- *
  * @param {any} value - The value to be tested against the regular expression
  * @param {string} message - The message to be displayed in case the value does not match the regex
  * @param {RegExp} regex - The regular expression to test the value against
@@ -40,7 +38,6 @@ export function checkRegex(value, message, regex) {
 /**
  * ? CHECK ROLE
  * * Checks if a given user role has the required role permission
- *
  * @param {string} userRole - The role of the user being checked
  * @param {string} role - The required role permission
  * @return {boolean} Returns true if the user has the required role permission, else false

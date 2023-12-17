@@ -11,12 +11,13 @@
  * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
 export function checkRange(value, message, min = 2, max = 200) {
-  const IS_NUMBER = (typeof value === "number" && value >= min && value <= max);
-  const IS_STRING = (typeof value === "string" && value.length >= min && value.length <= max);
+  const NUMBER = (typeof value === "number" && value >= min && value <= max);
+  const STRING = (typeof value === "string" && value.length >= min && value.length <= max);
 
-  if (!IS_NUMBER || !IS_STRING) alert(`${message} ${min} & ${max}`);
+  const IN_RANGE = NUMBER || STRING;
+  if (!IN_RANGE) alert(`${message} ${min} & ${max}`);
 
-  return IS_NUMBER || IS_STRING;
+  return IN_RANGE;
 }
 
 /**

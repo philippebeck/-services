@@ -3,17 +3,17 @@
 /**
  * ? SET ERROR
  * * Logs an error message from the provided error object
- *
  * @param {Error} error - The error object to log the message from
  */
 export function setError(error) {
-  console.error(error.response ? error.response.data.message : error.message);
+  const { message, response } = error;
+
+  console.error(response && response.data ? response.data.message : message);
 }
 
 /**
  * ? SET GLOBAL META
  * * Sets the metadata of the website including language & favicon
- *
  * @param {string} [lang="en"] - The language code to set in the metadata
  * @param {string} [icon="img/favicon.ico"] - The path to the favicon to set in the metadata
  */
@@ -27,7 +27,6 @@ export function setGlobalMeta(lang = "en", icon = "img/favicon.ico") {
 /**
  * ? SET META
  * * Sets the metadata of the page including title, description, url & image
- *
  * @param {string} title - the title to set
  * @param {string} description - The description to set
  * @param {string} url - The URL to set

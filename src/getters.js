@@ -3,7 +3,6 @@
 /**
  * ? GET CATEGORIES
  * * Returns an array of unique categories from the given items
- *
  * @param {Array} items - An array of objects representing items with a 'cat' property
  * @return {Array} An array of unique cat categories from the given items
  */
@@ -15,7 +14,6 @@ export function getCats(items) {
 /**
  * ? GET ITEM NAME
  * * Returns the name of the item with the given id from the provided array of items
- *
  * @param {string} id - The id of the item to search for
  * @param {Array} items - An array of items to search through
  * @return {string|boolean} The name of the item with the given id if found, false otherwise
@@ -29,7 +27,6 @@ export function getItemName(id, items) {
 /**
  * ? GET ITEMS BY CATEGORY
  * * Groups an array of items by category & sorts each category's item list by name
- *
  * @param {Array} items - The array of items to group
  * @return {Object} An object where each key is a category & its value is the array of items belonging to that category
  */

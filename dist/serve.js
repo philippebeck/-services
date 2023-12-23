@@ -1,4 +1,4 @@
-/*! servidio v3.0.2 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v3.1.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -91,7 +91,6 @@ export async function deleteData(url, token = null, type = "multipart/form-data"
  * ? CHECK RANGE
  * * Checks whether a given value is within a specified range of min & max values,
  * * either by comparing their string length or their numerical value
- *
  * @param {number|string} value - The value to check against the range
  * @param {string} message - The message to display if the value is not within range
  * @param {number} [min=2] - The minimum value of range
@@ -112,7 +111,6 @@ export function checkRange(value, message, min = 2, max = 200) {
  * ? CHECK REGEX
  * * Checks if a given value matches a regular expression
  * * If it does not, it displays an alert message & returns false
- *
  * @param {any} value - The value to be tested against the regular expression
  * @param {string} message - The message to be displayed in case the value does not match the regex
  * @param {RegExp} regex - The regular expression to test the value against
@@ -128,7 +126,6 @@ export function checkRegex(value, message, regex) {
 /**
  * ? CHECK ROLE
  * * Checks if a given user role has the required role permission
- *
  * @param {string} userRole - The role of the user being checked
  * @param {string} role - The required role permission
  * @return {boolean} Returns true if the user has the required role permission, else false
@@ -169,11 +166,12 @@ export function getItemName(id, items) {
 
 /**
  * ? GET ITEMS BY CATEGORY
- * * Groups an array of items by category & sorts each category's item list by name
+ * * Groups an array of items by category & sorts each category's item list by id or name
  * @param {Array} items - The array of items to group
+ * @param {string} [sortBy="id"] - The property to sort the items by
  * @return {Object} An object where each key is a category & its value is the array of items belonging to that category
  */
-export function getItemsByCat(items) {
+export function getItemsByCat(items, sortBy = "id") {
   const itemsByCat = {};
 
   for (const item of items) {
@@ -184,7 +182,9 @@ export function getItemsByCat(items) {
   }
 
   for (const cat in itemsByCat) {
-    itemsByCat[cat].sort((a, b) => a.name.localeCompare(b.name));
+    itemsByCat[cat].sort((a, b) => sortBy === "id"
+    ? a.id - b.id
+    : a.name.localeCompare(b.name));
   }
 
   return itemsByCat;
@@ -238,4 +238,4 @@ export function setMeta(title, description, url, image = null) {
   if (image) document.querySelector('[property="og:image"]').setAttribute("content", image);
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 17th Dec 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 23rd Dec 2023 */

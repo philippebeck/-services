@@ -41,8 +41,8 @@ Yarn : `yarn add servidio`
 
 ## CDN *(not recommended)*
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@3.0.2/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@3.0.2/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@3.0.2/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@3.0.2/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.min.js)  
 
 ---
 
@@ -73,7 +73,7 @@ Fetchers part :
 Getters part :  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
--   **getItemsByCat(items)** get items by category property  
+-   **getItemsByCat(items, sortBy)** get items by category property  
 
 Setters part :  
 -   **setError(error)** : set error message  

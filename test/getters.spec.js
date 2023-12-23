@@ -74,6 +74,31 @@ describe("getItemName()", () => {
 describe("getItemsByCat()", () => {
   const assert = require("assert");
 
+  test("should group an array of items by category & sort each category's item list by id", () => {
+    const items = [
+      { name: "apple", cat: "fruit" },
+      { name: "pear", cat: "fruit" },
+      { name: "carrot", cat: "vegetable" },
+      { name: "broccoli", cat: "vegetable" }
+    ];
+
+    const expected = {
+      fruit: [
+        { name: "apple", cat: "fruit" },
+        { name: "pear", cat: "fruit" }
+      ],
+      vegetable: [
+        { name: "carrot", cat: "vegetable" },
+        { name: "broccoli", cat: "vegetable" }
+        
+      ]
+    };
+
+    const actual = getItemsByCat(items);
+
+    assert.deepStrictEqual(actual, expected);
+  });
+
   test("should group an array of items by category & sort each category's item list by name", () => {
     const items = [
       { name: "apple", cat: "fruit" },
@@ -90,10 +115,11 @@ describe("getItemsByCat()", () => {
       vegetable: [
         { name: "broccoli", cat: "vegetable" },
         { name: "carrot", cat: "vegetable" }
+        
       ]
     };
 
-    const actual = getItemsByCat(items);
+    const actual = getItemsByCat(items, "name");
 
     assert.deepStrictEqual(actual, expected);
   });
@@ -117,8 +143,8 @@ describe("getItemsByCat()", () => {
   test("should handle an array with items in only one category", () => {
     const items = [
       { name: "apple", cat: "fruit" },
-      { name: "pear", cat: "fruit" },
-      { name: "kiwi", cat: "fruit" }
+      { name: "kiwi", cat: "fruit" },
+      { name: "pear", cat: "fruit" }
     ];
 
     const expected = {

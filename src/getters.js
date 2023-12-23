@@ -26,11 +26,12 @@ export function getItemName(id, items) {
 
 /**
  * ? GET ITEMS BY CATEGORY
- * * Groups an array of items by category & sorts each category's item list by name
+ * * Groups an array of items by category & sorts each category's item list by id or name
  * @param {Array} items - The array of items to group
+ * @param {string} [sortBy="id"] - The property to sort the items by
  * @return {Object} An object where each key is a category & its value is the array of items belonging to that category
  */
-export function getItemsByCat(items) {
+export function getItemsByCat(items, sortBy = "id") {
   const itemsByCat = {};
 
   for (const item of items) {
@@ -41,7 +42,9 @@ export function getItemsByCat(items) {
   }
 
   for (const cat in itemsByCat) {
-    itemsByCat[cat].sort((a, b) => a.name.localeCompare(b.name));
+    itemsByCat[cat].sort((a, b) => sortBy === "id"
+    ? a.id - b.id
+    : a.name.localeCompare(b.name));
   }
 
   return itemsByCat;

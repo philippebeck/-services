@@ -73,7 +73,7 @@ Fetchers part :
 Getters part :  
 -   **getCats(items)** get categories from an array of objects  
 -   **getItemName(id, items)** get image name  
--   **getItemsByCat(items)** get items by category property  
+-   **getItemsByCat(items, sortBy)** get items by category property  
 
 Setters part :  
 -   **setError(error)** : set error message  

@@ -10,7 +10,7 @@
  * @param {number} [max=200] - The maximum value of range
  * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
-export function checkRange(value, message, min = 2, max = 200) {
+export function checkRange(value, message, min = 2, max = 250) {
   const NUMBER = (typeof value === "number" && value >= min && value <= max);
   const STRING = (typeof value === "string" && value.length >= min && value.length <= max);
 

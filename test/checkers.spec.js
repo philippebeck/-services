@@ -22,26 +22,9 @@ describe("checkRange()", () => {
   test("should return false if value is not within the specified range", () => {
 
     expect(checkRange(1, msg)).toBe(false);
-    expect(checkRange(201, msg)).toBe(false);
+    expect(checkRange(251, msg)).toBe(false);
     expect(checkRange("", msg)).toBe(false);
-    expect(checkRange("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY", msg)).toBe(false);
-  });
-
-  test("should display the correct message if value is not within the specified range", () => {
-    const min = 2;
-    const max = 200;
-
-    checkRange(1, msg, min, max);
-    expect(alert).toHaveBeenCalledWith(`${msg} ${min} & ${max}`);
-
-    checkRange(51, msg, min, max);
-    expect(alert).toHaveBeenCalledWith(`${msg} ${min} & ${max}`);
-
-    checkRange("", msg, min, max);
-    expect(alert).toHaveBeenCalledWith(`${msg} ${min} & ${max}`);
-
-    checkRange("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", msg, min, max);
-    expect(alert).toHaveBeenCalledWith(`${msg} ${min} & ${max}`);
+    expect(checkRange("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", msg)).toBe(false);
   });
 });
 

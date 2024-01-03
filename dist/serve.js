@@ -1,4 +1,4 @@
-/*! servidio v3.1.0 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
+/*! servidio v3.1.1 | https://www.npmjs.com/package/servidio | Apache-2.0 License */
 
 "use strict";
 
@@ -97,7 +97,7 @@ export async function deleteData(url, token = null, type = "multipart/form-data"
  * @param {number} [max=200] - The maximum value of range
  * @return {boolean} Returns true if the value is within the specified range, otherwise false
  */
-export function checkRange(value, message, min = 2, max = 200) {
+export function checkRange(value, message, min = 2, max = 250) {
   const NUMBER = (typeof value === "number" && value >= min && value <= max);
   const STRING = (typeof value === "string" && value.length >= min && value.length <= max);
 
@@ -238,4 +238,4 @@ export function setMeta(title, description, url, image = null) {
   if (image) document.querySelector('[property="og:image"]').setAttribute("content", image);
 }
 
-/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 23rd Dec 2023 */
+/*! Author: Philippe Beck <philippe@philippebeck.net> | Updated: 3rd Jan 2024 */

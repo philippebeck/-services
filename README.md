@@ -41,8 +41,8 @@ Yarn : `yarn add servidio`
 
 ## CDN *(not recommended)*
 
--   Development : [https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.js)  
--   Production : [https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@3.1.0/dist/serve.min.js)  
+-   Development : [https://cdn.jsdelivr.net/npm/servidio@3.1.1/dist/serve.js](https://cdn.jsdelivr.net/npm/servidio@3.1.1/dist/serve.js)  
+-   Production : [https://cdn.jsdelivr.net/npm/servidio@3.1.1/dist/serve.min.js](https://cdn.jsdelivr.net/npm/servidio@3.1.1/dist/serve.min.js)  
 
 ---
 
